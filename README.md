@@ -89,4 +89,4 @@ Thanks to Symfony Cloud, I will be able to ensure a continuous deployment of my 
 
 ## Sketch
 
-<p align="center"><img src ="login_screen.png" alt="Login Screen" width="250"/></p>
+<p align="center"><img src ="login_screen.png" alt="Login Screen" width="250"/><img src ="list_screen.png" alt="List Screen" width="250"/></p>
