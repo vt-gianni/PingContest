@@ -32,6 +32,8 @@ Competitors wishing to participate in a tournament can register for it via the a
 
 ## Technologies
 
+<p align="center"><img src ="api_platform.png" alt="API Platform" width="200"/></p>
+
 ### API : Using API Platform through the Symfony framework
 
 A « framework » is a toolkit in the form of code files. It allows developers to focus on the main features of their project by providing an architecture, security rules, useful components, etc..
@@ -46,17 +48,26 @@ Finally, it is a technology that I use a lot for my personal projects but also i
 
 API Platform is a module that can be easily installed via a Symfony API. It greatly simplifies development by providing for example, basic actions around entities. The developer does not need to develop the routes himself to fetch the articles, create one, delete one, etc.. It is nevertheless of course possible to create custom routes and modify the basic behavior of the classic routes. The creation of routes can be done only via annotations and makes development very fast.
 
+<p align="center"><img src ="mysql.png" alt="MySQL" width="200"/></p>
+
+
 ### Using MySQL
 
 MySQL is an open-source relational database management system created in 1995. Its use rather than another database manager like PostgreSQL is mainly explained by my habit of using it and its very simple and understandable interface.
+
+<p align="center"><img src ="react_native.png" alt="React Native" width="200"/></p>
 
 ### Using React Native
 
 React Native is a framework for creating cross-platform mobile applications very simply using only the JavaScript langage. This framework is based on the React framework, itself designed to simplify the development of web platforms by providing reusable component development. React Native is a very reliable framework, developed by Facebook, with a huge community and many community plugins. Its choice over other mobile frameworks is primarily based on its cross-platform character. In addition, its simplicity of development, coupled with the use of Expo Go made me prefer React Native to Flutter for example.
 
+<p align="center"><img src ="expo_go.png" alt="Expo Go" width="200"/></p>
+
 ### Using Expo Go
 
 Expo Go is a tool and a mobile application allowing to test an application in React Native on all devices connected to the same network as the PC where the developer works. Thus, the developer can test in real time the modifications on the application on many devices at the same time, via the Internet.
+
+<p align="center"><img src ="git.png" alt="Git" width="200"/></p>
 
 ### Using git
 
@@ -78,4 +89,4 @@ Thanks to Symfony Cloud, I will be able to ensure a continuous deployment of my 
 
 ## Sketch
 
-<p align="center"><img src ="login_screen.png" alt="Login Screen"/></p>
+<p align="center"><img src ="login_screen.png" alt="Login Screen" width="250"/></p>
