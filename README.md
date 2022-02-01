@@ -1,3 +1,5 @@
+<p align="center"><img src ="logo.png" alt="Logo" width="200"/></p>
+
 # Ping Contest
 
 ## About
@@ -73,3 +75,7 @@ Thanks to Symfony Cloud, I will be able to ensure a continuous deployment of my 
 ## Database schema
 
 <p align="center"><img src ="db_schema.png" alt="Database schema"/></p>
+
+## Sketch
+
+<p align="center"><img src ="login_screen.png" alt="Login Screen"/></p>
