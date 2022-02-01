@@ -69,3 +69,7 @@ It will of course be possible to manually install the application and the API by
 ### Symfony Cloud
 
 Thanks to Symfony Cloud, I will be able to ensure a continuous deployment of my Symfony application (and therefore of my API). By pushing updates to git, my cloud API will be automatically updated, allowing me to avoid manual releases with each new feature or bug fix.
+
+## Database schema
+
+<p align="center"><img src ="db_schema.png" alt="Database schema"/></p>
