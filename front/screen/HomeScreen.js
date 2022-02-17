@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
-import {TouchableOpacity} from "react-native-web";
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 import CustomInput from "../component/CustomInput";
 
 const HomeScreen = () => {
@@ -11,6 +10,10 @@ const HomeScreen = () => {
         <View style={styles.container}>
             <View style={styles.logo}>
                 <Image source={require('../assets/logo.png')} style={styles.logoPicture} />
+                <View>
+                    <Text style={[styles.title, styles.redText]}>Ping</Text>
+                    <Text style={[styles.title, styles.blueText]}>Contest</Text>
+                </View>
             </View>
 
             <View style={styles.form}>
@@ -43,10 +46,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    title: {
+        fontSize: 27,
+        fontWeight: 'bold',
+        textAlign: 'center'
     },
     logoPicture: {
-        width: 110,
-        height: 110
+        width: 100,
+        height: 100,
+        marginHorizontal: 10
     },
     form: {
         flex: 1,
@@ -62,24 +73,32 @@ const styles = StyleSheet.create({
     btnContainer: {
         flex: 1,
         width: '100%',
-        justifyContent: 'space-evenly'
+        justifyContent: 'center'
     },
     btnRed: {
         backgroundColor: '#ff576b',
         borderRadius: 20,
         paddingHorizontal: 15,
-        paddingVertical: 10
+        paddingVertical: 10,
+        marginBottom: 10
     },
     btnBlue: {
         backgroundColor: '#00908f',
         borderRadius: 20,
         paddingHorizontal: 15,
-        paddingVertical: 10
+        paddingVertical: 10,
+        marginTop: 10
     },
     btnText: {
         color: '#ffffff',
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+    redText: {
+        color: '#ff576b'
+    },
+    blueText: {
+        color: '#00908f'
     }
 })
 
