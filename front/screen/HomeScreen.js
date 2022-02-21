@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, Pressable } from 'react-native'
 import CustomInput from "../component/CustomInput"
 import {useFonts, Kreon_600SemiBold} from "@expo-google-fonts/kreon"
 
@@ -22,6 +22,13 @@ const HomeScreen = () => {
                 <View style={ styles.inputsContainer }>
                     <CustomInput field={mailAddress} placeholder={"Adresse mail *"} setField={setMailAddress} secure={false} />
                     <CustomInput field={password} placeholder={"Mot de passe *"} setField={setPassword} secure={true} />
+                </View>
+
+                <View style={[styles.row, styles.w100]}>
+                    <Text>Pas encore de compte ?</Text>
+                    <Pressable style={styles.registerBtn}>
+                        <Text style={styles.registerBtnText}>S'inscrire</Text>
+                    </Pressable>
                 </View>
             </View>
 
@@ -100,6 +107,16 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row'
+    },
+    w100: {
+        width: '100%'
+    },
+    registerBtn: {
+        marginStart: 5
+    },
+    registerBtnText: {
+        color: '#00908f',
+        textDecorationLine: 'underline'
     }
 })
 
