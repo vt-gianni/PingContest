@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -70,6 +72,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $lastConnection;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Contest::class, mappedBy="creator", orphanRemoval=true)
+     */
+    private $contests;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $participations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Media::class, mappedBy="user")
+     */
+    private $media;
+
+    public function __construct()
+    {
+        $this->contests = new ArrayCollection();
+        $this->participations = new ArrayCollection();
+        $this->media = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -240,6 +264,96 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastConnection(?\DateTimeInterface $lastConnection): self
     {
         $this->lastConnection = $lastConnection;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contest>
+     */
+    public function getContests(): Collection
+    {
+        return $this->contests;
+    }
+
+    public function addContest(Contest $contest): self
+    {
+        if (!$this->contests->contains($contest)) {
+            $this->contests[] = $contest;
+            $contest->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContest(Contest $contest): self
+    {
+        if ($this->contests->removeElement($contest)) {
+            // set the owning side to null (unless already changed)
+            if ($contest->getCreator() === $this) {
+                $contest->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participation>
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getUser() === $this) {
+                $participation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedia(): Collection
+    {
+        return $this->media;
+    }
+
+    public function addMedium(Media $medium): self
+    {
+        if (!$this->media->contains($medium)) {
+            $this->media[] = $medium;
+            $medium->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedium(Media $medium): self
+    {
+        if ($this->media->removeElement($medium)) {
+            // set the owning side to null (unless already changed)
+            if ($medium->getUser() === $this) {
+                $medium->setUser(null);
+            }
+        }
 
         return $this;
     }
