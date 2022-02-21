@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e3885844-5291-462e-9752-2fed4e19a99f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CONTRIBUTING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/reactnativesystemnavigationbar/SystemNavigationBarModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reactnativesystemnavigationbar/SystemNavigationBarModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/File.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/Podfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample-Bridging-Header.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample.xcodeproj/xcshareddata/xcschemes/SystemNavigationBarExample.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample/AppDelegate.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample/AppDelegate.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample/Images.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample/Images.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample/LaunchScreen.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/ios/SystemNavigationBarExample/main.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../example/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/SystemNavigationBar-Bridging-Header.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/SystemNavigationBar.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/SystemNavigationBar.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/SystemNavigationBar.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../react-native-system-navigation-bar.podspec" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1tJypAUgkbWO27eNEU3RnRreIEC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="memory.settings.postsync.last.time.stamp" value="1622501721433" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e3885844-5291-462e-9752-2fed4e19a99f" name="Default Changelist" comment="" />
+      <created>1622501672017</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622501672017</updated>
+    </task>
+    <servers />
+  </component>
+</project>

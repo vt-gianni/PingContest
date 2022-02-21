@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import HomeScreen from "./screen/HomeScreen";
-import React from "react";
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, Text, View } from 'react-native'
+import HomeScreen from "./screen/HomeScreen"
+import React from "react"
 
 export default function App() {
   return (
@@ -18,6 +18,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20
   }
 })

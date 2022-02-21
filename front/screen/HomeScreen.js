@@ -1,7 +1,9 @@
-import React, {useState} from "react"
-import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, Pressable } from 'react-native'
+import React, {useEffect, useState} from "react"
+import {StyleSheet, Text, View, TextInput, Image, TouchableOpacity, Pressable, Platform} from 'react-native'
 import CustomInput from "../component/CustomInput"
 import {useFonts, Kreon_600SemiBold} from "@expo-google-fonts/kreon"
+import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
+import {LinearGradient} from 'expo-linear-gradient'
 
 const HomeScreen = () => {
     let [fontsLoaded] = useFonts({
@@ -13,35 +15,47 @@ const HomeScreen = () => {
 
     return (
         !fontsLoaded ? <View/> :
-        <View style={styles.container}>
-            <View style={styles.logo}>
-                <Image source={require('../assets/logo.png')} style={styles.logoPicture} />
-            </View>
+            <LinearGradient colors={['#FFBBC3', '#CDF6F6']} start={{x: 0, y: 0}} end={{x: 1, y: 1}}
+                            style={{flex: 1, width: '100%'}}>
+                <View style={styles.darken}>
+                    <View style={styles.container}>
+                        <View style={styles.logo}>
+                            <Image source={require('../assets/logo.png')} style={styles.logoPicture}/>
+                        </View>
 
-            <View style={styles.form}>
-                <View style={ styles.inputsContainer }>
-                    <CustomInput field={mailAddress} placeholder={"Adresse mail *"} setField={setMailAddress} secure={false} />
-                    <CustomInput field={password} placeholder={"Mot de passe *"} setField={setPassword} secure={true} />
+                        <View style={styles.form}>
+                            <View style={styles.inputsContainer}>
+                                <CustomInput field={mailAddress} placeholder={"Adresse mail *"}
+                                             setField={setMailAddress}
+                                             secure={false}/>
+                                <CustomInput field={password} placeholder={"Mot de passe *"} setField={setPassword}
+                                             secure={true}/>
+                            </View>
+
+                            <TouchableOpacity onPress={() => {
+                            }} style={styles.btnRed}>
+                                <Text style={styles.btnText}>Connexion</Text>
+                            </TouchableOpacity>
+
+                            <View style={[styles.row, styles.w100]}>
+                                <Text style={styles.italic}>Pas encore de compte ?</Text>
+                                <Pressable style={styles.registerBtn}>
+                                    <Text style={[styles.registerBtnText, styles.italic]}>S'inscrire</Text>
+                                </Pressable>
+                            </View>
+                        </View>
+
+                        <View style={styles.btnContainer}>
+                            <TouchableOpacity onPress={() => {
+                            }} style={styles.btnBlue}>
+                                <Text style={styles.btnTextBlue}><MaterialCommunityIcon name="facebook" color="#00908f"
+                                                                                        size={22}/> Connexion avec
+                                    Facebook</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                 </View>
-
-                <View style={[styles.row, styles.w100]}>
-                    <Text>Pas encore de compte ?</Text>
-                    <Pressable style={styles.registerBtn}>
-                        <Text style={styles.registerBtnText}>S'inscrire</Text>
-                    </Pressable>
-                </View>
-            </View>
-
-            <View style={styles.btnContainer}>
-                <TouchableOpacity onPress={() => {}} style={styles.btnRed}>
-                    <Text style={styles.btnText}>Connexion</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={() => {}} style={styles.btnBlue}>
-                    <Text style={styles.btnText}>Connexion avec Facebook</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+            </LinearGradient>
     )
 }
 
@@ -49,10 +63,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
-        width: '100%'
+        width: '100%',
+        padding: 20
     },
     logo: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',
@@ -78,26 +93,36 @@ const styles = StyleSheet.create({
     btnContainer: {
         flex: 1,
         width: '100%',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     btnRed: {
         backgroundColor: '#ff576b',
-        borderRadius: 20,
+        borderRadius: 5,
         paddingHorizontal: 15,
         paddingVertical: 10,
-        marginBottom: 10
+        marginBottom: 10,
+        width: '100%',
+        marginTop: 10
     },
     btnBlue: {
-        backgroundColor: '#00908f',
-        borderRadius: 20,
+        borderRadius: 5,
         paddingHorizontal: 15,
         paddingVertical: 10,
-        marginTop: 10
+        marginTop: 10,
+        width: '100%',
+        borderColor: '#00908f',
+        borderWidth: 1,
     },
     btnText: {
         color: '#ffffff',
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+    btnTextBlue: {
+        color: '#00908f',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize: 20,
     },
     redText: {
         color: '#ff576b'
@@ -117,6 +142,14 @@ const styles = StyleSheet.create({
     registerBtnText: {
         color: '#00908f',
         textDecorationLine: 'underline'
+    },
+    italic: {
+        fontStyle: 'italic',
+        fontSize: 16
+    },
+    darken: {
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        flex: 1,
     }
 })
 
