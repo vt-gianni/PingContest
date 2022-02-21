@@ -1,19 +1,21 @@
-import React, {useState} from "react";
-import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
-import CustomInput from "../component/CustomInput";
+import React, {useState} from "react"
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native'
+import CustomInput from "../component/CustomInput"
+import {useFonts, Kreon_600SemiBold} from "@expo-google-fonts/kreon"
 
 const HomeScreen = () => {
+    let [fontsLoaded] = useFonts({
+        Kreon_600SemiBold
+    });
+
     const [mailAddress, setMailAddress] = useState('')
     const [password, setPassword] = useState('')
 
     return (
+        !fontsLoaded ? <View/> :
         <View style={styles.container}>
             <View style={styles.logo}>
-                <Image source={require('../assets/logo.png')} style={styles.logoPicture} />
-                <View>
-                    <Text style={[styles.title, styles.redText]}>Ping</Text>
-                    <Text style={[styles.title, styles.blueText]}>Contest</Text>
-                </View>
+                <Image source={require('../assets/logo2.png')} style={styles.logoPicture} />
             </View>
 
             <View style={styles.form}>
@@ -47,17 +49,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',
-        flexDirection: 'row'
-    },
-    title: {
-        fontSize: 27,
-        fontWeight: 'bold',
-        textAlign: 'center'
+        flexDirection: 'column'
     },
     logoPicture: {
-        width: 100,
-        height: 100,
-        marginHorizontal: 10
+        width: 200,
+        height: 200,
+        marginHorizontal: 10,
+        marginVertical: 10
     },
     form: {
         flex: 1,
@@ -99,6 +97,9 @@ const styles = StyleSheet.create({
     },
     blueText: {
         color: '#00908f'
+    },
+    row: {
+        flexDirection: 'row'
     }
 })
 
