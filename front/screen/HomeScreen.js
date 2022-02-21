@@ -15,7 +15,7 @@ const HomeScreen = () => {
         !fontsLoaded ? <View/> :
         <View style={styles.container}>
             <View style={styles.logo}>
-                <Image source={require('../assets/logo2.png')} style={styles.logoPicture} />
+                <Image source={require('../assets/logo.png')} style={styles.logoPicture} />
             </View>
 
             <View style={styles.form}>
