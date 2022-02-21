@@ -1,4 +1,4 @@
-<p align="center"><img src ="logo.png" alt="Logo" width="200"/></p>
+<p align="center"><img src ="front/assets/logo.png" alt="Logo" width="250"/></p>
 
 # Ping Contest
 
