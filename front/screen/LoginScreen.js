@@ -4,7 +4,6 @@ import CustomInput from "../component/CustomInput"
 import {useFonts, Kreon_600SemiBold} from "@expo-google-fonts/kreon"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import {LinearGradient} from 'expo-linear-gradient'
-import {IndexScreen} from "./IndexScreen";
 import {SplashScreen} from "./SplashScreen";
 
 const LoginScreen = () => {
