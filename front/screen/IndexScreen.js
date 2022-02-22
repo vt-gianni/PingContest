@@ -12,14 +12,24 @@ export const IndexScreen = ({navigation}) => {
     });
 
     const [visible, setVisible] = useState(false)
+    const [textVisible, setTextVisible] = useState(false)
     const [pressed, setPressed] = useState(false)
 
     useEffect(() => {
-        toggleVisible()
+        setTimeout(() => {
+            toggleVisible()
+        }, 500)
+        setTimeout(() => {
+            toggleTextVisible()
+        }, 1000)
     }, [])
 
     const toggleVisible = () => {
         setVisible(!visible)
+    }
+
+    const toggleTextVisible = () => {
+        setTextVisible(!textVisible)
     }
 
     const dimensions = Dimensions.get('window')
@@ -30,35 +40,47 @@ export const IndexScreen = ({navigation}) => {
             <LinearGradient colors={['#ffffff', '#D4E7F3']} start={{x: 0, y: 0}} end={{x: 1, y: 1}}
                             style={{flex: 1, width: '100%', alignItems: 'center', justifyContent: 'center'}}>
                 <View style={styles.logoBlock}>
-                        <Image source={require('../assets/welcome.png')} style={{ height: imageSize, width: imageSize }}/>
+                    <FadeInOut scale={true} visible={visible} duration={1500}>
+                        <Image source={require('../assets/welcome.png')} style={{height: imageSize, width: imageSize}}/>
+                    </FadeInOut>
                 </View>
                 <View style={styles.bottomBlock}>
                     <View>
-                        <View style={styles.row}>
-                            <Text style={styles.title}>PING </Text>
-                            <Text style={styles.title2}>CONTEST</Text>
-                        </View>
-                        <Text style={[styles.description, {marginTop: 20}]}>
-                            Ping Contest est une application de création et gestion de tournois.
-                        </Text>
-                        <Text style={styles.description}>
-                            Finis les retraits et paiements sur place, inscrivez-vous sur l'application et payez directement par carte bancaire.
-                        </Text>
-                    </View>
-                    <Pressable style={pressed ? styles.pressablePressed : styles.pressable} onPressIn={() => {
-                        setPressed(true)
-                    }} onPressOut={() => {
-                        setPressed(false)
-                    }} onPress={() => {navigation.navigate('Main')}}>
-                        <Text style={styles.pressableText}>
-                            Commencer maintenant
-                        </Text>
-                        <View style={styles.nextBtn}>
-                            <Text>
-                                <MaterialCommunityIcon name="arrow-right" color="#ffffff" size={20}  direction={'rtl'}/>
+                        <FadeInOut scale={true} visible={textVisible} duration={1500}>
+                            <View style={styles.row}>
+                                <Text style={styles.title}>PING </Text>
+                                <Text style={styles.title2}>CONTEST</Text>
+                            </View>
+                            <Text style={[styles.description, {marginTop: 20}]}>
+                                Ping Contest est une application de création et gestion de tournois.
                             </Text>
-                        </View>
-                    </Pressable>
+                            <Text style={styles.description}>
+                                Finis les retraits et paiements sur place, inscrivez-vous sur l'application et payez
+                                directement par carte bancaire.
+                            </Text>
+                        </FadeInOut>
+                    </View>
+                    <View style={{width: '100%'}}>
+                        <FadeInOut scale={true} visible={textVisible} duration={1500}>
+                            <Pressable style={pressed ? styles.pressablePressed : styles.pressable} onPressIn={() => {
+                                setPressed(true)
+                            }} onPressOut={() => {
+                                setPressed(false)
+                            }} onPress={() => {
+                                navigation.navigate('Main')
+                            }}>
+                                <Text style={styles.pressableText}>
+                                    Commencer maintenant
+                                </Text>
+                                <View style={styles.nextBtn}>
+                                    <Text>
+                                        <MaterialCommunityIcon name="arrow-right" color="#ffffff" size={20}
+                                                               direction={'rtl'}/>
+                                    </Text>
+                                </View>
+                            </Pressable>
+                        </FadeInOut>
+                    </View>
                 </View>
             </LinearGradient>
     )
