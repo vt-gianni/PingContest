@@ -1,6 +1,6 @@
 import {NavigationContainer} from "@react-navigation/native"
 import {createNativeStackNavigator} from "@react-navigation/native-stack"
-import {IndexScreen} from "../component/IndexScreen"
+import {IndexScreen} from "../screen/IndexScreen"
 import {StatusBar} from "expo-status-bar"
 import {MainStack} from "./MainStack"
 
