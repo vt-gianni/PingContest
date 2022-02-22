@@ -5,6 +5,7 @@ import {useFonts, Kreon_600SemiBold} from "@expo-google-fonts/kreon"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import {LinearGradient} from 'expo-linear-gradient'
 import {IndexScreen} from "../component/IndexScreen";
+import {SplashScreen} from "../component/SplashScreen";
 
 const HomeScreen = () => {
     let [fontsLoaded] = useFonts({
@@ -15,8 +16,8 @@ const HomeScreen = () => {
     const [password, setPassword] = useState('')
 
     return (
-        fontsLoaded ? <IndexScreen/> :
-            <LinearGradient colors={['#ffffff', '#CDF6F6']} start={{x: 0, y: 0}} end={{x: 1, y: 1}}
+        !fontsLoaded ? <SplashScreen/> :
+            <LinearGradient colors={['#ffffff', '#D4E7F3']} start={{x: 0, y: 0}} end={{x: 1, y: 1}}
                             style={{flex: 1, width: '100%'}}>
                 <View style={styles.darken}>
                     <View style={styles.container}>
@@ -49,7 +50,7 @@ const HomeScreen = () => {
                         <View style={styles.btnContainer}>
                             <TouchableOpacity onPress={() => {
                             }} style={styles.btnBlue}>
-                                <Text style={styles.btnTextBlue}><MaterialCommunityIcon name="facebook" color="#00908f"
+                                <Text style={styles.btnTextBlue}><MaterialCommunityIcon name="facebook" color="#2D6990"
                                                                                         size={22}/> Connexion avec
                                     Facebook</Text>
                             </TouchableOpacity>
@@ -75,8 +76,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     logoPicture: {
-        width: 200,
-        height: 200,
+        width: 250,
+        height: 306.75,
         marginHorizontal: 10,
         marginVertical: 10
     },
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     btnRed: {
-        backgroundColor: '#ff576b',
+        backgroundColor: '#E1673D',
         borderRadius: 5,
         paddingHorizontal: 15,
         paddingVertical: 10,
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         marginTop: 10,
         width: '100%',
-        borderColor: '#00908f',
+        borderColor: '#2D6990',
         borderWidth: 1,
     },
     btnText: {
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     btnTextBlue: {
-        color: '#00908f',
+        color: '#2D6990',
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 20,
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
         color: '#ff576b'
     },
     blueText: {
-        color: '#00908f'
+        color: '#2D6990'
     },
     row: {
         flexDirection: 'row'
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
         marginStart: 5
     },
     registerBtnText: {
-        color: '#00908f'
+        color: '#2D6990'
     },
     noAccount: {
         fontSize: 16
