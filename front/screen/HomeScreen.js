@@ -15,7 +15,7 @@ const HomeScreen = () => {
 
     return (
         !fontsLoaded ? <View/> :
-            <LinearGradient colors={['#FFBBC3', '#CDF6F6']} start={{x: 0, y: 0}} end={{x: 1, y: 1}}
+            <LinearGradient colors={['#ffffff', '#CDF6F6']} start={{x: 0, y: 0}} end={{x: 1, y: 1}}
                             style={{flex: 1, width: '100%'}}>
                 <View style={styles.darken}>
                     <View style={styles.container}>
@@ -38,9 +38,9 @@ const HomeScreen = () => {
                             </TouchableOpacity>
 
                             <View style={[styles.row, styles.w100]}>
-                                <Text style={styles.italic}>Pas encore de compte ?</Text>
+                                <Text style={styles.noAccount}>Pas encore de compte ?</Text>
                                 <Pressable style={styles.registerBtn}>
-                                    <Text style={[styles.registerBtnText, styles.italic]}>S'inscrire</Text>
+                                    <Text style={[styles.registerBtnText, styles.noAccount]}>S'inscrire</Text>
                                 </Pressable>
                             </View>
                         </View>
@@ -140,11 +140,9 @@ const styles = StyleSheet.create({
         marginStart: 5
     },
     registerBtnText: {
-        color: '#00908f',
-        textDecorationLine: 'underline'
+        color: '#00908f'
     },
-    italic: {
-        fontStyle: 'italic',
+    noAccount: {
         fontSize: 16
     },
     darken: {
