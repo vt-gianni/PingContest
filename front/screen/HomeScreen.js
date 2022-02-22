@@ -4,6 +4,7 @@ import CustomInput from "../component/CustomInput"
 import {useFonts, Kreon_600SemiBold} from "@expo-google-fonts/kreon"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import {LinearGradient} from 'expo-linear-gradient'
+import {IndexScreen} from "../component/IndexScreen";
 
 const HomeScreen = () => {
     let [fontsLoaded] = useFonts({
@@ -14,7 +15,7 @@ const HomeScreen = () => {
     const [password, setPassword] = useState('')
 
     return (
-        !fontsLoaded ? <View/> :
+        fontsLoaded ? <IndexScreen/> :
             <LinearGradient colors={['#ffffff', '#CDF6F6']} start={{x: 0, y: 0}} end={{x: 1, y: 1}}
                             style={{flex: 1, width: '100%'}}>
                 <View style={styles.darken}>
