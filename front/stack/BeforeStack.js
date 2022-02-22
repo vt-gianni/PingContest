@@ -18,6 +18,7 @@ export const BeforeStack = () => {
                 <Stack.Screen
                     name="Main"
                     component={MainStack}
+                    options={{animation: "slide_from_right"}}
                 />
             </Stack.Navigator>
         </NavigationContainer>
