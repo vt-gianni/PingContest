@@ -49,7 +49,7 @@ export const IndexScreen = ({navigation}) => {
                         setPressed(true)
                     }} onPressOut={() => {
                         setPressed(false)
-                    }} onPress={() => {navigation.navigate('Home')}}>
+                    }} onPress={() => {navigation.navigate('Main')}}>
                         <Text style={styles.pressableText}>
                             Commencer maintenant
                         </Text>
