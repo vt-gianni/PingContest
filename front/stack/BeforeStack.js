@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator()
 
 export const BeforeStack = () => {
     return (
-        <NavigationContainer>
+        <NavigationContainer >
             <StatusBar hidden />
             <Stack.Navigator screenOptions={{headerShown: false}}>
                 <Stack.Screen

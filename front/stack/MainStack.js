@@ -1,13 +1,21 @@
-import HomeScreen from "../screen/HomeScreen"
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {ContestsListScreen} from "../screen/ContestsListScreen";
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
+import {AccountStack} from "./AccountStack";
 
-const Tab = createMaterialBottomTabNavigator()
+const Tab = createBottomTabNavigator()
 
 export const MainStack = () => {
     return (
-        <Tab.Navigator labeled={false} barStyle={{ backgroundColor: '#2D6990' }} initialRouteName="Home">
+        <Tab.Navigator initialRouteName="Home" screenOptions={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarInactiveBackgroundColor: '#2D6990',
+            tabBarActiveBackgroundColor: '#2D6990',
+            tabBarActiveTintColor: 'rgba(255, 255, 255, 1)',
+            tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.5)'
+        }}
+        >
             <Tab.Screen
                 name="ContestsList"
                 component={ContestsListScreen}
@@ -27,8 +35,9 @@ export const MainStack = () => {
                 }}
             />
             <Tab.Screen
+
                 name="Account"
-                component={HomeScreen}
+                component={AccountStack}
                 options={{
                     tabBarIcon: ({color}) => (
                         <MaterialCommunityIcon name="account" color={color} size={26}/>

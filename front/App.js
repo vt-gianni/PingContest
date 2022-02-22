@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
-import HomeScreen from "./screen/HomeScreen"
+import LoginScreen from "./screen/LoginScreen"
 import React from "react"
 import {BeforeStack} from "./stack/BeforeStack";
 

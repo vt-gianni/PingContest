@@ -7,7 +7,7 @@ import {LinearGradient} from 'expo-linear-gradient'
 import {IndexScreen} from "../component/IndexScreen";
 import {SplashScreen} from "../component/SplashScreen";
 
-const HomeScreen = () => {
+const LoginScreen = () => {
     let [fontsLoaded] = useFonts({
         Kreon_600SemiBold
     });
@@ -153,4 +153,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default HomeScreen
+export default LoginScreen
