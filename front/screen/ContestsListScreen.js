@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react"
 import {View, Text, SafeAreaView, FlatList, StyleSheet, Image, ScrollView} from "react-native"
-import {Top} from "../component/Top";
+import {Top} from "../component/Top"
+import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
+import BottomSheet from '@gorhom/bottom-sheet'
 
 const DATA = [
     {
@@ -59,14 +61,19 @@ export const ContestsListScreen = () => {
     const renderItem = ({item}) => {
         return (
             <View style={styles.item}>
-                <View style={styles.pictureBlock}>
-                    <Image source={require('../assets/lmtt.png')} style={styles.picture}/>
+                <View style={styles.row}>
+                    <View style={styles.pictureBlock}>
+                        <Image source={require('../assets/lmtt.png')} style={styles.picture}/>
+                    </View>
+                    <View>
+                        <Text style={styles.city}>{item.city}</Text>
+                        <Text style={styles.startDate}>Le {item.startDate}</Text>
+                        <Text style={styles.nbParticipants}>{item.contestCategories.length} participants</Text>
+                    </View>
                 </View>
-                <View>
-                    <Text style={styles.city}>{item.city}</Text>
-                    <Text>Le {item.startDate}</Text>
-                    <Text style={styles.nbParticipants}>{item.contestCategories.length} participants</Text>
-                </View>
+                <Text>
+                    <MaterialCommunityIcon name="chevron-right" color="#2D6990" size={30} direction={"ltr"}/>
+                </Text>
             </View>
         )
     }
@@ -75,23 +82,27 @@ export const ContestsListScreen = () => {
         <SafeAreaView style={styles.container}>
             <Top/>
             <View style={styles.content}>
-                <ScrollView horizontal={true} style={{ marginBottom: 15 }}>
-                    <View style={styles.activeFilter}>
-                        <Text style={styles.activeFilterText}>A venir</Text>
-                    </View>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15}}>
+                    <View style={{flexDirection: 'row'}}>
+                        <View style={styles.activeFilter}>
+                            <Text style={styles.activeFilterText}>A venir</Text>
+                        </View>
 
-                    <View style={styles.filter}>
-                        <Text style={styles.filterText}>Terminés</Text>
+                        <View style={styles.filter}>
+                            <Text style={styles.filterText}>Terminés</Text>
+                        </View>
                     </View>
-                </ScrollView>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={DATA}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id}
-                    style={{ marginBottom: 100 }}
-                />
+                    <Text>
+                        <MaterialCommunityIcon name="tune" color="#2D6990" size={26} direction={"ltr"}/>
+                    </Text>
+                </View>
             </View>
+            <FlatList
+                showsVerticalScrollIndicator={false}
+                data={DATA}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+            />
         </SafeAreaView>
 
     )
@@ -102,44 +113,51 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     content: {
-        padding: 30
+        paddingHorizontal: 20,
+        paddingVertical: 10
     },
     item: {
-        backgroundColor: 'white',
-        marginVertical: 15,
+        marginBottom: 10,
         padding: 15,
+        marginHorizontal: 20,
+        flexDirection: 'row',
+        backgroundColor: 'white',
         borderRadius: 5,
-        flexDirection: 'row'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     city: {
         fontWeight: 'bold',
         fontSize: 16,
         color: '#2D6990'
     },
+    startDate: {
+        fontSize: 13,
+    },
     nbParticipants: {
         fontSize: 13,
-        marginTop: 15,
         fontStyle: 'italic'
     },
     pictureBlock: {
-        marginRight: 10
+        marginRight: 20
     },
     picture: {
-        width: 80,
-        height: 80
+        width: 60,
+        height: 60,
+        borderRadius: 50
     },
     filter: {
         borderWidth: 1,
         borderColor: '#2D6990',
         padding: 8,
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
         borderRadius: 50,
         marginRight: 10
     },
     activeFilter: {
         backgroundColor: '#2D6990',
         padding: 8,
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
         borderRadius: 50,
         marginRight: 10
     },
@@ -150,6 +168,9 @@ const styles = StyleSheet.create({
     activeFilterText: {
         color: '#ffffff',
         fontWeight: 'bold'
+    },
+    row: {
+        flexDirection: 'row'
     }
 })
 

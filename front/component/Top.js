@@ -4,7 +4,7 @@ import {Image, Text} from "react-native";
 export const Top = () => {
     return (
         <View style={styles.top}>
-            {/*<Image source={require('../assets/welcome.png')} style={styles.logo}/>*/}
+            <Image source={require('../assets/welcome.png')} style={styles.logo}/>
             <View style={styles.row}>
                 <Text style={styles.title}>Ping </Text>
                 <Text style={styles.title2}>Contest</Text>
