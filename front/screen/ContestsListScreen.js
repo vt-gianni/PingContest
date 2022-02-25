@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react"
-import {View, Text, SafeAreaView, FlatList, StyleSheet, Image, ScrollView} from "react-native"
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react"
+import {View, Text, SafeAreaView, FlatList, StyleSheet, Image, ScrollView, Pressable} from "react-native"
 import {Top} from "../component/Top"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
-import BottomSheet from '@gorhom/bottom-sheet'
+import RBSheet from "react-native-raw-bottom-sheet"
+import {ContestsListFilters} from "./ContestsListFilters";
 
 const DATA = [
     {
@@ -58,6 +59,10 @@ const DATA = [
 
 
 export const ContestsListScreen = () => {
+    const refRBSheet = useRef()
+    const [coming, setComing] = useState(true)
+    const [done, setDone] = useState(false)
+
     const renderItem = ({item}) => {
         return (
             <View style={styles.item}>
@@ -84,17 +89,23 @@ export const ContestsListScreen = () => {
             <View style={styles.content}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15}}>
                     <View style={{flexDirection: 'row'}}>
-                        <View style={styles.activeFilter}>
-                            <Text style={styles.activeFilterText}>A venir</Text>
-                        </View>
+                        <Pressable style={coming ? styles.activeFilter : styles.filter} onPress={() => {
+                            setComing(true)
+                            setDone(false)
+                        }}>
+                            <Text style={coming ? styles.activeFilterText : styles.filterText}>A venir</Text>
+                        </Pressable>
 
-                        <View style={styles.filter}>
-                            <Text style={styles.filterText}>Terminés</Text>
-                        </View>
+                        <Pressable style={done ? styles.activeFilter : styles.filter} onPress={() => {
+                            setDone(true)
+                            setComing(false)
+                        }}>
+                            <Text style={done ? styles.activeFilterText : styles.filterText}>Terminés</Text>
+                        </Pressable>
                     </View>
-                    <Text>
+                    <Pressable onPress={() => refRBSheet.current.open()}>
                         <MaterialCommunityIcon name="tune" color="#2D6990" size={26} direction={"ltr"}/>
-                    </Text>
+                    </Pressable>
                 </View>
             </View>
             <FlatList
@@ -103,6 +114,24 @@ export const ContestsListScreen = () => {
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
             />
+            <RBSheet
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                closeOnPressMask={true}
+                customStyles={{
+                    wrapper: {
+                        backgroundColor: "rgba(0, 0, 0, 0.4)",
+                    },
+                    container: {
+                    },
+                    draggableIcon: {
+                        backgroundColor: "#000"
+                    }
+                }}
+
+            >
+                <ContestsListFilters />
+            </RBSheet>
         </SafeAreaView>
 
     )
