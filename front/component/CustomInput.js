@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     container: {
         marginBottom: 10,
         marginTop: 10,
+        flexGrow: 1
     },
     input: {
         backgroundColor: '#ffffff',
