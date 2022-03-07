@@ -42,7 +42,7 @@ class SecurityController extends AbstractController
             $user = new User();
             $user->setFirstname($data['firstname']);
             $user->setLastname($data['lastname']);
-            $user->setBirthdate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['birthdate']));
+            $user->setBirthdate(\DateTime::createFromFormat('Y-m-d', $data['birthdate']));
             $user->setEmail($data['mailAddress']);
             $user->setRegistrationDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
             $user->setPassword($passwordHasher->hashPassword($user, $data['password']));

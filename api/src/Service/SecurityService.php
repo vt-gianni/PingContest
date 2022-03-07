@@ -31,8 +31,7 @@ class SecurityService
                 $this->checkBirthdate($data['birthdate'])) {
                 return true;
             }
-        }
-        else {
+        } else {
             $this->error = 'Veuillez remplir tous les champs.';
         }
         return false;
@@ -44,8 +43,7 @@ class SecurityService
      */
     private function checkBirthdate($birthdate): bool
     {
-        if (date('Y-m-d H:i:s', strtotime($birthdate)) == $birthdate) {
-            $date = \DateTime::createFromFormat('Y-m-d H:i:s', $birthdate);
+        if ($date = \DateTime::createFromFormat('Y-m-d', $birthdate)) {
             $now = new \DateTime('now');
             if ($date->diff($now)->y >= 6) {
                 return true;
@@ -66,7 +64,7 @@ class SecurityService
     {
         $uppercase = preg_match('@[A-Z]@', $password);
         $lowercase = preg_match('@[a-z]@', $password);
-        $number    = preg_match('@[0-9]@', $password);
+        $number = preg_match('@[0-9]@', $password);
         $specialChars = preg_match('@[^\w]@', $password);
 
         if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 6) {
@@ -87,8 +85,7 @@ class SecurityService
                 return true;
             }
             $this->error = 'Cette adresse mail est déjà utilisée.';
-        }
-        else {
+        } else {
             $this->error = 'Mauvais format d\'adresse mail.';
         }
         return false;
