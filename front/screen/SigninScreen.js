@@ -106,11 +106,14 @@ export const SigninScreen = ({navigation}) => {
                                         firstname: firstname,
                                         lastname: lastname,
                                         mailAddress: mailAddress,
-                                        birthdate: date,
+                                        birthdate: date.toISOString().split('T')[0],
                                         password: password
                                     })) {
                                     const req = await security.register()
-                                    console.log('status', req.status)
+                                    if (req.status !== 201) {
+                                        const data = await req.json()
+                                        setError(data.error)
+                                    }
                                 } else {
                                     setError(security.error)
                                 }
