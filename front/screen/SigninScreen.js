@@ -1,22 +1,27 @@
 import React, {useEffect, useState} from "react"
-import {StyleSheet, Text, View, TextInput, Image, TouchableOpacity, Pressable, Platform, Button} from 'react-native'
+import {StyleSheet, Text, View, Image, TouchableOpacity, Pressable, Platform} from 'react-native'
 import CustomInput from "../component/CustomInput"
-import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import {LinearGradient} from 'expo-linear-gradient'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import {SecurityService} from "../service/SecurityService";
 
 export const SigninScreen = ({navigation}) => {
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [mailAddress, setMailAddress] = useState('')
     const [password, setPassword] = useState('')
-    const [date, setDate] = useState(new Date())
+    const [date, setDate] = useState(null)
     const [mode, setMode] = useState('date')
     const [show, setShow] = useState(false)
+    const [error, setError] = useState(null)
+    const [security, setSecurity] = useState(null)
 
-    const getMaxBirthdate = () => {
+    useEffect(() => {
+        setSecurity(new SecurityService())
+    }, [])
+
+    const getMaxDate = () => {
         const maxDate = new Date()
-
         maxDate.setFullYear(maxDate.getFullYear() - 6)
         return maxDate
     }
@@ -50,6 +55,7 @@ export const SigninScreen = ({navigation}) => {
                     </View>
 
                     <View style={styles.form}>
+                        {error && <Text style={styles.redText}>{error}</Text>}
                         <View style={styles.inputsContainerRow}>
                             <View style={styles.inputsRow}>
                                 <CustomInput field={firstname} placeholder={"Prénom *"}
@@ -74,7 +80,7 @@ export const SigninScreen = ({navigation}) => {
                             style={[styles.row, {alignItems: 'center', justifyContent: 'space-evenly', width: '100%'}]}>
                             <Text>Date de naissance *</Text>
                             <Pressable onPress={showDatepicker} style={styles.date}>
-                                {date.getFullYear() === ((new Date()).getFullYear()) ?
+                                {!date ?
                                     <View style={styles.row}>
                                         <Text style={styles.placeholder}>dd</Text>
                                         <Text style={styles.placeholder}> / </Text>
@@ -94,6 +100,15 @@ export const SigninScreen = ({navigation}) => {
                         </View>
 
                         <TouchableOpacity onPress={() => {
+                            if (security !==  null) {
+                                security.canRegister({
+                                        firstname: firstname,
+                                        lastname: lastname,
+                                        mailAddress: mailAddress,
+                                        birthdate: date,
+                                        password: password
+                                    }) ? security.register() : setError(security.getError())
+                            }
                         }} style={styles.btnRed}>
                             <Text style={styles.btnText}>Inscription</Text>
                         </TouchableOpacity>
@@ -110,9 +125,9 @@ export const SigninScreen = ({navigation}) => {
                 </View>
                 {show && (
                     <DateTimePicker
-                        maximumDate={getMaxBirthdate()}
+                        maximumDate={getMaxDate()}
                         testID="dateTimePicker"
-                        value={date}
+                        value={date ? date : new Date()}
                         mode={mode}
                         is24Hour={true}
                         display="default"
@@ -133,7 +148,7 @@ const styles = StyleSheet.create({
         padding: 20
     },
     logo: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',
@@ -146,7 +161,7 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     form: {
-        flex: 1,
+        flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -200,7 +215,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     redText: {
-        color: '#ff576b'
+        color: '#E1673D'
     },
     blueText: {
         color: '#2D6990'
