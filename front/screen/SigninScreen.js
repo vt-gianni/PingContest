@@ -99,15 +99,21 @@ export const SigninScreen = ({navigation}) => {
                             </Pressable>
                         </View>
 
-                        <TouchableOpacity onPress={() => {
-                            if (security !==  null) {
-                                security.canRegister({
+                        <TouchableOpacity onPress={async () => {
+                            if (security !== null) {
+                                if (
+                                    security.canRegister({
                                         firstname: firstname,
                                         lastname: lastname,
                                         mailAddress: mailAddress,
                                         birthdate: date,
                                         password: password
-                                    }) ? security.register() : setError(security.getError())
+                                    })) {
+                                    const req = await security.register()
+                                    console.log('status', req.status)
+                                } else {
+                                    setError(security.error)
+                                }
                             }
                         }} style={styles.btnRed}>
                             <Text style={styles.btnText}>Inscription</Text>
