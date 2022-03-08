@@ -70,6 +70,7 @@ const LoginScreen = ({navigation}) => {
                         <View style={[styles.row, styles.w100]}>
                             <Text style={styles.noAccount}>Pas encore de compte ?</Text>
                             <Pressable style={styles.registerBtn} onPress={() => {
+                                navigation.navigate('Signin')
                             }}>
                                 <Text style={[styles.registerBtnText, styles.noAccount]}>S'inscrire</Text>
                             </Pressable>

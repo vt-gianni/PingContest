@@ -18,11 +18,17 @@ export const SigninScreen = ({navigation}) => {
     const [error, setError] = useState(null)
     const [security, setSecurity] = useState(null)
 
-    const {setToken} = useContext(authContext)
+    const {token, setToken} = useContext(authContext)
 
     useEffect(() => {
         setSecurity(new SecurityService())
     }, [])
+
+    useEffect(() => {
+        if (token) {
+            navigation.navigate('Profile')
+        }
+    }, [token])
 
     const getMaxDate = () => {
         const maxDate = new Date()
@@ -119,7 +125,7 @@ export const SigninScreen = ({navigation}) => {
                                         if (logReq.status === 200) {
                                             const res = await logReq.json()
                                             await AsyncStorage.setItem('token', res.token)
-                                            setToken(data.token)
+                                            setToken(res.token)
                                         }
                                     }
                                     else{
