@@ -3,9 +3,9 @@ import {StyleSheet, Text, View, Image, TouchableOpacity, Pressable, Platform} fr
 import CustomInput from "../component/CustomInput"
 import {LinearGradient} from 'expo-linear-gradient'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import {SecurityService} from "../service/SecurityService";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import authContext from "../context/AuthContext";
+import {SecurityService} from "../service/SecurityService"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import authContext from "../context/AuthContext"
 
 export const SigninScreen = ({navigation}) => {
     const [firstname, setFirstname] = useState('')
