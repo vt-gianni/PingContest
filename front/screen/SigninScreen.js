@@ -4,6 +4,7 @@ import CustomInput from "../component/CustomInput"
 import {LinearGradient} from 'expo-linear-gradient'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import {SecurityService} from "../service/SecurityService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const SigninScreen = ({navigation}) => {
     const [firstname, setFirstname] = useState('')
@@ -110,7 +111,14 @@ export const SigninScreen = ({navigation}) => {
                                         password: password
                                     })) {
                                     const req = await security.register()
-                                    if (req.status !== 201) {
+                                    if (req.status === 201) {
+                                        const logReq = await security.login()
+                                        if (logReq.status === 200) {
+                                            const res = await logReq.json()
+                                            await AsyncStorage.setItem('token', res.token)
+                                        }
+                                    }
+                                    else{
                                         const data = await req.json()
                                         setError(data.error)
                                     }

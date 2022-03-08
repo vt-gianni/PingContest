@@ -1,6 +1,6 @@
 export const SecurityService = class {
     constructor() {
-        this._apiAddress = 'https://c8ba-176-138-20-134.ngrok.io/api'
+        this._apiAddress = 'https://40d2-77-130-124-139.ngrok.io/api'
         this._error = null
 
         this._firstname = ''
@@ -65,6 +65,13 @@ export const SecurityService = class {
         return (this.checkFirstname() && this.checkLastname() && this.checkMailAddress() && this.checkPassword() && this.checkBirthdate())
     }
 
+    canLogin = (data) => {
+        this._mailAddress = data.mailAddress
+        this._password = data.password
+
+        return (this.checkMailAddress() && this._password.length > 0)
+    }
+
     register = () => {
         return fetch(this._apiAddress + '/registration', {
             method: 'POST',
@@ -76,6 +83,19 @@ export const SecurityService = class {
                 lastname: this._lastname,
                 mailAddress: this._mailAddress,
                 birthdate: this._birthdate,
+                password: this._password
+            })
+        })
+    }
+
+    login = () => {
+        return fetch(this._apiAddress + '/login_check', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: this._mailAddress,
                 password: this._password
             })
         })

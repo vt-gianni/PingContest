@@ -1,12 +1,29 @@
 import React, {useEffect, useState} from "react"
-import {StyleSheet, Text, View, TextInput, Image, TouchableOpacity, Pressable, Platform} from 'react-native'
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+    Pressable,
+    Platform,
+} from 'react-native'
 import CustomInput from "../component/CustomInput"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import {LinearGradient} from 'expo-linear-gradient'
+import {SecurityService} from "../service/SecurityService"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({navigation}) => {
     const [mailAddress, setMailAddress] = useState('')
     const [password, setPassword] = useState('')
+    const [security, setSecurity] = useState(null)
+    const [error, setError] = useState(null)
+
+    useEffect(() => {
+        setSecurity(new SecurityService())
+    }, [])
 
     return (
         <LinearGradient colors={['#ffffff', '#D4E7F3']} start={{x: 0, y: 0}} end={{x: 1, y: 1}}
@@ -18,6 +35,7 @@ const LoginScreen = ({navigation}) => {
                     </View>
 
                     <View style={styles.form}>
+                        {error && <Text style={styles.redText}>{error}</Text>}
                         <View style={styles.inputsContainer}>
                             <CustomInput field={mailAddress} placeholder={"Adresse mail *"}
                                          setField={setMailAddress}
@@ -26,7 +44,21 @@ const LoginScreen = ({navigation}) => {
                                          secure={true}/>
                         </View>
 
-                        <TouchableOpacity onPress={() => {
+                        <TouchableOpacity onPress={async () => {
+                            if (
+                                security.canLogin({
+                                    mailAddress: mailAddress,
+                                    password: password
+                                })) {
+                                const req = await security.login()
+                                if (req.status === 200) {
+                                    const data = await req.json()
+                                    await AsyncStorage.setItem('token', data.token)
+                                }
+                                else {
+                                    setError('Identifiants incorrects.')
+                                }
+                            }
                         }} style={styles.btnRed}>
                             <Text style={styles.btnText}>Connexion</Text>
                         </TouchableOpacity>
@@ -34,7 +66,6 @@ const LoginScreen = ({navigation}) => {
                         <View style={[styles.row, styles.w100]}>
                             <Text style={styles.noAccount}>Pas encore de compte ?</Text>
                             <Pressable style={styles.registerBtn} onPress={() => {
-                                navigation.navigate('Signin')
                             }}>
                                 <Text style={[styles.registerBtnText, styles.noAccount]}>S'inscrire</Text>
                             </Pressable>
@@ -121,7 +152,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     redText: {
-        color: '#ff576b'
+        color: '#E1673D'
     },
     blueText: {
         color: '#2D6990'
