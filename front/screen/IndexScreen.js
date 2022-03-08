@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from "react"
+import React, {useContext, useEffect, useState} from "react"
 import {LinearGradient} from "expo-linear-gradient"
 import {View, Text, StyleSheet, Image, Pressable, Dimensions} from "react-native"
 import FadeInOut from 'react-native-fade-in-out'
 import {useFonts, Kreon_600SemiBold} from "@expo-google-fonts/kreon"
 import {SplashScreen} from "./SplashScreen";
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
+import authContext from "../context/AuthContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const IndexScreen = ({navigation}) => {
     let [fontsLoaded] = useFonts({
@@ -14,15 +16,38 @@ export const IndexScreen = ({navigation}) => {
     const [visible, setVisible] = useState(false)
     const [textVisible, setTextVisible] = useState(false)
     const [pressed, setPressed] = useState(false)
+    const [firstTime, setFirstTime] = useState(false)
 
     useEffect(() => {
-        setTimeout(() => {
-            toggleVisible()
-        }, 500)
-        setTimeout(() => {
-            toggleTextVisible()
-        }, 1000)
+        checkFirstTime().then(() => {
+            saveFirstTime().then()
+        })
     }, [])
+
+    useEffect(() => {
+        if (fontsLoaded && firstTime) {
+            setTimeout(() => {
+                toggleVisible()
+            }, 500)
+            setTimeout(() => {
+                toggleTextVisible()
+            }, 1000)
+        }
+        else if (fontsLoaded && !firstTime) {
+            navigation.navigate('Main')
+        }
+    }, [fontsLoaded, firstTime])
+
+    const saveFirstTime = async () => {
+        await AsyncStorage.setItem('firstTime', 'true')
+    }
+
+    const checkFirstTime = async () => {
+        const ft = await AsyncStorage.getItem('firstTime')
+        if (ft === null) {
+            setFirstTime(true)
+        }
+    }
 
     const toggleVisible = () => {
         setVisible(!visible)

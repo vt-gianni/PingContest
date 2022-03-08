@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useContext, useEffect, useState} from "react"
 import {
     StyleSheet,
     Text,
@@ -14,12 +14,15 @@ import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCom
 import {LinearGradient} from 'expo-linear-gradient'
 import {SecurityService} from "../service/SecurityService"
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import authContext from "../context/AuthContext";
 
 const LoginScreen = ({navigation}) => {
     const [mailAddress, setMailAddress] = useState('')
     const [password, setPassword] = useState('')
     const [security, setSecurity] = useState(null)
     const [error, setError] = useState(null)
+
+    const {setToken} = useContext(authContext)
 
     useEffect(() => {
         setSecurity(new SecurityService())
@@ -54,6 +57,7 @@ const LoginScreen = ({navigation}) => {
                                 if (req.status === 200) {
                                     const data = await req.json()
                                     await AsyncStorage.setItem('token', data.token)
+                                    setToken(data.token)
                                 }
                                 else {
                                     setError('Identifiants incorrects.')

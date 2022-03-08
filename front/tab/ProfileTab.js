@@ -1,11 +1,12 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import LoginScreen from "../screen/LoginScreen";
 import {ProfileScreen} from "../screen/ProfileScreen";
+import authContext from "../context/AuthContext";
 
 export const ProfileTab = ({navigation}) => {
-    const [logged, setLogged] = useState(false)
+    const {token} = useContext(authContext)
 
     return (
-        !logged ? <LoginScreen navigation={navigation}/> : <ProfileScreen/>
+        !token ? <LoginScreen navigation={navigation}/> : <ProfileScreen/>
     )
 }

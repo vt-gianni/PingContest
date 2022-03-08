@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react"
+import React, {useContext, useEffect, useState} from "react"
 import {StyleSheet, Text, View, Image, TouchableOpacity, Pressable, Platform} from 'react-native'
 import CustomInput from "../component/CustomInput"
 import {LinearGradient} from 'expo-linear-gradient'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import {SecurityService} from "../service/SecurityService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import authContext from "../context/AuthContext";
 
 export const SigninScreen = ({navigation}) => {
     const [firstname, setFirstname] = useState('')
@@ -16,6 +17,8 @@ export const SigninScreen = ({navigation}) => {
     const [show, setShow] = useState(false)
     const [error, setError] = useState(null)
     const [security, setSecurity] = useState(null)
+
+    const {setToken} = useContext(authContext)
 
     useEffect(() => {
         setSecurity(new SecurityService())
@@ -116,6 +119,7 @@ export const SigninScreen = ({navigation}) => {
                                         if (logReq.status === 200) {
                                             const res = await logReq.json()
                                             await AsyncStorage.setItem('token', res.token)
+                                            setToken(data.token)
                                         }
                                     }
                                     else{
