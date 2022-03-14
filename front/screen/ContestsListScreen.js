@@ -60,38 +60,49 @@ const DATA = [
 
 export const ContestsListScreen = () => {
     const refRBSheet = useRef()
+    const [current, setCurrent] = useState(false)
     const [coming, setComing] = useState(true)
     const [done, setDone] = useState(false)
 
     const renderItem = ({item}) => {
         return (
-            <View style={styles.item}>
-                <View style={styles.row}>
-                    <View style={styles.pictureBlock}>
-                        <Image source={require('../assets/lmtt.png')} style={styles.picture}/>
+            <View>
+                <View style={styles.item}>
+                    <View style={styles.row}>
+                        <View style={styles.pictureBlock}>
+                            <Image source={require('../assets/lmtt.png')} style={styles.picture}/>
+                        </View>
+                        <View>
+                            <Text style={styles.city}>{item.city}</Text>
+                            <Text style={styles.startDate}>{item.startDate}</Text>
+                            <Text style={styles.nbParticipants}>{item.contestCategories.length} places restantes</Text>
+                        </View>
                     </View>
-                    <View>
-                        <Text style={styles.city}>{item.city}</Text>
-                        <Text style={styles.startDate}>Le {item.startDate}</Text>
-                        <Text style={styles.nbParticipants}>{item.contestCategories.length} participants</Text>
-                    </View>
+                    <Text>
+                        <MaterialCommunityIcon name="chevron-right" color="#2D6990" size={30} direction={"ltr"}/>
+                    </Text>
                 </View>
-                <Text>
-                    <MaterialCommunityIcon name="chevron-right" color="#2D6990" size={30} direction={"ltr"}/>
-                </Text>
             </View>
         )
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            <Top/>
             <View style={styles.content}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15}}>
                     <View style={{flexDirection: 'row'}}>
+                        <Pressable style={current ? styles.activeFilter : styles.filter} onPress={() => {
+                            setCurrent(true)
+                            setComing(false)
+                            setDone(false)
+                        }}>
+                            <Text style={current ? styles.activeFilterText : styles.filterText}>En cours</Text>
+                        </Pressable>
+
                         <Pressable style={coming ? styles.activeFilter : styles.filter} onPress={() => {
                             setComing(true)
                             setDone(false)
+                            setCurrent(false)
                         }}>
                             <Text style={coming ? styles.activeFilterText : styles.filterText}>A venir</Text>
                         </Pressable>
@@ -99,6 +110,7 @@ export const ContestsListScreen = () => {
                         <Pressable style={done ? styles.activeFilter : styles.filter} onPress={() => {
                             setDone(true)
                             setComing(false)
+                            setCurrent(false)
                         }}>
                             <Text style={done ? styles.activeFilterText : styles.filterText}>Terminés</Text>
                         </Pressable>
@@ -140,17 +152,19 @@ export const ContestsListScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white'
     },
     content: {
         paddingHorizontal: 20,
-        paddingVertical: 10
+        paddingBottom: 10,
+        paddingTop: 40
     },
     item: {
         marginBottom: 10,
         padding: 15,
         marginHorizontal: 20,
         flexDirection: 'row',
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(45, 105, 144, 0.1)',
         borderRadius: 5,
         justifyContent: 'space-between',
         alignItems: 'center'
@@ -162,13 +176,17 @@ const styles = StyleSheet.create({
     },
     startDate: {
         fontSize: 13,
+        color: '#333'
     },
     nbParticipants: {
         fontSize: 13,
         fontStyle: 'italic'
     },
     pictureBlock: {
-        marginRight: 20
+        marginRight: 20,
+        borderWidth: 2,
+        borderRadius: 50,
+        borderColor: '#2D6990'
     },
     picture: {
         width: 60,
