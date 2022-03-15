@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,6 +14,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @ApiResource(
+ *     itemOperations={
+ *          "get",
+            "put"={
+ *              "access_control"="object == user",
+ *              "denormalization_context"={"groups"={"put_user"}}
+ *          }
+ *     }
+ * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -44,29 +54,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user_registrated"})
+     * @Groups({"user_registrated", "put_user"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user_registrated"})
+     * @Groups({"user_registrated", "put_user"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user_registrated"})
+     * @Groups({"user_registrated", "put_user"})
      */
     private $birthdate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"put_user"})
      */
     private $licenseNumber;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"put_user"})
      */
     private $officialPoints;
 
