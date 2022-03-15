@@ -105,6 +105,7 @@ export const ContestsListScreen = () => {
                 </View>
             </View>
             <FlatList
+                style={{ marginHorizontal: 20 }}
                 showsVerticalScrollIndicator={false}
                 data={DATA}
                 renderItem={renderItem}
@@ -137,11 +138,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        paddingHorizontal: 20
     },
     content: {
         paddingBottom: 10,
-        paddingTop: 40
+        paddingTop: 40,
+        marginHorizontal: 20
     },
     filter: {
         borderWidth: 1,

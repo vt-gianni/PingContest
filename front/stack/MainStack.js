@@ -15,7 +15,7 @@ export const MainStack = () => {
             tabBarActiveBackgroundColor: '#2D6990',
             tabBarActiveTintColor: 'rgba(255, 255, 255, 1)',
             tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.5)',
-            tabBarStyle: { height: 65 }
+            tabBarStyle: { height: 65, paddingBottom: 0, paddingTop: 0 }
         }}
         >
             <Tab.Screen
