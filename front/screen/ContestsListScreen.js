@@ -3,6 +3,7 @@ import {View, Text, SafeAreaView, FlatList, StyleSheet, Image, ScrollView, Press
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import RBSheet from "react-native-raw-bottom-sheet"
 import {ContestsListFilters} from "./ContestsListFilters";
+import {ContestListItem} from "../component/ContestListItem";
 
 const DATA = [
     {
@@ -65,23 +66,7 @@ export const ContestsListScreen = () => {
 
     const renderItem = ({item}) => {
         return (
-            <View>
-                <View style={styles.item}>
-                    <View style={styles.row}>
-                        <View style={styles.pictureBlock}>
-                            <Image source={require('../assets/lmtt.png')} style={styles.picture}/>
-                        </View>
-                        <View>
-                            <Text style={styles.city}>{item.city}</Text>
-                            <Text style={styles.startDate}>{item.startDate}</Text>
-                            <Text style={styles.nbParticipants}>{item.contestCategories.length} places restantes</Text>
-                        </View>
-                    </View>
-                    <Text>
-                        <MaterialCommunityIcon name="chevron-right" color="#2D6990" size={30} direction={"ltr"}/>
-                    </Text>
-                </View>
-            </View>
+            <ContestListItem item={item}/>
         )
     }
 
@@ -151,46 +136,12 @@ export const ContestsListScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        paddingHorizontal: 15
     },
     content: {
-        paddingHorizontal: 20,
         paddingBottom: 10,
         paddingTop: 40
-    },
-    item: {
-        marginBottom: 10,
-        padding: 15,
-        marginHorizontal: 20,
-        flexDirection: 'row',
-        backgroundColor: 'rgba(45, 105, 144, 0.1)',
-        borderRadius: 5,
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
-    city: {
-        fontWeight: 'bold',
-        fontSize: 16,
-        color: '#2D6990'
-    },
-    startDate: {
-        fontSize: 13,
-        color: '#333'
-    },
-    nbParticipants: {
-        fontSize: 13,
-        fontStyle: 'italic'
-    },
-    pictureBlock: {
-        marginRight: 20,
-        borderWidth: 2,
-        borderRadius: 50,
-        borderColor: '#2D6990'
-    },
-    picture: {
-        width: 60,
-        height: 60,
-        borderRadius: 50
     },
     filter: {
         borderWidth: 1,
@@ -214,9 +165,6 @@ const styles = StyleSheet.create({
     activeFilterText: {
         color: '#ffffff',
         fontWeight: 'bold'
-    },
-    row: {
-        flexDirection: 'row'
     }
 })
 

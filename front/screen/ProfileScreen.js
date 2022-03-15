@@ -1,17 +1,61 @@
 import React, {useContext, useRef} from "react"
-import {Pressable, StyleSheet, Text, TouchableOpacity, View} from "react-native"
+import {FlatList, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native"
 import authContext from "../context/AuthContext"
-import { Avatar } from 'react-native-elements'
+import {Avatar, Divider} from 'react-native-elements'
 import RBSheet from "react-native-raw-bottom-sheet"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
-import {ContestsListFilters} from "./ContestsListFilters";
+import {ContestListItem} from "../component/ContestListItem";
+
+const DATA = [
+    {
+        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+        city: "Wattignies",
+        startDate: "18/07/2021",
+        endRegistrationDate: "12/07/2021",
+        contestCategories: [1, 2, 3, 4, 5, 6]
+    },
+    {
+        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+        city: "Tourcoing",
+        startDate: "25/07/2021",
+        endRegistrationDate: "19/07/2021",
+        contestCategories: [1, 2, 3, 4]
+    },
+    {
+        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        city: "Haubourdin",
+        startDate: "03/08/2021",
+        endRegistrationDate: "21/07/2021",
+        contestCategories: [1, 2, 3, 4, 5]
+    },
+    {
+        id: "58694a0f-3da1-471f-bd96-145571e29d71",
+        city: "La Madeleine",
+        startDate: "08/08/2021",
+        endRegistrationDate: "26/07/2021",
+        contestCategories: [1, 2]
+    },
+    {
+        id: "58694a0f-3da1-471f-bd96-145571e29d73",
+        city: "Lille",
+        startDate: "11/08/2021",
+        endRegistrationDate: "29/07/2021",
+        contestCategories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    }
+]
 
 export const ProfileScreen = () => {
     const {setToken} = useContext(authContext)
     const refRBSheet = useRef()
 
+    const renderItem = ({item}) => {
+        return (
+            <ContestListItem item={item}/>
+        )
+    }
+
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
                 <Text style={styles.topBarTitle}>Mon profil</Text>
                 <Pressable onPress={() => refRBSheet.current.open()}>
@@ -41,19 +85,30 @@ export const ProfileScreen = () => {
                 </TouchableOpacity>*/}
                 <View style={styles.playerInfoRow}>
                     <View style={styles.licenseBlock}>
-                        <Text style={styles.fwbold}>Numéro de Licence</Text>
-                        <Text>512231545312</Text>
+                        <Text style={styles.fwbold}>N° de Licence</Text>
+                        <Text>5725318</Text>
                     </View>
+                    <Divider orientation='vertical' />
                     <View style={styles.pointsBlock}>
                         <Text style={styles.fwbold}>Points officiels</Text>
-                        <Text>1005</Text>
+                        <Text>1005 Pts</Text>
                     </View>
                 </View>
 
-                <View>
-                    <Text style={styles.title}>Tournois à venir</Text>
+                <View style={{flex: 1}}>
+                    <Text style={styles.title}>Mes inscriptions</Text>
 
-                    <Text style={styles.noContestText}>Vous n'avez aucun tournois à venir..</Text>
+                    {/*<Text style={styles.noContestText}>Vous n'avez aucun tournois à venir..</Text>*/}
+
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={DATA}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        contentContainerStyle={{
+                            flexGrow: 1,
+                        }}
+                    />
                 </View>
             </View>
             <RBSheet
@@ -74,7 +129,7 @@ export const ProfileScreen = () => {
             >
                 <Text>Paramètres</Text>
             </RBSheet>
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -132,22 +187,22 @@ const styles = StyleSheet.create({
     },
     playerInfoRow: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginVertical: 30
+        justifyContent: 'center',
+        marginVertical: 30,
+        paddingVertical: 10
     },
     licenseBlock: {
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'rgba(45, 105, 144, 0.1)',
         padding: 10,
-        borderRadius: 5
+        borderColor: 'rgba(0, 0, 0, 0.3)',
+        marginRight: 10
     },
     pointsBlock: {
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'rgba(45, 105, 144, 0.1)',
         padding: 10,
-        borderRadius: 5
+        marginLeft: 10
     },
     fwbold: {
         fontWeight: 'bold'

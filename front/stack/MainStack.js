@@ -42,7 +42,7 @@ export const MainStack = () => {
                 component={AccountStack}
                 options={{
                     tabBarIcon: ({color}) => (
-                        <MaterialCommunityIcon name="account" color={color} size={26}/>
+                        <MaterialCommunityIcon name="account-circle" color={color} size={26}/>
                     )
                 }}
             />
