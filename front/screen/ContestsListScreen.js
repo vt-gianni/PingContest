@@ -1,6 +1,5 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react"
+import React, {useRef, useState} from "react"
 import {View, Text, SafeAreaView, FlatList, StyleSheet, Image, ScrollView, Pressable} from "react-native"
-import {Top} from "../component/Top"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import RBSheet from "react-native-raw-bottom-sheet"
 import {ContestsListFilters} from "./ContestsListFilters";
