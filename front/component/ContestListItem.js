@@ -8,7 +8,10 @@ export const ContestListItem = ({item}) => {
             <View style={styles.item}>
                 <View style={styles.row}>
                     <View style={styles.pictureBlock}>
-                        <Image source={require('../assets/lmtt.png')} style={styles.picture}/>
+                        {item.city === 'Lille' ?
+                            <Image source={require('../assets/lmtt.png')} style={styles.picture}/> :
+                        <Image source={require('../assets/wattignies.jpg')} style={styles.picture}/>
+                        }
                     </View>
                     <View>
                         <Text style={styles.city}>{item.city}</Text>
@@ -17,7 +20,7 @@ export const ContestListItem = ({item}) => {
                     </View>
                 </View>
                 <Text>
-                    <MaterialCommunityIcon name="chevron-right" color="#2D6990" size={30} direction={"ltr"}/>
+                    <MaterialCommunityIcon name="chevron-right" color="#00A1E7" size={30} direction={"ltr"}/>
                 </Text>
             </View>
         </View>
@@ -29,19 +32,20 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         padding: 15,
         flexDirection: 'row',
-        backgroundColor: 'rgba(45, 105, 144, 0.1)',
         borderRadius: 5,
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderColor: 'rgba(0, 0, 0, 0.1)'
     },
     row: {
         flexDirection: 'row'
     },
     pictureBlock: {
         marginRight: 20,
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 50,
-        borderColor: '#2D6990'
+        borderColor: '#333'
     },
     picture: {
         width: 60,
@@ -51,7 +55,7 @@ const styles = StyleSheet.create({
     city: {
         fontWeight: 'bold',
         fontSize: 16,
-        color: '#2D6990'
+        color: '#333'
     },
     startDate: {
         fontSize: 13,

@@ -11,49 +11,56 @@ const DATA = [
         city: "Wattignies",
         startDate: "18/07/2021",
         endRegistrationDate: "12/07/2021",
-        contestCategories: [1, 2, 3, 4, 5, 6]
+        contestCategories: [1, 2, 3, 4, 5, 6],
+        pic: "wattignies.jpg"
     },
     {
         id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
         city: "Tourcoing",
         startDate: "25/07/2021",
         endRegistrationDate: "19/07/2021",
-        contestCategories: [1, 2, 3, 4]
+        contestCategories: [1, 2, 3, 4],
+        pic: "lmtt.png"
     },
     {
         id: "58694a0f-3da1-471f-bd96-145571e29d72",
         city: "Haubourdin",
         startDate: "03/08/2021",
         endRegistrationDate: "21/07/2021",
-        contestCategories: [1, 2, 3, 4, 5]
+        contestCategories: [1, 2, 3, 4, 5],
+        pic: "lmtt.png"
     },
     {
         id: "58694a0f-3da1-471f-bd96-145571e29d71",
         city: "La Madeleine",
         startDate: "08/08/2021",
         endRegistrationDate: "26/07/2021",
-        contestCategories: [1, 2]
+        contestCategories: [1, 2],
+        pic: "lmtt.png"
     },
     {
         id: "58694a0f-3da1-471f-bd96-145571e29d73",
         city: "Lille",
         startDate: "11/08/2021",
         endRegistrationDate: "29/07/2021",
-        contestCategories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+        contestCategories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+        pic: "lmtt.png"
     },
     {
         id: "58694a0f-3da1-471f-bd96-145571e29d74",
         city: "Lesquin",
         startDate: "13/08/2021",
         endRegistrationDate: "31/07/2021",
-        contestCategories: [1, 2, 3, 4, 5]
+        contestCategories: [1, 2, 3, 4, 5],
+        pic: "lmtt.png"
     },
     {
         id: "58694a0f-3da1-471f-bd96-145571e29d75",
         city: "Valenciennes",
         startDate: "15/08/2021",
         endRegistrationDate: "02/07/2021",
-        contestCategories: [1, 2, 3]
+        contestCategories: [1, 2, 3],
+        pic: "lmtt.png"
     },
 ];
 
@@ -100,7 +107,7 @@ export const ContestsListScreen = () => {
                         </Pressable>
                     </View>
                     <Pressable onPress={() => refRBSheet.current.open()}>
-                        <MaterialCommunityIcon name="tune" color="#2D6990" size={26} direction={"ltr"}/>
+                        <MaterialCommunityIcon name="tune" color="#00A1E7" size={26} direction={"ltr"}/>
                     </Pressable>
                 </View>
             </View>
@@ -146,21 +153,21 @@ const styles = StyleSheet.create({
     },
     filter: {
         borderWidth: 1,
-        borderColor: '#2D6990',
+        borderColor: '#00A1E7',
         padding: 8,
         paddingHorizontal: 15,
         borderRadius: 50,
         marginRight: 10
     },
     activeFilter: {
-        backgroundColor: '#2D6990',
+        backgroundColor: '#00A1E7',
         padding: 8,
         paddingHorizontal: 15,
         borderRadius: 50,
         marginRight: 10
     },
     filterText: {
-        color: '#2D6990',
+        color: '#00A1E7',
         fontWeight: 'bold'
     },
     activeFilterText: {

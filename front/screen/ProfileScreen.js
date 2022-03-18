@@ -57,7 +57,6 @@ export const ProfileScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
-                <Text style={styles.topBarTitle}>Mon profil</Text>
                 <Pressable onPress={() => refRBSheet.current.open()}>
                     <MaterialCommunityIcon name="menu" color='#333' size={26}/>
                 </Pressable>
@@ -85,18 +84,18 @@ export const ProfileScreen = () => {
                 </TouchableOpacity>*/}
                 <View style={styles.playerInfoRow}>
                     <View style={styles.licenseBlock}>
-                        <Text style={styles.fwbold}>N° de Licence</Text>
+                        <Text style={[styles.bigText, styles.fwbold]}>N° Licence</Text>
                         <Text>5725318</Text>
                     </View>
-                    <Divider orientation='vertical' />
                     <View style={styles.pointsBlock}>
-                        <Text style={styles.fwbold}>Points officiels</Text>
+                        <Text style={[styles.bigText, styles.fwbold]}>Points officiels</Text>
                         <Text>1005 Pts</Text>
                     </View>
                 </View>
 
+                <Divider color={'rgba(0, 0, 0, 0.1)'} width={2}/>
+
                 <View style={{flex: 1}}>
-                    <Text style={styles.title}>Mes inscriptions</Text>
 
                     {/*<Text style={styles.noContestText}>Vous n'avez aucun tournois à venir..</Text>*/}
 
@@ -143,7 +142,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 15,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         alignItems: 'center'
     },
     topBarTitle: {
@@ -164,7 +163,8 @@ const styles = StyleSheet.create({
     username: {
         marginTop: 20,
         textAlign: 'center',
-        fontSize: 22
+        fontSize: 22,
+        fontWeight: 'bold'
     },
     category: {
         fontSize: 16,
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     playerInfoRow: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginVertical: 30,
+        marginVertical: 20,
         paddingVertical: 10
     },
     licenseBlock: {
@@ -211,9 +211,12 @@ const styles = StyleSheet.create({
         marginTop: 20,
         textAlign: 'center',
         fontSize: 22,
-        marginBottom: 30
+        marginBottom: 10
     },
     noContestText: {
         fontStyle: 'italic'
+    },
+    bigText: {
+        fontSize: 18
     }
 })

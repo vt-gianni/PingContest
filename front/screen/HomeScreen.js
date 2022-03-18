@@ -5,7 +5,6 @@ import React from "react";
 export const HomeScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <Top/>
             <View style={styles.content}>
                 <Text>Hello world!</Text>
             </View>

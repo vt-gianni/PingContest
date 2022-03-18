@@ -1,8 +1,10 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {ContestsListScreen} from "../screen/ContestsListScreen";
-import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
-import {AccountStack} from "./AccountStack";
-import {HomeStack} from "./HomeStack";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import {ContestsListScreen} from "../screen/ContestsListScreen"
+import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
+import {AccountStack} from "./AccountStack"
+import {HomeStack} from "./HomeStack"
+import IconBadge from 'react-native-icon-badge'
+import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 
 const Tab = createBottomTabNavigator()
 
@@ -11,10 +13,8 @@ export const MainStack = () => {
         <Tab.Navigator initialRouteName="Home" screenOptions={{
             headerShown: false,
             tabBarShowLabel: false,
-            tabBarInactiveBackgroundColor: '#2D6990',
-            tabBarActiveBackgroundColor: '#2D6990',
-            tabBarActiveTintColor: 'rgba(255, 255, 255, 1)',
-            tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.5)',
+            tabBarActiveTintColor: '#00A1E7',
+            tabBarInactiveTintColor: 'rgba(0, 0, 0, 0.5)',
             tabBarStyle: { height: 65, paddingBottom: 0, paddingTop: 0 }
         }}
         >
@@ -23,7 +23,7 @@ export const MainStack = () => {
                 component={ContestsListScreen}
                 options={{
                     tabBarIcon: ({color}) => (
-                        <MaterialCommunityIcon name="trophy-variant" color={color} size={26}/>
+                        <FontAwesome5Icon name='table-tennis' size={24} color={color} solid={false}/>
                     )
                 }}
             />
@@ -32,7 +32,7 @@ export const MainStack = () => {
                 component={HomeStack}
                 options={{
                     tabBarIcon: ({color}) => (
-                        <MaterialCommunityIcon name="home" color={color} size={26}/>
+                        <FontAwesome5Icon name='home' size={24} color={color} solid={false}/>
                     )
                 }}
             />
@@ -42,7 +42,7 @@ export const MainStack = () => {
                 component={AccountStack}
                 options={{
                     tabBarIcon: ({color}) => (
-                        <MaterialCommunityIcon name="account-circle" color={color} size={26}/>
+                        <FontAwesome5Icon name='user-circle' size={24} color={color} solid={false}/>
                     )
                 }}
             />
