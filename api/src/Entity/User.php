@@ -107,6 +107,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $media;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
+
     public function __construct()
     {
         $this->contests = new ArrayCollection();
@@ -373,6 +378,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $medium->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

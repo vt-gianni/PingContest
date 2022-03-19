@@ -24,6 +24,7 @@ class JWTCreatedListener
         $data['birthdate'] = $user->getBirthdate();
         $data['licenseNumber'] = $user->getLicenseNumber();
         $data['officialPoints'] = $user->getOfficialPoints();
+        $data['picture'] = $user->getPicture();
 
         $event->setData($data);
     }
