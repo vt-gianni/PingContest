@@ -20,15 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ca7eb0f-d451-41a1-a8ed-049ba1e9e753" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventListener/JWTCreatedListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListener/JWTCreatedListener.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/screen/ProfileScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/screen/ProfileScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/service/SecurityService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/service/SecurityService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../front/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +168,7 @@
       <workItem from="1647271398239" duration="822000" />
       <workItem from="1647341661456" duration="4517000" />
       <workItem from="1647705208553" duration="1527000" />
-      <workItem from="1647725081273" duration="701000" />
+      <workItem from="1647725081273" duration="1568000" />
     </task>
     <servers />
   </component>

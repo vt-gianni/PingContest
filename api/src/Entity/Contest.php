@@ -70,6 +70,12 @@ class Contest
      */
     private $media;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="contests")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $club;
+
     public function __construct()
     {
         $this->contestCategories = new ArrayCollection();
@@ -233,6 +239,18 @@ class Contest
                 $medium->setContest(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClub(): ?Club
+    {
+        return $this->club;
+    }
+
+    public function setClub(?Club $club): self
+    {
+        $this->club = $club;
 
         return $this;
     }
