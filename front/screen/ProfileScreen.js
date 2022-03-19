@@ -1,10 +1,12 @@
-import React, {useContext, useRef} from "react"
-import {FlatList, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native"
+import React, {useContext, useEffect, useRef, useState} from "react"
+import {FlatList, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native"
 import authContext from "../context/AuthContext"
 import {Avatar, Divider} from 'react-native-elements'
 import RBSheet from "react-native-raw-bottom-sheet"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
-import {ContestListItem} from "../component/ContestListItem";
+import {ContestListItem} from "../component/ContestListItem"
+import {UserService} from "../service/UserService"
+import {UserParameters} from "../component/UserParameters"
 
 const DATA = [
     {
@@ -45,8 +47,22 @@ const DATA = [
 ]
 
 export const ProfileScreen = () => {
-    const {setToken} = useContext(authContext)
+    const {token, setToken, user} = useContext(authContext)
     const refRBSheet = useRef()
+    const [userService, setUserService] = useState(null)
+    const [ageCategory, setAgeCategory] = useState(null)
+
+    useEffect(() => {
+        setUserService(new UserService())
+    }, [])
+
+    useEffect(() => {
+        if (userService) {
+            setAgeCategory(
+                userService.getCategory(user.birthdate.date)
+            )
+        }
+    }, [userService])
 
     const renderItem = ({item}) => {
         return (
@@ -63,33 +79,38 @@ export const ProfileScreen = () => {
             </View>
             <View style={styles.content}>
                 <View style={styles.avatarBlock}>
-                    <Avatar
-                        size={90}
-                        rounded
-                        icon={{ name: 'camera', type: 'font-awesome', color: '#2D6990' }}
-                        containerStyle={{ backgroundColor: '#fff', marginRight: 20 }}
-                        source={require('../assets/profile.jpg')}
-                    />
+                    {user?.avatar ?
+                        <Avatar
+                            size={90}
+                            rounded
+                            icon={{ name: 'camera', type: 'font-awesome', color: '#00A1E7' }}
+                            containerStyle={{ backgroundColor: '#fff', marginRight: 20 }}
+                            source={{
+                                uri: user.picture
+                            }}
+                        /> :
+                        <Avatar
+                            size={90}
+                            rounded
+                            icon={{ name: 'camera', type: 'font-awesome', color: '#00A1E7' }}
+                            containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: '#fff', marginRight: 20 }}
+                            title={user?.firstname.charAt(0) + user?.lastname.charAt(0)}
+                        />
+                    }
                     <View>
-                        <Text style={styles.username}>Gianni GIUDICE</Text>
-                        <Text style={styles.category}>Catégorie Séniors</Text>
+                        <Text style={styles.username}>{user?.firstname} {user?.lastname}</Text>
+                        <Text style={styles.category}>Catégorie {ageCategory ? ageCategory : ''}</Text>
                     </View>
                 </View>
 
-                {/*<TouchableOpacity onPress={async () => {
-                    await AsyncStorage.removeItem('token')
-                    setToken(null)
-                }} style={styles.btnRed}>
-                    <Text style={styles.btnText}>Déconnexion</Text>
-                </TouchableOpacity>*/}
                 <View style={styles.playerInfoRow}>
                     <View style={styles.licenseBlock}>
                         <Text style={[styles.bigText, styles.fwbold]}>N° Licence</Text>
-                        <Text>5725318</Text>
+                        <Text>{user?.licenseNumber}</Text>
                     </View>
                     <View style={styles.pointsBlock}>
                         <Text style={[styles.bigText, styles.fwbold]}>Points officiels</Text>
-                        <Text>1005 Pts</Text>
+                        <Text>{user?.officialPoints} Pts</Text>
                     </View>
                 </View>
 
@@ -126,7 +147,7 @@ export const ProfileScreen = () => {
                 }}
 
             >
-                <Text>Paramètres</Text>
+                <UserParameters setToken={setToken} />
             </RBSheet>
         </SafeAreaView>
     )
@@ -169,20 +190,6 @@ const styles = StyleSheet.create({
     category: {
         fontSize: 16,
         color: 'rgba(0, 0, 0, 0.4)',
-        textAlign: 'center'
-    },
-    btnRed: {
-        backgroundColor: '#E1673D',
-        borderRadius: 5,
-        paddingHorizontal: 15,
-        paddingVertical: 10,
-        marginBottom: 10,
-        width: '100%',
-        marginTop: 30
-    },
-    btnText: {
-        color: '#ffffff',
-        fontWeight: 'bold',
         textAlign: 'center'
     },
     playerInfoRow: {

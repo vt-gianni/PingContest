@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react"
 import {BeforeStack} from "./stack/BeforeStack"
 import AuthContext from "./context/AuthContext"
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import jwtDecode from "jwt-decode";
 
 export default function App() {
     const [token, setToken] = useState(null)
@@ -15,10 +16,17 @@ export default function App() {
     }
 
     useEffect(() => {
-        checkForStorageToken().then((token) => {
-            token && setToken(token)
+        checkForStorageToken().then(async (token) => {
+            if (token) {
+                await setUserData(token)
+                setToken(token)
+            }
         })
     }, [])
+
+    const setUserData = (token) => {
+        setUser(jwtDecode(token))
+    }
 
     const checkForStorageToken = async () => {
         return await AsyncStorage.getItem('token')
