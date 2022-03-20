@@ -1,5 +1,15 @@
 import React, {useContext, useEffect, useRef, useState} from "react"
-import {View, Text, SafeAreaView, FlatList, StyleSheet, Image, ScrollView, Pressable} from "react-native"
+import {
+    View,
+    Text,
+    SafeAreaView,
+    FlatList,
+    StyleSheet,
+    Image,
+    ScrollView,
+    Pressable,
+    ActivityIndicator
+} from "react-native"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import RBSheet from "react-native-raw-bottom-sheet"
 import {ContestsListFilters} from "./ContestsListFilters";
@@ -12,7 +22,9 @@ export const ContestsListScreen = () => {
     const [current, setCurrent] = useState(false)
     const [coming, setComing] = useState(true)
     const [done, setDone] = useState(false)
-    const [contests, setContests] = useState()
+    const [contests, setContests] = useState([])
+    const [page, setPage] = useState(1)
+    const [loading, setLoading] = useState(false)
 
     const {token} = useContext(AuthContext)
 
@@ -20,14 +32,25 @@ export const ContestsListScreen = () => {
         saveContests()
     }, [])
 
+    useEffect(() => {
+        if (loading) {
+            setPage(page + 1)
+        }
+    }, [loading])
+
+    useEffect(() => {
+        saveContests()
+    }, [page])
+
+    useEffect(() => {
+        setLoading(false)
+    }, [contests])
+
     const saveContests = async () => {
-        const request = await getContests(token)
+        const request = await getContests(token, page)
         if (request.status === 200) {
             const response = await request.json()
-            setContests(response['hydra:member'])
-        }
-        else {
-            console.lo
+            setContests([...contests, ...response['hydra:member']])
         }
     }
 
@@ -35,6 +58,10 @@ export const ContestsListScreen = () => {
         return (
             <ContestListItem item={item}/>
         )
+    }
+
+    const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
+        return layoutMeasurement.height + contentOffset.y >= contentSize.height - 1
     }
 
     return (
@@ -77,6 +104,11 @@ export const ContestsListScreen = () => {
                 data={contests}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
+                onScroll={({ nativeEvent }) => {
+                    if (isCloseToBottom(nativeEvent)) {
+                        setLoading(true)
+                    }
+                }}
             />
             <RBSheet
                 ref={refRBSheet}
@@ -96,6 +128,12 @@ export const ContestsListScreen = () => {
             >
                 <ContestsListFilters />
             </RBSheet>
+            {
+                loading &&
+                <View style={styles.loaderBlock}>
+                    <ActivityIndicator size={'large'} color={'#00A1E7'}/>
+                </View>
+            }
         </SafeAreaView>
 
     )
@@ -133,6 +171,13 @@ const styles = StyleSheet.create({
     activeFilterText: {
         color: '#ffffff',
         fontWeight: 'bold'
+    },
+    loaderBlock: {
+        position: 'absolute',
+        width: '100%',
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 
