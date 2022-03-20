@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
                     date_add($startDate, date_interval_create_from_date_string('1 days'));
                 }
 
-                // Série handicap possible
+                // Série handicap
                 $boolDis = rand(0, 10);
                 if ($boolDis > 5) {
                     $contestCategory = new ContestCategory();
@@ -60,13 +60,78 @@ class AppFixtures extends Fixture
                         ->setMinParticipants(16)
                         ->setMaxParticipants(32)
                         ->setPrice($this->faker->biasedNumberBetween(5, 10))
-                        ->setWinPrice(80, 200)
+                        ->setWinPrice($this->faker->biasedNumberBetween(80, 200))
                     ;
 
                     $this->entityManager->persist($contestCategory);
                 }
+                else {
+                    // Série open
+                    $boolOpen = rand(0, 10);
+                    if ($boolOpen > 5) {
+                        $contestCategory = new ContestCategory();
 
+                        $contestCategory->setContest($contest)
+                            ->setStartDate($startDate)
+                            ->setOpen(true)
+                            ->setMinParticipants(16)
+                            ->setMaxParticipants(32)
+                            ->setPrice($this->faker->biasedNumberBetween(8, 15))
+                            ->setWinPrice($this->faker->biasedNumberBetween(150, 400))
+                        ;
 
+                        $this->entityManager->persist($contestCategory);
+                    }
+                }
+                $contestCategory = new ContestCategory();
+
+                // Série dames
+                $contestCategory->setContest($contest)
+                    ->setStartDate($startDate)
+                    ->setOnlyWomen(true)
+                    ->setMinParticipants(16)
+                    ->setMaxParticipants(32)
+                    ->setPrice($this->faker->biasedNumberBetween(5, 10))
+                    ->setWinPrice($this->faker->biasedNumberBetween(80, 200))
+                ;
+
+                $this->entityManager->persist($contestCategory);
+
+                // Série -1100
+                $contestCategory->setContest($contest)
+                    ->setStartDate($startDate)
+                    ->setMaxPoints(1099)
+                    ->setMinParticipants(16)
+                    ->setMaxParticipants(32)
+                    ->setPrice($this->faker->biasedNumberBetween(5, 10))
+                    ->setWinPrice($this->faker->biasedNumberBetween(80, 200))
+                ;
+
+                $this->entityManager->persist($contestCategory);
+
+                // Série -1400
+                $contestCategory->setContest($contest)
+                    ->setStartDate($startDate)
+                    ->setMaxPoints(1399)
+                    ->setMinParticipants(16)
+                    ->setMaxParticipants(32)
+                    ->setPrice($this->faker->biasedNumberBetween(5, 10))
+                    ->setWinPrice($this->faker->biasedNumberBetween(80, 200))
+                ;
+
+                $this->entityManager->persist($contestCategory);
+
+                // Série -1800
+                $contestCategory->setContest($contest)
+                    ->setStartDate($startDate)
+                    ->setMaxPoints(1799)
+                    ->setMinParticipants(16)
+                    ->setMaxParticipants(32)
+                    ->setPrice($this->faker->biasedNumberBetween(5, 10))
+                    ->setWinPrice($this->faker->biasedNumberBetween(80, 200))
+                ;
+
+                $this->entityManager->persist($contestCategory);
             }
         } catch (\Exception $e) {
             error_log($e->getMessage());
@@ -84,6 +149,21 @@ class AppFixtures extends Fixture
             foreach ($clubs as $club) {
                 $contest = new Contest();
 
+                // Creator
+                $creator = new User();
+                $creator->setRoles(['ROLE_CLUB'])
+                    ->setFirstname($this->faker->firstName)
+                    ->setLastname($this->faker->lastName)
+                    ->setBirthdate($this->faker->dateTimeBetween('-80 years', '-6 years'))
+                    ->setEmail($this->faker->email)
+                    ->setRegistrationDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')))
+                    ->setLicenseNumber(strval($this->faker->randomNumber('7')))
+                    ->setOfficialPoints($this->faker->biasedNumberBetween(500, 3000))
+                    ->setPassword($this->passwordHasher->hashPassword($creator, 'test'))
+                ;
+
+                $this->entityManager->persist($creator);
+
                 $startDate = $this->faker->dateTimeBetween('+2 months', '+2 years');
                 $endDate = $startDate;
                 date_sub($endDate, date_interval_create_from_date_string('2 days'));
@@ -95,9 +175,10 @@ class AppFixtures extends Fixture
                     ->setStartDate($startDate)
                     ->setEndRegistrationDate($endDate)
                     ->setHallName($this->faker->name)
+                    ->setCreator($creator)
                 ;
 
-                $this->entityManager->persist($club);
+                $this->entityManager->persist($contest);
                 $contests[] = $contest;
             }
             return $contests;
