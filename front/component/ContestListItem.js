@@ -16,7 +16,7 @@ export const ContestListItem = ({item}) => {
                     <View>
                         <Text style={styles.city}>{item.city}</Text>
                         <Text style={styles.startDate}>{item.startDate}</Text>
-                        <Text style={styles.nbParticipants}>{item.contestCategories.length} places restantes</Text>
+                        <Text style={styles.nbParticipants}>??? places restantes</Text>
                     </View>
                 </View>
                 <Text>

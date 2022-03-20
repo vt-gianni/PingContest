@@ -1,75 +1,35 @@
-import React, {useRef, useState} from "react"
+import React, {useContext, useEffect, useRef, useState} from "react"
 import {View, Text, SafeAreaView, FlatList, StyleSheet, Image, ScrollView, Pressable} from "react-native"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import RBSheet from "react-native-raw-bottom-sheet"
 import {ContestsListFilters} from "./ContestsListFilters";
 import {ContestListItem} from "../component/ContestListItem";
-
-const DATA = [
-    {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        city: "Wattignies",
-        startDate: "18/07/2021",
-        endRegistrationDate: "12/07/2021",
-        contestCategories: [1, 2, 3, 4, 5, 6],
-        pic: "wattignies.jpg"
-    },
-    {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-        city: "Tourcoing",
-        startDate: "25/07/2021",
-        endRegistrationDate: "19/07/2021",
-        contestCategories: [1, 2, 3, 4],
-        pic: "lmtt.png"
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
-        city: "Haubourdin",
-        startDate: "03/08/2021",
-        endRegistrationDate: "21/07/2021",
-        contestCategories: [1, 2, 3, 4, 5],
-        pic: "lmtt.png"
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d71",
-        city: "La Madeleine",
-        startDate: "08/08/2021",
-        endRegistrationDate: "26/07/2021",
-        contestCategories: [1, 2],
-        pic: "lmtt.png"
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d73",
-        city: "Lille",
-        startDate: "11/08/2021",
-        endRegistrationDate: "29/07/2021",
-        contestCategories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-        pic: "lmtt.png"
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d74",
-        city: "Lesquin",
-        startDate: "13/08/2021",
-        endRegistrationDate: "31/07/2021",
-        contestCategories: [1, 2, 3, 4, 5],
-        pic: "lmtt.png"
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d75",
-        city: "Valenciennes",
-        startDate: "15/08/2021",
-        endRegistrationDate: "02/07/2021",
-        contestCategories: [1, 2, 3],
-        pic: "lmtt.png"
-    },
-];
-
+import AuthContext from "../context/AuthContext";
+import {getContests} from "../service/APIService";
 
 export const ContestsListScreen = () => {
     const refRBSheet = useRef()
     const [current, setCurrent] = useState(false)
     const [coming, setComing] = useState(true)
     const [done, setDone] = useState(false)
+    const [contests, setContests] = useState()
+
+    const {token} = useContext(AuthContext)
+
+    useEffect(() => {
+        saveContests()
+    }, [])
+
+    const saveContests = async () => {
+        const request = await getContests(token)
+        if (request.status === 200) {
+            const response = await request.json()
+            setContests(response['hydra:member'])
+        }
+        else {
+            console.lo
+        }
+    }
 
     const renderItem = ({item}) => {
         return (
@@ -114,7 +74,7 @@ export const ContestsListScreen = () => {
             <FlatList
                 style={{ marginHorizontal: 20 }}
                 showsVerticalScrollIndicator={false}
-                data={DATA}
+                data={contests}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
             />

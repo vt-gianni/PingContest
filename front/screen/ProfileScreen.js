@@ -47,7 +47,7 @@ const DATA = [
 ]
 
 export const ProfileScreen = () => {
-    const {token, setToken, user} = useContext(authContext)
+    const {token, setToken, user, setUser} = useContext(authContext)
     const refRBSheet = useRef()
     const [userService, setUserService] = useState(null)
     const [ageCategory, setAgeCategory] = useState(null)
@@ -57,12 +57,12 @@ export const ProfileScreen = () => {
     }, [])
 
     useEffect(() => {
-        if (userService) {
+        if (userService && user) {
             setAgeCategory(
-                userService.getCategory(user.birthdate.date)
+                userService.getCategory(user?.birthdate.date)
             )
         }
-    }, [userService])
+    }, [userService, user])
 
     const renderItem = ({item}) => {
         return (
@@ -83,11 +83,8 @@ export const ProfileScreen = () => {
                         <Avatar
                             size={90}
                             rounded
-                            icon={{ name: 'camera', type: 'font-awesome', color: '#00A1E7' }}
-                            containerStyle={{ backgroundColor: '#fff', marginRight: 20 }}
-                            source={{
-                                uri: user.picture
-                            }}
+                            containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: '#fff', marginRight: 20 }}
+                            title={''}
                         /> :
                         <Avatar
                             size={90}
@@ -106,11 +103,11 @@ export const ProfileScreen = () => {
                 <View style={styles.playerInfoRow}>
                     <View style={styles.licenseBlock}>
                         <Text style={[styles.bigText, styles.fwbold]}>N° Licence</Text>
-                        <Text>{user?.licenseNumber}</Text>
+                        <Text>{user?.licenseNumber ? user.licenseNumber : 'Non renseigné'}</Text>
                     </View>
                     <View style={styles.pointsBlock}>
                         <Text style={[styles.bigText, styles.fwbold]}>Points officiels</Text>
-                        <Text>{user?.officialPoints} Pts</Text>
+                        <Text>{user?.officialPoints ? user?.officialPoints + ' Pts' : 'Non renseigné'}</Text>
                     </View>
                 </View>
 
@@ -147,7 +144,7 @@ export const ProfileScreen = () => {
                 }}
 
             >
-                <UserParameters setToken={setToken} />
+                <UserParameters setToken={setToken} user={user} setUser={setUser} />
             </RBSheet>
         </SafeAreaView>
     )

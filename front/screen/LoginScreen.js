@@ -15,18 +15,32 @@ import {LinearGradient} from 'expo-linear-gradient'
 import {SecurityService} from "../service/SecurityService"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import authContext from "../context/AuthContext";
+import jwtDecode from "jwt-decode";
 
 const LoginScreen = ({navigation}) => {
     const [mailAddress, setMailAddress] = useState('')
     const [password, setPassword] = useState('')
     const [security, setSecurity] = useState(null)
     const [error, setError] = useState(null)
+    const [tk, setTk] = useState(null)
 
-    const {setToken} = useContext(authContext)
+    const {setToken, user, setUser} = useContext(authContext)
 
     useEffect(() => {
         setSecurity(new SecurityService())
     }, [])
+
+    useEffect(() => {
+        if (tk) {
+            setUser(jwtDecode(tk))
+        }
+    }, [tk])
+
+    useEffect(() => {
+        if (user) {
+            setToken(tk)
+        }
+    }, [user])
 
     return (
         <LinearGradient colors={['#ffffff', '#D4E7F3']} start={{x: 0, y: 0}} end={{x: 1, y: 1}}
@@ -57,7 +71,7 @@ const LoginScreen = ({navigation}) => {
                                 if (req.status === 200) {
                                     const data = await req.json()
                                     await AsyncStorage.setItem('token', data.token)
-                                    setToken(data.token)
+                                    setTk(data.token)
                                 }
                                 else {
                                     setError('Identifiants incorrects.')
@@ -80,7 +94,7 @@ const LoginScreen = ({navigation}) => {
                     <View style={styles.btnContainer}>
                         <TouchableOpacity onPress={() => {
                         }} style={styles.btnBlue}>
-                            <Text style={styles.btnTextBlue}><MaterialCommunityIcon name="facebook" color="#2D6990"
+                            <Text style={styles.btnTextBlue}><MaterialCommunityIcon name="facebook" color="#00A1E7"
                                                                                     size={22}/> Connexion avec
                                 Facebook</Text>
                         </TouchableOpacity>
@@ -128,7 +142,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     btnRed: {
-        backgroundColor: '#E1673D',
+        backgroundColor: '#00A1E7',
         borderRadius: 5,
         paddingHorizontal: 15,
         paddingVertical: 10,
@@ -142,7 +156,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         marginTop: 10,
         width: '100%',
-        borderColor: '#2D6990',
+        borderColor: '#00A1E7',
         borderWidth: 1,
     },
     btnText: {
@@ -151,7 +165,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     btnTextBlue: {
-        color: '#2D6990',
+        color: '#00A1E7',
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 20,
@@ -172,7 +186,7 @@ const styles = StyleSheet.create({
         marginStart: 5
     },
     registerBtnText: {
-        color: '#2D6990'
+        color: '#00A1E7'
     },
     noAccount: {
         fontSize: 16

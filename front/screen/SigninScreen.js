@@ -6,6 +6,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import {SecurityService} from "../service/SecurityService"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import authContext from "../context/AuthContext"
+import jwtDecode from "jwt-decode";
 
 export const SigninScreen = ({navigation}) => {
     const [firstname, setFirstname] = useState('')
@@ -17,12 +18,25 @@ export const SigninScreen = ({navigation}) => {
     const [show, setShow] = useState(false)
     const [error, setError] = useState(null)
     const [security, setSecurity] = useState(null)
+    const [tk, setTk] = useState(null)
 
-    const {token, setToken} = useContext(authContext)
+    const {token, setToken, user, setUser} = useContext(authContext)
 
     useEffect(() => {
         setSecurity(new SecurityService())
     }, [])
+
+    useEffect(() => {
+        if (tk) {
+            setUser(jwtDecode(tk))
+        }
+    }, [tk])
+
+    useEffect(() => {
+        if (user) {
+            setToken(tk)
+        }
+    }, [user])
 
     useEffect(() => {
         if (token) {
@@ -125,7 +139,7 @@ export const SigninScreen = ({navigation}) => {
                                         if (logReq.status === 200) {
                                             const res = await logReq.json()
                                             await AsyncStorage.setItem('token', res.token)
-                                            setToken(res.token)
+                                            setTk(res.token)
                                         }
                                     }
                                     else{
@@ -213,7 +227,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     btnRed: {
-        backgroundColor: '#E1673D',
+        backgroundColor: '#00A1E7',
         borderRadius: 5,
         paddingHorizontal: 15,
         paddingVertical: 10,
@@ -227,7 +241,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         marginTop: 10,
         width: '100%',
-        borderColor: '#2D6990',
+        borderColor: '#00A1E7',
         borderWidth: 1,
     },
     btnText: {
@@ -236,7 +250,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     btnTextBlue: {
-        color: '#2D6990',
+        color: '#00A1E7',
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 20,
@@ -245,7 +259,7 @@ const styles = StyleSheet.create({
         color: '#E1673D'
     },
     blueText: {
-        color: '#2D6990'
+        color: '#00A1E7'
     },
     row: {
         flexDirection: 'row'
@@ -257,7 +271,7 @@ const styles = StyleSheet.create({
         marginStart: 5
     },
     registerBtnText: {
-        color: '#2D6990'
+        color: '#00A1E7'
     },
     noAccount: {
         fontSize: 16
@@ -271,7 +285,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderWidth: 1,
-        borderColor: '#2D6990',
+        borderColor: '#00A1E7',
         borderRadius: 3
     },
     placeholder: {

@@ -1,8 +1,14 @@
 import {AsyncStorage, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import React from "react";
+import React, {useEffect} from "react";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 
-export const UserParameters = ({setToken}) => {
+export const UserParameters = ({setToken, user, setUser}) => {
+    useEffect(() => {
+        if (!user) {
+            setToken(null)
+        }
+    }, [user])
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={ () => {}}>
@@ -12,7 +18,7 @@ export const UserParameters = ({setToken}) => {
             </TouchableOpacity>
             <TouchableOpacity onPress={ async () => {
                 await AsyncStorage.removeItem('token')
-                setToken(null)
+                setUser(null)
             }} style={styles.btnRed}>
                 <Text style={[styles.btnText, styles.text]}><FontAwesome5Icon name='sign-out-alt' size={18} color='#E1673D' solid={false}/> Déconnexion</Text>
             </TouchableOpacity>
