@@ -10,7 +10,38 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ContestRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={
+ *          "order"={"startDate": "ASC"}
+ *     },
+ *     collectionOperations={
+ *          "get",
+            "coming"={
+ *              "method"="get",
+ *              "path"="/contests/coming",
+ *              "controller"="App\Controller\ComingContestsController",
+ *              "openapi_context"={
+                    "summary"="Retourne les tournois à venir."
+ *              }
+ *          },
+ *          "inprogress"={
+ *              "method"="get",
+ *              "path"="/contests/inprogress",
+ *              "controller"="App\Controller\InProgressContestsController",
+ *              "openapi_context"={
+                    "summary"="Retourne les tournois en cours."
+ *              }
+ *          },
+ *          "done"={
+ *              "method"="get",
+ *              "path"="/contests/done",
+ *              "controller"="App\Controller\DoneContestsController",
+ *              "openapi_context"={
+                    "summary"="Retourne les tournois terminés."
+ *              }
+ *          }
+ *     }
+ * )
  */
 class Contest
 {
@@ -77,6 +108,11 @@ class Contest
      * @ORM\JoinColumn(nullable=false)
      */
     private $club;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $endDate;
 
     public function __construct()
     {
@@ -253,6 +289,18 @@ class Contest
     public function setClub(?Club $club): self
     {
         $this->club = $club;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(?\DateTimeInterface $endDate): self
+    {
+        $this->endDate = $endDate;
 
         return $this;
     }

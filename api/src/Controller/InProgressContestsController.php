@@ -1,0 +1,28 @@
+<?php
+
+
+namespace App\Controller;
+
+
+use App\Repository\ContestRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+
+class InProgressContestsController extends AbstractController
+{
+    private $repository;
+
+    public function __construct(ContestRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function __invoke(Request $request)
+    {
+        try {
+            return $this->repository->getInProgressContests($request->query->get('page', 1));
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+        }
+    }
+}
