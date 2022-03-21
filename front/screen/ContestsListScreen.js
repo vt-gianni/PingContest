@@ -48,16 +48,14 @@ export const ContestsListScreen = () => {
     }, [contests])
 
     useEffect(() => {
-        if (type === 'inprogress') {
-            loadCurrentContests()
-        }
+        loadContests()
     }, [type])
 
     const restoreFirstLoading = async () => {
         setFirstLoading(true)
     }
 
-    const loadCurrentContests = () => {
+    const loadContests = () => {
         restoreFirstLoading().then(() => {
             setContests([])
         }).then(() => {
@@ -80,7 +78,7 @@ export const ContestsListScreen = () => {
 
     const renderItem = ({item}) => {
         return (
-            <ContestListItem item={item} key={item.id}/>
+            <ContestListItem item={item} key={item.id} type={type} />
         )
     }
 

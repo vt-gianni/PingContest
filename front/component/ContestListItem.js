@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react"
 import {translate} from "../service/DateService";
 const formatDistanceToNow = require('date-fns/formatDistanceToNow')
 
-export const ContestListItem = ({item}) => {
+export const ContestListItem = ({item, type}) => {
     const [startDate, setStartDate] = useState(null)
     const [finalStartDate, setFinalStartDate] = useState(null)
 
@@ -37,6 +37,7 @@ export const ContestListItem = ({item}) => {
 
                         <Text style={styles.startDate}>
                             { finalStartDate ?
+                                type === 'done' ? 'Le ' + startDate[2] + '/' + startDate[1] + '/' + startDate[0] :
                                 translate(formatDistanceToNow(
                                     finalStartDate,
                                     { addSuffix: true }
