@@ -17,9 +17,7 @@ import {getContests} from "../service/APIService"
 
 export const ContestsListScreen = () => {
     const refRBSheet = useRef()
-    const [current, setCurrent] = useState(false)
-    const [coming, setComing] = useState(true)
-    const [done, setDone] = useState(false)
+    const [type, setType] = useState('coming')
     const [contests, setContests] = useState([])
     const [page, setPage] = useState(1)
     const [firstLoading, setFirstLoading] = useState(true)
@@ -44,20 +42,45 @@ export const ContestsListScreen = () => {
     }, [page])
 
     useEffect(() => {
-        setLoading(false)
+        if (contests) {
+            setLoading(false)
+        }
     }, [contests])
 
+    useEffect(() => {
+        if (type === 'inprogress') {
+            loadCurrentContests()
+        }
+    }, [type])
+
+    const restoreFirstLoading = async () => {
+        setFirstLoading(true)
+    }
+
+    const loadCurrentContests = () => {
+        restoreFirstLoading().then(() => {
+            setContests([])
+        }).then(() => {
+            setPage(1)
+        }).then(() => {
+            saveContests().then(() => {
+                setFirstLoading(false)
+            })
+        })
+    }
+
     const saveContests = async () => {
-        const request = await getContests(token, page)
+        const request = await getContests(token, page, type)
         if (request.status === 200) {
             const response = await request.json()
+            page === 1 ? setContests(response['hydra:member']) :
             setContests([...contests, ...response['hydra:member']])
         }
     }
 
     const renderItem = ({item}) => {
         return (
-            <ContestListItem item={item}/>
+            <ContestListItem item={item} key={item.id}/>
         )
     }
 
@@ -80,28 +103,22 @@ export const ContestsListScreen = () => {
                             marginBottom: 15
                         }}>
                             <View style={{flexDirection: 'row'}}>
-                                <Pressable style={current ? styles.activeFilter : styles.filter} onPress={() => {
-                                    setCurrent(true)
-                                    setComing(false)
-                                    setDone(false)
+                                <Pressable style={type === 'inprogress' ? styles.activeFilter : styles.filter} onPress={() => {
+                                    setType('inprogress')
                                 }}>
-                                    <Text style={current ? styles.activeFilterText : styles.filterText}>En cours</Text>
+                                    <Text style={type === 'inprogress' ? styles.activeFilterText : styles.filterText}>En cours</Text>
                                 </Pressable>
 
-                                <Pressable style={coming ? styles.activeFilter : styles.filter} onPress={() => {
-                                    setComing(true)
-                                    setDone(false)
-                                    setCurrent(false)
+                                <Pressable style={type === 'coming' ? styles.activeFilter : styles.filter} onPress={() => {
+                                    setType('coming')
                                 }}>
-                                    <Text style={coming ? styles.activeFilterText : styles.filterText}>A venir</Text>
+                                    <Text style={type === 'coming' ? styles.activeFilterText : styles.filterText}>A venir</Text>
                                 </Pressable>
 
-                                <Pressable style={done ? styles.activeFilter : styles.filter} onPress={() => {
-                                    setDone(true)
-                                    setComing(false)
-                                    setCurrent(false)
+                                <Pressable style={type === 'done' ? styles.activeFilter : styles.filter} onPress={() => {
+                                    setType('done')
                                 }}>
-                                    <Text style={done ? styles.activeFilterText : styles.filterText}>Terminés</Text>
+                                    <Text style={type === 'done' ? styles.activeFilterText : styles.filterText}>Terminés</Text>
                                 </Pressable>
                             </View>
                             <Pressable onPress={() => refRBSheet.current.open()}>

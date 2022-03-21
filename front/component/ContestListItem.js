@@ -44,7 +44,7 @@ export const ContestListItem = ({item}) => {
                                 ''
                             }
                         </Text>
-                        <Text style={styles.nbParticipants}>??? places restantes</Text>
+                        <Text style={styles.nbParticipants}>{ item.contestCategories.length } catégorie{ item.contestCategories.length > 1 && 's' }</Text>
                     </View>
                 </View>
                 <Text>
@@ -70,14 +70,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     pictureBlock: {
+        width: 60,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
         marginRight: 20,
         borderWidth: 1,
         borderRadius: 50,
         borderColor: '#333'
     },
     picture: {
-        width: 60,
-        height: 60,
+        width: 55,
+        height: 55,
         borderRadius: 50
     },
     city: {
@@ -86,11 +90,11 @@ const styles = StyleSheet.create({
         color: '#333'
     },
     startDate: {
-        fontSize: 13,
-        color: '#333'
-    },
-    nbParticipants: {
+        color: '#29abe2',
         fontSize: 13,
         fontStyle: 'italic'
+    },
+    nbParticipants: {
+        marginTop: 10
     }
 })
