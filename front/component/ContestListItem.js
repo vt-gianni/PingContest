@@ -18,7 +18,6 @@ export const ContestListItem = ({item}) => {
             date.setMonth(date.getMonth() - 1)
             date.setDate(date.getDate() + 1)
             setFinalStartDate(date)
-            console.log(finalStartDate)
         }
     }, [startDate])
 
