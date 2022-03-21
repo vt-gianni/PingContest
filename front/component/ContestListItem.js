@@ -1,8 +1,28 @@
-import {Image, StyleSheet, Text, View} from "react-native";
-import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
-import React from "react";
+import {Image, StyleSheet, Text, View} from "react-native"
+import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
+import React, {useEffect, useState} from "react"
+import {translate} from "../service/DateService";
+const formatDistanceToNow = require('date-fns/formatDistanceToNow')
 
 export const ContestListItem = ({item}) => {
+    const [startDate, setStartDate] = useState(null)
+    const [finalStartDate, setFinalStartDate] = useState(null)
+
+    useEffect(() => {
+        setStartDate(item.startDate.split('T')[0].split('-'))
+    }, [])
+
+    useEffect(() => {
+        if (startDate) {
+            let date = new Date(parseInt(startDate[0]), parseInt(startDate[1]), parseInt(startDate[2]))
+            date.setMonth(date.getMonth() - 1)
+            date.setDate(date.getDate() + 1)
+            setFinalStartDate(date)
+            console.log(finalStartDate)
+        }
+    }, [startDate])
+
+
     return (
         <View>
             <View style={styles.item}>
@@ -15,7 +35,16 @@ export const ContestListItem = ({item}) => {
                     </View>
                     <View>
                         <Text style={styles.city}>{item.city}</Text>
-                        <Text style={styles.startDate}>{item.startDate}</Text>
+
+                        <Text style={styles.startDate}>
+                            { finalStartDate ?
+                                translate(formatDistanceToNow(
+                                    finalStartDate,
+                                    { addSuffix: true }
+                                )) :
+                                ''
+                            }
+                        </Text>
                         <Text style={styles.nbParticipants}>??? places restantes</Text>
                     </View>
                 </View>
