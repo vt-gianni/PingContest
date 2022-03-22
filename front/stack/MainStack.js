@@ -5,6 +5,7 @@ import {AccountStack} from "./AccountStack"
 import {HomeStack} from "./HomeStack"
 import IconBadge from 'react-native-icon-badge'
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import {ContestStack} from "./ContestStack";
 
 const Tab = createBottomTabNavigator()
 
@@ -19,8 +20,8 @@ export const MainStack = () => {
         }}
         >
             <Tab.Screen
-                name="ContestsList"
-                component={ContestsListScreen}
+                name="ContestsStack"
+                component={ContestStack}
                 options={{
                     tabBarIcon: ({color}) => (
                         <FontAwesome5Icon name='table-tennis' size={24} color={color} solid={false}/>

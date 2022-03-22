@@ -15,7 +15,7 @@ import {ContestListItem} from "../component/ContestListItem"
 import AuthContext from "../context/AuthContext"
 import {getContests} from "../service/APIService"
 
-export const ContestsListScreen = () => {
+export const ContestsListScreen = ({navigation}) => {
     const refRBSheet = useRef()
     const [type, setType] = useState('coming')
     const [contests, setContests] = useState([])
@@ -78,7 +78,11 @@ export const ContestsListScreen = () => {
 
     const renderItem = ({item}) => {
         return (
-            <ContestListItem item={item} key={item.id} type={type} />
+            <Pressable onPress={() => {
+                navigation.navigate('Contest', {contest: item})
+            }}>
+                <ContestListItem item={item} key={item.id} type={type} />
+            </Pressable>
         )
     }
 
