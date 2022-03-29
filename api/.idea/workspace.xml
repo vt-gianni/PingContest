@@ -21,9 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1ca7eb0f-d451-41a1-a8ed-049ba1e9e753" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/api_platform.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/api_platform.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Contest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Contest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ContestRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ContestRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +179,9 @@
       <workItem from="1647725081273" duration="4514000" />
       <workItem from="1647771920609" duration="2248000" />
       <workItem from="1647787281007" duration="3955000" />
-      <workItem from="1647889282272" duration="8170000" />
+      <workItem from="1647889282272" duration="8546000" />
+      <workItem from="1647982292774" duration="759000" />
+      <workItem from="1648584455346" duration="2003000" />
     </task>
     <servers />
   </component>
@@ -206,10 +205,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1647262422164" />
-    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog" timestamp="1647897644940">
+    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog" timestamp="1648585088228">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1647897644940" />
+    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1648585088228" />
     <state x="651" y="292" width="618" height="522" key="find.popup" timestamp="1647729518868">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
