@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\User;
 use App\Repository\ContestRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,15 +12,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserContestsParticipationsController extends AbstractController
 {
-    private $contestRepository;
+    private $repository;
 
-    public function __construct(ContestRepository $contestRepository)
+    public function __construct(ContestRepository $repository)
     {
-        $this->contestRepository = $contestRepository;
+        $this->repository = $repository;
     }
 
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request)
     {
-
+        try {
+            /** @var User $user */
+            $user = $this->getUser();
+            return $this->repository->getUserParticipations($request->query->get('page', 1), $user);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+        }
     }
 }

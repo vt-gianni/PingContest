@@ -39,6 +39,14 @@ use Doctrine\ORM\Mapping as ORM;
  *              "openapi_context"={
                     "summary"="Retourne les tournois terminés."
  *              }
+ *          },
+ *          "participations"={
+ *              "method"="get",
+ *              "path"="/contests/participations",
+ *              "controller"="App\Controller\UserContestsParticipations",
+ *              "openapi_context"={
+                    "summary"="Retourne les tournois auxquels l'utilisateur participe."
+ *              }
  *          }
  *     }
  * )

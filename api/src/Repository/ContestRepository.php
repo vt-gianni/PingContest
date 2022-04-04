@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Contest;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Paginator as ApiPlatformPaginator;
@@ -74,6 +75,31 @@ class ContestRepository extends ServiceEntityRepository
             ->andWhere('c.endDate < :currentDate')
             ->setParameter('currentDate', new \DateTime('now', new \DateTimeZone('Europe/Paris')))
             ->orderBy('c.endDate', 'DESC')
+            ->setFirstResult(($page - 1) * 10)
+            ->setMaxResults(10)
+        ;
+
+        $doctrinePaginator = new Paginator($query);
+        return new ApiPlatformPaginator($doctrinePaginator);
+    }
+
+    /**
+     * @param string $page
+     * @param User $user
+     * @return ApiPlatformPaginator
+     * @throws Exception
+     */
+    public function getUserParticipations(string $page, User $user): ApiPlatformPaginator
+    {
+        $query = $this->createQueryBuilder('c')
+            ->leftJoin('c.contestCategories', 'cc')
+            ->leftJoin('cc.participations', 'p')
+            ->andWhere('p.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('c.startDate > :currentDate')
+            ->setParameter('currentDate', new \DateTime('now', new \DateTimeZone('Europe/Paris')))
+            ->orderBy('c.startDate', 'ASC')
+            ->groupBy('c.id')
             ->setFirstResult(($page - 1) * 10)
             ->setMaxResults(10)
         ;
