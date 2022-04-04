@@ -117,7 +117,7 @@ export const ProfileScreen = () => {
 
                     {/*<Text style={styles.noContestText}>Vous n'avez aucun tournois à venir..</Text>*/}
 
-                    <FlatList
+                    {/*<FlatList
                         showsVerticalScrollIndicator={false}
                         data={DATA}
                         renderItem={renderItem}
@@ -125,7 +125,7 @@ export const ProfileScreen = () => {
                         contentContainerStyle={{
                             flexGrow: 1,
                         }}
-                    />
+                    />*/}
                 </View>
             </View>
             <RBSheet
