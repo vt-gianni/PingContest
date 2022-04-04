@@ -5,5 +5,9 @@ export const getContests = (token, page, type) => {
 }
 
 export const getUserParticipations = (token, page) => {
-    return fetch(apiAddress + '/contests/participations?page=' + page)
+    return fetch(apiAddress + '/contests/participations?page=' + page, {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
 }

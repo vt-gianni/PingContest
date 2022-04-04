@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef, useState} from "react"
-import {FlatList, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native"
+import {ActivityIndicator, FlatList, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native"
 import authContext from "../context/AuthContext"
 import {Avatar, Divider} from 'react-native-elements'
 import RBSheet from "react-native-raw-bottom-sheet"
@@ -7,53 +7,21 @@ import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCom
 import {ContestListItem} from "../component/ContestListItem"
 import {UserService} from "../service/UserService"
 import {UserParameters} from "../component/UserParameters"
-
-const DATA = [
-    {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        city: "Wattignies",
-        startDate: "18/07/2021",
-        endRegistrationDate: "12/07/2021",
-        contestCategories: [1, 2, 3, 4, 5, 6]
-    },
-    {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-        city: "Tourcoing",
-        startDate: "25/07/2021",
-        endRegistrationDate: "19/07/2021",
-        contestCategories: [1, 2, 3, 4]
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
-        city: "Haubourdin",
-        startDate: "03/08/2021",
-        endRegistrationDate: "21/07/2021",
-        contestCategories: [1, 2, 3, 4, 5]
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d71",
-        city: "La Madeleine",
-        startDate: "08/08/2021",
-        endRegistrationDate: "26/07/2021",
-        contestCategories: [1, 2]
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d73",
-        city: "Lille",
-        startDate: "11/08/2021",
-        endRegistrationDate: "29/07/2021",
-        contestCategories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-    }
-]
+import {getContests, getUserParticipations} from "../service/APIService";
 
 export const ProfileScreen = () => {
     const {token, setToken, user, setUser} = useContext(authContext)
     const refRBSheet = useRef()
     const [userService, setUserService] = useState(null)
     const [ageCategory, setAgeCategory] = useState(null)
+    const [contests, setContests] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         setUserService(new UserService())
+        saveContests().then(() => {
+            setLoading(false)
+        })
     }, [])
 
     useEffect(() => {
@@ -63,6 +31,14 @@ export const ProfileScreen = () => {
             )
         }
     }, [userService, user])
+
+    const saveContests = async () => {
+        const request = await getUserParticipations(token, 1)
+        if (request.status === 200) {
+            const response = await request.json()
+            setContests(response['hydra:member'])
+        }
+    }
 
     const renderItem = ({item}) => {
         return (
@@ -115,17 +91,20 @@ export const ProfileScreen = () => {
 
                 <View style={{flex: 1}}>
 
-                    {/*<Text style={styles.noContestText}>Vous n'avez aucun tournois à venir..</Text>*/}
+                    {loading ? <ActivityIndicator style={{ marginTop: 30 }} size={50} color={'#00A1E7'}/> :
 
-                    {/*<FlatList
-                        showsVerticalScrollIndicator={false}
-                        data={DATA}
-                        renderItem={renderItem}
-                        keyExtractor={(item) => item.id}
-                        contentContainerStyle={{
-                            flexGrow: 1,
-                        }}
-                    />*/}
+                        <View>
+                            {contests.length > 0 ?
+                            <FlatList
+                            showsVerticalScrollIndicator={false}
+                            data={contests}
+                            renderItem={renderItem}
+                            keyExtractor={(item) => item.id}
+                            contentContainerStyle={{
+                                flexGrow: 1,
+                            }}
+                        /> : <Text style={styles.noContestText}>Vous n'avez aucun tournois à venir..</Text> }
+                        </View> }
                 </View>
             </View>
             <RBSheet
@@ -218,7 +197,9 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     noContestText: {
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        marginTop: 30,
+        textAlign: 'center'
     },
     bigText: {
         fontSize: 18
