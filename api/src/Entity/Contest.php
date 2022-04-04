@@ -7,6 +7,7 @@ use App\Repository\ContestRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ContestRepository::class)
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     attributes={
  *          "order"={"startDate": "ASC"}
  *     },
+ *     normalizationContext={"groups"={"read_contest"}},
  *     collectionOperations={
  *          "get",
             "coming"={
@@ -43,7 +45,7 @@ use Doctrine\ORM\Mapping as ORM;
  *          "participations"={
  *              "method"="get",
  *              "path"="/contests/participations",
- *              "controller"="App\Controller\UserContestsParticipations",
+ *              "controller"="App\Controller\UserContestsParticipationsController",
  *              "openapi_context"={
                     "summary"="Retourne les tournois auxquels l'utilisateur participe."
  *              }
@@ -57,63 +59,75 @@ class Contest
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read_contest"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read_contest"})
      */
     private $creationDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read_contest"})
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read_contest"})
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read_contest"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read_contest"})
      */
     private $hallName;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read_contest"})
      */
     private $endRegistrationDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read_contest"})
      */
     private $attachPicture;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="contests")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"read_contest"})
      */
     private $creator;
 
     /**
      * @ORM\OneToMany(targetEntity=ContestCategory::class, mappedBy="contest", orphanRemoval=true)
+     * @Groups({"read_contest"})
      */
     private $contestCategories;
 
     /**
      * @ORM\OneToMany(targetEntity=Media::class, mappedBy="contest")
+     * @Groups({"read_contest"})
      */
     private $media;
 
     /**
      * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="contests")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"read_contest"})
      */
     private $club;
 

@@ -6,6 +6,7 @@ use App\Repository\ContestCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ContestCategoryRepository::class)
@@ -16,71 +17,85 @@ class ContestCategory
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read_contest"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"read_contest"})
      */
     private $minPoints;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"read_contest"})
      */
     private $maxPoints;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_contest"})
      */
     private $minAge;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_contest"})
      */
     private $maxAge;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_contest"})
      */
     private $onlyMen;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_contest"})
      */
     private $onlyWomen;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_contest"})
      */
     private $disability;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_contest"})
      */
     private $open;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read_contest"})
      */
     private $minParticipants;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read_contest"})
      */
     private $maxParticipants;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_contest"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_contest"})
      */
     private $winPrice;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read_contest"})
      */
     private $startDate;
 
@@ -97,6 +112,7 @@ class ContestCategory
 
     /**
      * @ORM\OneToMany(targetEntity=Media::class, mappedBy="contestCategory")
+     * @Groups({"read_contest"})
      */
     private $media;
 

@@ -23,9 +23,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserContestsParticipationsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserContestsParticipationsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Contest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Contest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ContestRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ContestRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/ContestCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ContestCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/screen/ProfileScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/screen/ProfileScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/service/APIService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/service/APIService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/service/SecurityService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/service/SecurityService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +188,7 @@
       <workItem from="1647982292774" duration="759000" />
       <workItem from="1648584455346" duration="2212000" />
       <workItem from="1648714892389" duration="625000" />
-      <workItem from="1649087060314" duration="1474000" />
+      <workItem from="1649087060314" duration="4624000" />
     </task>
     <servers />
   </component>
