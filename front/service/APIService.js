@@ -1,4 +1,4 @@
-const apiAddress = 'https://0584-2001-861-3505-4e20-6bae-8f19-e6ea-31d1.ngrok.io/api'
+const apiAddress = 'https://d4e1-2001-861-3505-4e20-9b78-1b4-1c86-c584.ngrok.io/api'
 
 export const getContests = (token, page, type) => {
     return fetch(apiAddress + '/contests/' + type + '?page=' + page)

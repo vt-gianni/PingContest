@@ -4,14 +4,16 @@ import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 
 export const ContestScreen = ({route, navigation}) => {
 
-    const { contest } = route.params
+    const {contest} = route.params
 
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
 
+    console.log(contest)
+
     useEffect(() => {
-        navigation.setOptions({ title: contest?.city })
-        })
+        navigation.setOptions({title: contest?.city})
+    })
 
     useEffect(() => {
         setStartDate(contest.startDate.split('T')[0].split('-'))
@@ -28,27 +30,28 @@ export const ContestScreen = ({route, navigation}) => {
             </View>
             <View style={styles.content}>
                 <Text style={styles.title}>
-                    Tournois de { contest?.city }
+                    Tournoi de {contest?.city}
                 </Text>
                 {startDate && endDate ?
-                <View style={styles.row}>
-                    <Text style={styles.date}>
-                        Du
-                    </Text>
-                    <Text style={[styles.date, styles.blueText, styles.fwBold]}>
-                        { startDate[2] }/{ startDate[1] }/{ startDate[0] }
-                    </Text>
-                    <Text style={styles.date}>
-                        au
-                    </Text>
-                    <Text style={[styles.date, styles.blueText, styles.fwBold]}>
-                        { endDate[2] }/{ endDate[1] }/{ endDate[0] }
-                    </Text>
-                </View> : <></> }
+                    <View style={styles.row}>
+                        <Text style={styles.date}>
+                            Du
+                        </Text>
+                        <Text style={[styles.date, styles.blueText, styles.fwBold]}>
+                            {startDate[2]}/{startDate[1]}/{startDate[0]}
+                        </Text>
+                        <Text style={styles.date}>
+                            au
+                        </Text>
+                        <Text style={[styles.date, styles.blueText, styles.fwBold]}>
+                            {endDate[2]}/{endDate[1]}/{endDate[0]}
+                        </Text>
+                    </View> : <></>}
 
                 <View style={styles.where}>
                     <Text>
-                        <FontAwesome5Icon name='map-marker-alt' size={18} color='#00A1E7' solid={false}/> {contest?.address}
+                        <FontAwesome5Icon name='map-marker-alt' size={18} color='#00A1E7'
+                                          solid={false}/> {contest?.address}
                     </Text>
                     <Text>
                         Salle {contest?.hallName}
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     coverImageBlock: {
-        flex: 2
+        flex: 3
     },
     coverImage: {
         flex: 1
