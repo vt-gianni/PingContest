@@ -7,7 +7,9 @@ import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCom
 import {ContestListItem} from "../component/ContestListItem"
 import {UserService} from "../service/UserService"
 import {UserParameters} from "../component/UserParameters"
-import {getContests, getUserParticipations} from "../service/APIService";
+import {apiAvatar, getUserParticipations, updateUserPicture} from "../service/APIService"
+import * as ImagePicker from 'expo-image-picker'
+import * as ImageManipulator from "expo-image-manipulator"
 
 export const ProfileScreen = () => {
     const {token, setToken, user, setUser} = useContext(authContext)
@@ -16,21 +18,84 @@ export const ProfileScreen = () => {
     const [ageCategory, setAgeCategory] = useState(null)
     const [contests, setContests] = useState([])
     const [loading, setLoading] = useState(true)
+    const [image, setImage] = useState(null)
+    const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions()
 
     useEffect(() => {
         setUserService(new UserService())
         saveContests().then(() => {
             setLoading(false)
         })
+        console.log('user', user)
     }, [])
 
     useEffect(() => {
         if (userService && user) {
-            setAgeCategory(
-                userService.getCategory(user?.birthdate.date)
-            )
+            console.log('user actuel', user)
+            if (user.birthdate.date) {
+                setAgeCategory(
+                    userService.getCategory(user?.birthdate.date)
+                )
+            }
+            else {
+                setAgeCategory(
+                    userService.getCategory(user?.birthdate)
+                )
+            }
         }
     }, [userService, user])
+
+    useEffect(() => {
+        if (image) {
+            updateUserPicture(token, image['base64']).then((request) => {
+                if (request.status) {
+                    request.json().then(data => {
+                        // TODO: Flash message + change avatar
+                        setUser(data)
+                    })
+                }
+                else {
+                    // TODO: Flash message
+                }
+            })
+        }
+    }, [image])
+
+    const compressAndConvert = async (uri) => {
+        return await ImageManipulator.manipulateAsync(
+            uri,
+            [
+                {
+                    resize: {
+                        width: 800
+                    }
+                }
+            ],
+            {
+                format: ImageManipulator.SaveFormat.JPEG,
+                compress: 1,
+                base64: true
+            }
+        );
+    }
+
+    const pickImage = async () => {
+        await requestPermission()
+
+        if (status.granted) {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.All,
+                allowsEditing: true,
+                aspect: [4, 3],
+                quality: 1,
+            });
+
+            if (!result.cancelled) {
+                const image64 = await compressAndConvert(result.uri)
+                setImage(image64)
+            }
+        }
+    }
 
     const saveContests = async () => {
         const request = await getUserParticipations(token, 1)
@@ -55,21 +120,23 @@ export const ProfileScreen = () => {
             </View>
             <View style={styles.content}>
                 <View style={styles.avatarBlock}>
-                    {user?.avatar ?
-                        <Avatar
-                            size={90}
-                            rounded
-                            containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: '#fff', marginRight: 20 }}
-                            title={''}
-                        /> :
-                        <Avatar
-                            size={90}
-                            rounded
-                            icon={{ name: 'camera', type: 'font-awesome', color: '#00A1E7' }}
-                            containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: '#fff', marginRight: 20 }}
-                            title={user?.firstname.charAt(0) + user?.lastname.charAt(0)}
-                        />
-                    }
+                    <Pressable onPress={pickImage}>
+                        {user?.picture ?
+                            <Avatar
+                                size={90}
+                                rounded
+                                source={{ uri: apiAvatar + '/' + user?.picture }}
+                                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: '#fff', marginRight: 20 }}
+                            /> :
+                            <Avatar
+                                size={90}
+                                rounded
+                                icon={{ name: 'camera', type: 'font-awesome', color: '#00A1E7' }}
+                                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: '#fff', marginRight: 20 }}
+                                title={user?.firstname.charAt(0) + user?.lastname.charAt(0)}
+                            />
+                        }
+                    </Pressable>
                     <View>
                         <Text style={styles.username}>{user?.firstname} {user?.lastname}</Text>
                         <Text style={styles.category}>Catégorie {ageCategory ? ageCategory : ''}</Text>

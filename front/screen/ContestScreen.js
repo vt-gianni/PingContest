@@ -9,8 +9,6 @@ export const ContestScreen = ({route, navigation}) => {
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
 
-    console.log(contest)
-
     useEffect(() => {
         navigation.setOptions({title: contest?.city})
     })
