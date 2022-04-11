@@ -133,6 +133,7 @@ class Contest
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read_contest"})
      */
     private $endDate;
 

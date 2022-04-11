@@ -15,11 +15,23 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @ApiResource(
+ *     normalizationContext={"groups"={"read_user"}},
  *     itemOperations={
  *          "get",
             "put"={
  *              "access_control"="object == user",
  *              "denormalization_context"={"groups"={"put_user"}}
+ *          }
+ *     },
+ *     collectionOperations={
+            "get",
+ *          "update_picture"={
+ *              "method"="put",
+ *              "path"="/users/update-picture",
+ *              "controller"="App\Controller\UpdateUserPictureController",
+ *              "openapi_context"={
+ *                  "summary"="Modifie l'image de l'utilisateur."
+ *              }
  *          }
  *     }
  * )
@@ -30,13 +42,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user_registrated"})
+     * @Groups({"user_registrated", "read_user"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"user_registrated"})
+     * @Groups({"user_registrated", "read_user"})
      */
     private $email;
 
@@ -54,31 +66,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user_registrated", "put_user"})
+     * @Groups({"user_registrated", "put_user", "read_user"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user_registrated", "put_user"})
+     * @Groups({"user_registrated", "put_user", "read_user"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"user_registrated", "put_user"})
+     * @Groups({"user_registrated", "put_user", "read_user"})
      */
     private $birthdate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"put_user"})
+     * @Groups({"put_user", "read_user"})
      */
     private $licenseNumber;
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Groups({"put_user"})
+     * @Groups({"put_user", "read_user"})
      */
     private $officialPoints;
 
@@ -109,6 +121,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read_user"})
      */
     private $picture;
 
