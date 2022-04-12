@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     },
     title2: {
         fontSize: 32,
-        color: '#2D6990',
+        color: '#00A1E7',
         textAlign: 'center',
         fontFamily: 'Kreon_600SemiBold',
     },
@@ -166,10 +166,10 @@ const styles = StyleSheet.create({
     pressableText: {
         fontSize: 17,
         fontWeight: 'bold',
-        color: '#2D6990'
+        color: '#00A1E7'
     },
     nextBtn: {
-        backgroundColor: '#2D6990',
+        backgroundColor: '#00A1E7',
         borderRadius: 5,
         paddingVertical: 5,
         paddingHorizontal: 10
