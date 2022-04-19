@@ -20,6 +20,7 @@ export const ProfileScreen = () => {
     const [contests, setContests] = useState([])
     const [loading, setLoading] = useState(true)
     const [image, setImage] = useState(null)
+    const [avatarLoading, setAvatarLoading] = useState(false)
     const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions()
 
     useEffect(() => {
@@ -46,6 +47,7 @@ export const ProfileScreen = () => {
 
     useEffect(() => {
         if (image) {
+            setAvatarLoading(true)
             updateUserPicture(token, image['base64']).then((request) => {
                 if (request.status) {
                     request.json().then(data => {
@@ -54,15 +56,16 @@ export const ProfileScreen = () => {
                             type: "success",
                         })
                         setUser(data)
+                        setAvatarLoading(false)
                     })
                 }
                 else {
-                    // TODO: Flash message
                     showMessage({
                         message: "Echec lors de l'importation de l'image.",
                         type: "danger",
                         icon: "success"
                     })
+                    setAvatarLoading(false)
                 }
             })
         }
@@ -128,6 +131,9 @@ export const ProfileScreen = () => {
             </View>
             <View style={styles.content}>
                 <View style={styles.avatarBlock}>
+
+                    { !avatarLoading ?
+
                     <Pressable onPress={pickImage}>
                         {user?.picture ?
                             <Avatar
@@ -144,7 +150,7 @@ export const ProfileScreen = () => {
                                 title={user?.firstname.charAt(0) + user?.lastname.charAt(0)}
                             />
                         }
-                    </Pressable>
+                    </Pressable> : <View style={styles.avatarIndicatorBlock}><ActivityIndicator size={40} color={'#00A1E7'}/></View> }
                     <View>
                         <Text style={styles.username}>{user?.firstname} {user?.lastname}</Text>
                         <Text style={styles.category}>Catégorie {ageCategory ? ageCategory : ''}</Text>
@@ -231,6 +237,13 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row'
+    },
+    avatarIndicatorBlock: {
+        width: 90,
+        height: 90,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 20
     },
     username: {
         marginTop: 20,
