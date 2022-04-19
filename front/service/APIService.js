@@ -1,5 +1,5 @@
-export const apiAvatar = 'https://d4e1-2001-861-3505-4e20-9b78-1b4-1c86-c584.ngrok.io/img/avatar'
-export const apiAddress = 'https://d4e1-2001-861-3505-4e20-9b78-1b4-1c86-c584.ngrok.io/api'
+export const apiAvatar = 'https://c512-84-100-101-45.ngrok.io/img/avatar'
+export const apiAddress = 'https://c512-84-100-101-45.ngrok.io/api'
 
 export const getContests = (token, page, type) => {
     return fetch(apiAddress + '/contests/' + type + '?page=' + page)

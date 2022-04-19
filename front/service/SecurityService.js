@@ -1,6 +1,6 @@
 export const SecurityService = class {
     constructor() {
-        this._apiAddress = 'https://d4e1-2001-861-3505-4e20-9b78-1b4-1c86-c584.ngrok.io/api'
+        this._apiAddress = 'https://c512-84-100-101-45.ngrok.io/api'
         this._error = null
 
         this._firstname = ''

@@ -10,6 +10,7 @@ import {UserParameters} from "../component/UserParameters"
 import {apiAvatar, getUserParticipations, updateUserPicture} from "../service/APIService"
 import * as ImagePicker from 'expo-image-picker'
 import * as ImageManipulator from "expo-image-manipulator"
+import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message"
 
 export const ProfileScreen = () => {
     const {token, setToken, user, setUser} = useContext(authContext)
@@ -26,12 +27,10 @@ export const ProfileScreen = () => {
         saveContests().then(() => {
             setLoading(false)
         })
-        console.log('user', user)
     }, [])
 
     useEffect(() => {
         if (userService && user) {
-            console.log('user actuel', user)
             if (user.birthdate.date) {
                 setAgeCategory(
                     userService.getCategory(user?.birthdate.date)
@@ -50,12 +49,20 @@ export const ProfileScreen = () => {
             updateUserPicture(token, image['base64']).then((request) => {
                 if (request.status) {
                     request.json().then(data => {
-                        // TODO: Flash message + change avatar
+                        showMessage({
+                            message: "Avatar modifié avec succès.",
+                            type: "success",
+                        })
                         setUser(data)
                     })
                 }
                 else {
                     // TODO: Flash message
+                    showMessage({
+                        message: "Echec lors de l'importation de l'image.",
+                        type: "danger",
+                        icon: "success"
+                    })
                 }
             })
         }
@@ -113,6 +120,7 @@ export const ProfileScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <FlashMessage position="top" />
             <View style={styles.topBar}>
                 <Pressable onPress={() => refRBSheet.current.open()}>
                     <MaterialCommunityIcon name="menu" color='#333' size={26}/>
