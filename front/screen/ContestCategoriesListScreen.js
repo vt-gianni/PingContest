@@ -1,6 +1,8 @@
-import {Image, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import {FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import {ContestListItem} from "../component/ContestListItem";
+import {ContestCategoryItem} from "../component/ContestCategoryItem";
 
 export const ContestCategoriesListScreen = ({route, navigation}) => {
 
@@ -17,6 +19,16 @@ export const ContestCategoriesListScreen = ({route, navigation}) => {
         setStartDate(contest.startDate.split('T')[0].split('-'))
         setEndDate(contest.endDate.split('T')[0].split('-'))
     }, [])
+
+    const renderItem = ({item}) => {
+        return (
+            <Pressable onPress={() => {
+                //navigation.navigate('Contest', {contest: item})
+            }}>
+                <ContestCategoryItem item={item} key={item.id} />
+            </Pressable>
+        )
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -49,6 +61,14 @@ export const ContestCategoriesListScreen = ({route, navigation}) => {
                         Salle {contest?.hallName}
                     </Text>
                 </View>
+
+                <FlatList
+                    style={{marginHorizontal: 20, marginVertical: 20}}
+                    showsVerticalScrollIndicator={false}
+                    data={contest?.contestCategories}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id}
+                />
             </View>
         </SafeAreaView>
     )
