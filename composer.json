@@ -1,0 +1,6 @@
+{
+    "require": {
+        "lexik/jwt-authentication-bundle": "^2.14",
+        "symfony/apache-pack": "^1.0"
+    }
+}
