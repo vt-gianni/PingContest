@@ -34,16 +34,7 @@
         "symfony/serializer": "5.4.*",
         "symfony/twig-bundle": "5.4.*",
         "symfony/validator": "5.4.*",
-        "symfony/yaml": "5.4.*",
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
-        "hautelook/alice-bundle": "^2.10",
-        "justinrainbow/json-schema": "^5.2",
-        "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "5.4.*",
-        "symfony/css-selector": "5.4.*",
-        "symfony/http-client": "5.4.*",
-        "symfony/maker-bundle": "^1.37",
-        "symfony/phpunit-bridge": "^6.0"
+        "symfony/yaml": "5.4.*"
     },
     "config": {
         "allow-plugins": {
@@ -94,6 +85,14 @@
         }
     },
     "require-dev": {
-
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "hautelook/alice-bundle": "^2.10",
+        "justinrainbow/json-schema": "^5.2",
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "5.4.*",
+        "symfony/css-selector": "5.4.*",
+        "symfony/http-client": "5.4.*",
+        "symfony/maker-bundle": "^1.37",
+        "symfony/phpunit-bridge": "^6.0"
     }
 }
