@@ -49,6 +49,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "openapi_context"={
                     "summary"="Retourne les tournois auxquels l'utilisateur participe."
  *              }
+ *          },
+ *          "create"={
+                "method"="post",
+ *              "path"="/contests",
+ *              "controller"="App\Controller\CreateContestController",
+ *              "openapi_context"={
+                    "summary"="Crée un tournoi."
+ *              }
  *          }
  *     }
  * )
