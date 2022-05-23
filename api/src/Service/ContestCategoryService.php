@@ -35,7 +35,7 @@ class ContestCategoryService
             array_key_exists('price', $element) && array_key_exists('minParticipants', $element) &&
             array_key_exists('maxParticipants', $element)) {
                 // Format et valeur des champs
-                if (($startDate = \DateTime::createFromFormat('Y-m-d', $data['startDate'])) &&
+                if (($startDate = \DateTime::createFromFormat('Y-m-d', $element['startDate'])) &&
                     $contest->getStartDate() <= $startDate) {
                     // Format et valeur des champs
                     if ($this->validatesAsInt($element['price']) && $this->validatesAsInt($element['winPrice']) &&
