@@ -1,0 +1,20 @@
+body {
+    background-color: #FFCEC2;
+}
+
+.bg-container {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.top img {
+    width: 300px;
+}
+
+.top p {
+    margin-top: 15px;
+    font-size: 1.5rem;
+}
+
+h1 {
+    color: #00A1E7;
+}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/index.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+    <div class="container vh-100 d-flex align-items-center justify-content-center bg-container">
+        <div class="top">
+            <img src="{{ asset('img/logo.png') }}" alt="Logo"/>
+            <p class="text-center">Bienvenue sur l'<strong>API</strong> de Ping Contest.</p>
+        </div>
+    </div>
+{% endblock %}

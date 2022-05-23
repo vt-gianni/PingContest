@@ -20,7 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ca7eb0f-d451-41a1-a8ed-049ba1e9e753" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,7 +239,9 @@
       <workItem from="1651946556373" duration="691000" />
       <workItem from="1652099172181" duration="5645000" />
       <workItem from="1652118306077" duration="17000" />
-      <workItem from="1652783166583" duration="3458000" />
+      <workItem from="1652783166583" duration="5766000" />
+      <workItem from="1653064790949" duration="37000" />
+      <workItem from="1653306868857" duration="1494000" />
     </task>
     <servers />
   </component>
@@ -258,14 +261,18 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1652118318488">
+    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1653064822706">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1652118318488" />
-    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog" timestamp="1652106763131">
+    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1653064822706" />
+    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog" timestamp="1653307583447">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1652106763131" />
+    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1653307583447" />
+    <state x="764" y="224" width="391" height="665" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1653308231408">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="764" y="224" width="391" height="665" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1653308231408" />
     <state x="651" y="292" width="721" height="522" key="find.popup" timestamp="1652784600078">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
