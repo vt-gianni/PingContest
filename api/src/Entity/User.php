@@ -125,6 +125,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $picture;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="users")
+     */
+    private $club;
+
     public function __construct()
     {
         $this->contests = new ArrayCollection();
@@ -403,6 +408,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getClub(): ?Club
+    {
+        return $this->club;
+    }
+
+    public function setClub(?Club $club): self
+    {
+        $this->club = $club;
 
         return $this;
     }

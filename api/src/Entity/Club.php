@@ -81,9 +81,15 @@ class Club
      */
     private $contests;
 
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="club")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->contests = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -247,6 +253,36 @@ class Club
             // set the owning side to null (unless already changed)
             if ($contest->getClub() === $this) {
                 $contest->setClub(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setClub($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getClub() === $this) {
+                $user->setClub(null);
             }
         }
 
