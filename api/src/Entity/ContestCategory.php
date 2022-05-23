@@ -16,6 +16,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "order"={"startDate": "ASC"}
  *     },
  *     normalizationContext={"groups"={"read_category"}},
+ *     collectionOperations={
+ *          "get",
+            "create"={
+ *              "method"="post",
+ *              "path"="/contest_categories",
+ *              "controller"="App\Controller\CreateContestCategoriesController",
+ *              "openapi_context"={
+                    "summary"="Crée les catégories liées à un tournoi."
+ *              }
+ *          }
+ *     }
  * )
  */
 class ContestCategory
