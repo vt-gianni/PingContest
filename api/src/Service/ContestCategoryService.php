@@ -31,8 +31,7 @@ class ContestCategoryService
     {
         foreach ($data['elements'] as $element) {
             // Champs obligatoires
-            if (array_key_exists('contestId', $element) &&
-            array_key_exists('startDate', $element) && array_key_exists('winPrice', $element) &&
+            if (array_key_exists('startDate', $element) && array_key_exists('winPrice', $element) &&
             array_key_exists('price', $element) && array_key_exists('minParticipants', $element) &&
             array_key_exists('maxParticipants', $element)) {
                 // Format et valeur des champs
