@@ -1,5 +1,5 @@
-export const apiAvatar = 'https://3de7-77-130-108-136.ngrok.io/img/avatar'
-export const apiAddress = 'https://3de7-77-130-108-136.ngrok.io/api'
+export const apiAvatar = 'https://ping-contest.herokuapp.com/img/avatar'
+export const apiAddress = 'https://ping-contest.herokuapp.com/api'
 
 export const getContests = (token, page, type) => {
     return fetch(apiAddress + '/contests/' + type + '?page=' + page)

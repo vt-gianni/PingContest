@@ -6,7 +6,7 @@ import {
     FlatList,
     StyleSheet,
     Pressable,
-    ActivityIndicator
+    ActivityIndicator, TouchableOpacity
 } from "react-native"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import RBSheet from "react-native-raw-bottom-sheet"
@@ -14,16 +14,16 @@ import {ContestsListFilters} from "./ContestsListFilters"
 import {ContestListItem} from "../component/ContestListItem"
 import AuthContext from "../context/AuthContext"
 import {getContests} from "../service/APIService"
+import authContext from "../context/AuthContext";
 
 export const ContestsListScreen = ({navigation}) => {
+    const {token, setToken, user, setUser} = useContext(authContext)
     const refRBSheet = useRef()
     const [type, setType] = useState('coming')
     const [contests, setContests] = useState([])
     const [page, setPage] = useState(1)
     const [firstLoading, setFirstLoading] = useState(true)
     const [loading, setLoading] = useState(false)
-
-    const {token} = useContext(AuthContext)
 
     useEffect(() => {
         saveContests().then(() => {
@@ -162,7 +162,29 @@ export const ContestsListScreen = ({navigation}) => {
                         <View style={styles.loaderBlock}>
                             <ActivityIndicator size={'large'} color={'#00A1E7'}/>
                         </View>
-                    }</View>
+                    }
+                    {user?.roles?.includes('ROLE_PRO') &&
+                        <TouchableOpacity
+                            style={{
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: 60,
+                                position: 'absolute',
+                                bottom: 20,
+                                right: 20,
+                                height: 60,
+                                backgroundColor: '#00A1E7',
+                                borderRadius: 100,
+                            }}
+
+                            onPress={() => {
+                                navigation.navigate('ContestCreation')
+                            }}
+                        >
+                            <MaterialCommunityIcon name='plus' size={30} color='#fff'/>
+                        </TouchableOpacity>
+                    }
+                </View>
             }
         </SafeAreaView>
 
