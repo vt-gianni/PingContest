@@ -6,15 +6,17 @@ namespace App\Service;
 
 use App\Entity\Contest;
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use Symfony\Component\Validator\Constraints\Date;
 
 class ContestService
 {
+    private $entityManager;
     private $error;
 
-    public function __construct()
+    public function __construct(EntityManagerInterface $entityManager)
     {
+        $this->entityManager = $entityManager;
         $this->error = null;
     }
 
@@ -68,7 +70,7 @@ class ContestService
     {
         $contest = new Contest();
 
-        return $contest
+        $contest
             ->setCreator($user)
             ->setStartDate(\DateTime::createFromFormat('Y-m-d', $data['startDate']))
             ->setHallName($data['hallName'])
@@ -80,6 +82,11 @@ class ContestService
             /*->setAttachPicture()*/
             ->setEndDate(\DateTime::createFromFormat('Y-m-d', $data['endDate']))
         ;
+
+            $this->entityManager->persist($contest);
+            $this->entityManager->flush();
+
+            return $contest;
     }
 
     /**
