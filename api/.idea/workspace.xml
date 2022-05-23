@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ca7eb0f-d451-41a1-a8ed-049ba1e9e753" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/CreateContestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CreateContestController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/ContestService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ContestService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +240,7 @@
       <workItem from="1652118306077" duration="17000" />
       <workItem from="1652783166583" duration="5766000" />
       <workItem from="1653064790949" duration="37000" />
-      <workItem from="1653306868857" duration="7375000" />
+      <workItem from="1653306868857" duration="7549000" />
     </task>
     <servers />
   </component>

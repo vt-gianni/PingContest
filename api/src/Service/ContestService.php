@@ -27,7 +27,7 @@ class ContestService
     public function checkPostData(array $data, User $user): bool
     {
         $now = new \DateTime("now", new \DateTimeZone('Europe/paris'));
-        if (($startDate = \DateTime::createFromFormat('Y-m-d', $data['startDate'])) && $now > $startDate) {
+        if (($startDate = \DateTime::createFromFormat('Y-m-d', $data['startDate'])) && $now < $startDate) {
             if (($endRegistrationDate = \DateTime::createFromFormat('Y-m-d', $data['endRegistrationDate'])) && $endRegistrationDate < $startDate) {
                 if (($endDate = \DateTime::createFromFormat('Y-m-d', $data['endDate'])) && $endDate > $startDate) {
                     if ($user->getClub()) {
