@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\User;
 use App\Repository\ContestRepository;
 use App\Service\ContestCategoryService;
 use Exception;
@@ -31,10 +32,12 @@ class CreateContestCategoriesController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
+        /** @var User $user */
         if (($user = $this->getUser()) && $this->isGranted('ROLE_PRO', $user)) {
             if (array_key_exists('contestId', $data) &&
                 ($contest = $this->contestRepository->find($data['contestId'])) &&
-                array_key_exists('elements', $data) && is_array($data['elements'])) {
+                array_key_exists('elements', $data) && is_array($data['elements']) &&
+                $user->getClub() === $contest->getClub()) {
                 if ($this->service->checkPostData($data, $contest)) {
                     return $this->json(
                         $this->contestRepository->find($contest->getId()), 201
