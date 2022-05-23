@@ -32,7 +32,8 @@ class CreateContestCategoriesController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         if (($user = $this->getUser()) && $this->isGranted('ROLE_PRO', $user)) {
-            if (($contest = $this->contestRepository->find($data['contestId'])) &&
+            if (array_key_exists('contestId', $data) &&
+                ($contest = $this->contestRepository->find($data['contestId'])) &&
                 array_key_exists('elements', $data) && is_array($data['elements'])) {
                 if ($this->service->checkPostData($data, $contest)) {
                     return $this->json(
