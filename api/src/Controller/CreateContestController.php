@@ -39,7 +39,7 @@ class CreateContestController extends AbstractController
                 }
                 return $this->json(['error' => $this->service->getError()], 400);
             }
-            return $this->json(['error' => 'Bad request.', 400]);
+            return $this->json(['error' => 'Bad request.'], 400);
         }
         return $this->json(['error' => 'Unauthorized.'], 401);
     }
