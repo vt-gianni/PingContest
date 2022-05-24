@@ -10,14 +10,19 @@ export const ContestCreationScreen = ({route, navigation}) => {
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [hallName, setHallName] = useState('')
-    const [startDate, setStartDate] = useState('')
+
+    const [date, setDate] = useState(null)
     const [endDate, setEndDate] = useState()
     const [endRegistrationDate, setEndRegistrationDate] = useState()
-    const [date, setDate] = useState(null)
+
     const [mode, setMode] = useState('date')
     const [modeEnd, setModeEnd] = useState('date')
+    const [modeReg, setModeReg] = useState('date')
+
     const [show, setShow] = useState(false)
     const [showEnd, setShowEnd] = useState(false)
+    const [showReg, setShowReg] = useState(false)
+
     const [error, setError] = useState(null)
 
     const showDatepicker = () => {
@@ -26,6 +31,10 @@ export const ContestCreationScreen = ({route, navigation}) => {
 
     const showDatepickerEnd = () => {
         showModeEnd('date')
+    }
+
+    const showDatepickerReg = () => {
+        showModeReg('date')
     }
 
     const showMode = (currentMode) => {
@@ -38,6 +47,11 @@ export const ContestCreationScreen = ({route, navigation}) => {
         setModeEnd(currentMode)
     }
 
+    const showModeReg = (currentMode) => {
+        setShowReg(true)
+        setModeReg(currentMode)
+    }
+
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date
         setShow(Platform.OS === 'ios')
@@ -48,6 +62,12 @@ export const ContestCreationScreen = ({route, navigation}) => {
         const currentDate = selectedDate || endDate
         setShowEnd(Platform.OS === 'ios')
         setEndDate(currentDate);
+    }
+
+    const onChangeReg = (event, selectedDate) => {
+        const currentDate = selectedDate || endRegistrationDate
+        setShowReg(Platform.OS === 'ios')
+        setEndRegistrationDate(currentDate);
     }
 
     const getMinDate = () => {
@@ -124,6 +144,29 @@ export const ContestCreationScreen = ({route, navigation}) => {
                             }
                         </Pressable>
                     </View>
+
+                    <View
+                        style={[styles.row, {alignItems: 'center', justifyContent: 'space-evenly', width: '100%'}]}>
+                        <Text>Date de fin *</Text>
+                        <Pressable onPress={showDatepickerReg} style={styles.date}>
+                            {!endRegistrationDate ?
+                                <View style={styles.row}>
+                                    <Text style={styles.placeholder}>dd</Text>
+                                    <Text style={styles.placeholder}> / </Text>
+                                    <Text style={styles.placeholder}>mm</Text>
+                                    <Text style={styles.placeholder}> / </Text>
+                                    <Text style={styles.placeholder}>yyyy</Text>
+                                </View> : <View style={styles.row}>
+                                    <Text style={styles.dateFilled}>{endRegistrationDate.getDate()}</Text>
+                                    <Text style={styles.dateFilled}> / </Text>
+                                    <Text
+                                        style={styles.dateFilled}>{(endRegistrationDate.getUTCMonth() + 1) < 10 ? '0' + (endRegistrationDate.getUTCMonth() + 1) : endRegistrationDate.getUTCMonth() + 1}</Text>
+                                    <Text style={styles.dateFilled}> / </Text>
+                                    <Text style={styles.dateFilled}>{endRegistrationDate.getFullYear()}</Text>
+                                </View>
+                            }
+                        </Pressable>
+                    </View>
                 </View>
             </View>
             {show && (
@@ -146,6 +189,18 @@ export const ContestCreationScreen = ({route, navigation}) => {
                     is24Hour={true}
                     display="default"
                     onChange={onChangeEnd}
+                />
+            )}
+
+            {showReg && (
+                <DateTimePicker
+                    minimumDate={getMinDate()}
+                    testID="dateTimePicker"
+                    value={endRegistrationDate ? endRegistrationDate : new Date()}
+                    mode={modeReg}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChangeReg}
                 />
             )}
         </SafeAreaView>
