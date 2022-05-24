@@ -15,11 +15,17 @@ export const ContestCreationScreen = ({route, navigation}) => {
     const [endRegistrationDate, setEndRegistrationDate] = useState()
     const [date, setDate] = useState(null)
     const [mode, setMode] = useState('date')
+    const [modeEnd, setModeEnd] = useState('date')
     const [show, setShow] = useState(false)
+    const [showEnd, setShowEnd] = useState(false)
     const [error, setError] = useState(null)
 
     const showDatepicker = () => {
         showMode('date')
+    }
+
+    const showDatepickerEnd = () => {
+        showModeEnd('date')
     }
 
     const showMode = (currentMode) => {
@@ -27,10 +33,21 @@ export const ContestCreationScreen = ({route, navigation}) => {
         setMode(currentMode)
     }
 
+    const showModeEnd = (currentMode) => {
+        setShowEnd(true)
+        setModeEnd(currentMode)
+    }
+
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date
         setShow(Platform.OS === 'ios')
         setDate(currentDate);
+    }
+
+    const onChangeEnd = (event, selectedDate) => {
+        const currentDate = selectedDate || endDate
+        setShowEnd(Platform.OS === 'ios')
+        setEndDate(currentDate);
     }
 
     const getMinDate = () => {
@@ -84,6 +101,29 @@ export const ContestCreationScreen = ({route, navigation}) => {
                             }
                         </Pressable>
                     </View>
+
+                    <View
+                        style={[styles.row, {alignItems: 'center', justifyContent: 'space-evenly', width: '100%'}]}>
+                        <Text>Date de fin *</Text>
+                        <Pressable onPress={showDatepickerEnd} style={styles.date}>
+                            {!endDate ?
+                                <View style={styles.row}>
+                                    <Text style={styles.placeholder}>dd</Text>
+                                    <Text style={styles.placeholder}> / </Text>
+                                    <Text style={styles.placeholder}>mm</Text>
+                                    <Text style={styles.placeholder}> / </Text>
+                                    <Text style={styles.placeholder}>yyyy</Text>
+                                </View> : <View style={styles.row}>
+                                    <Text style={styles.dateFilled}>{endDate.getDate()}</Text>
+                                    <Text style={styles.dateFilled}> / </Text>
+                                    <Text
+                                        style={styles.dateFilled}>{(endDate.getUTCMonth() + 1) < 10 ? '0' + (endDate.getUTCMonth() + 1) : endDate.getUTCMonth() + 1}</Text>
+                                    <Text style={styles.dateFilled}> / </Text>
+                                    <Text style={styles.dateFilled}>{endDate.getFullYear()}</Text>
+                                </View>
+                            }
+                        </Pressable>
+                    </View>
                 </View>
             </View>
             {show && (
@@ -95,6 +135,17 @@ export const ContestCreationScreen = ({route, navigation}) => {
                     is24Hour={true}
                     display="default"
                     onChange={onChange}
+                />
+            )}
+            {showEnd && (
+                <DateTimePicker
+                    minimumDate={getMinDate()}
+                    testID="dateTimePicker"
+                    value={endDate ? endDate : new Date()}
+                    mode={modeEnd}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChangeEnd}
                 />
             )}
         </SafeAreaView>
