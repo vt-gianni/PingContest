@@ -117,10 +117,6 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row'
     },
-    date: {
-        fontSize: 13,
-        fontStyle: 'italic'
-    },
     blueText: {
         color: '#00A1E7',
         marginHorizontal: 5
