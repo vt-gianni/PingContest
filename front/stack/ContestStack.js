@@ -47,14 +47,16 @@ export const ContestStack = () => {
                     name="ContestCreation"
                     component={ContestCreationScreen}
                     options={{
-                        title: 'Création de tournoi'
+                        title: 'Création de tournoi',
+                        headerShadowVisible: false
                     }}
                 />
                 <Stack.Screen
                     name="ContestCategoryCreation"
                     component={ContestCategoryCreationScreen}
                     options={{
-                        title: 'Création de séries'
+                        title: 'Création de séries',
+                        headerShadowVisible: false
                     }}
                 />
             </Stack.Navigator>
