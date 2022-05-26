@@ -4,16 +4,19 @@ import authContext from "../context/AuthContext";
 import CustomInput from "../component/CustomInput";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import ContestCreationContext from "../context/ContestCreationContext";
+import contestCreationContext from "../context/ContestCreationContext";
 
 export const ContestCreationScreen = ({route, navigation}) => {
     const {token, setToken, user, setUser} = useContext(authContext)
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [hallName, setHallName] = useState('')
-
-    const [date, setDate] = useState(null)
-    const [endDate, setEndDate] = useState(null)
-    const [endRegistrationDate, setEndRegistrationDate] = useState(null)
+    const {
+        address, setAddress,
+        city, setCity,
+        hallName, setHallName,
+        date, setDate,
+        endDate, setEndDate,
+        endRegistrationDate, setEndRegistrationDate
+    } = useContext(contestCreationContext)
 
     const [mode, setMode] = useState('date')
     const [modeEnd, setModeEnd] = useState('date')
@@ -28,8 +31,7 @@ export const ContestCreationScreen = ({route, navigation}) => {
     useEffect(() => {
         if (endDate < date) {
             setError('La date de fin ne peut être inférieure à la date de début.')
-        }
-        else {
+        } else {
             setError(null)
         }
     }, [date, endDate])
@@ -37,8 +39,7 @@ export const ContestCreationScreen = ({route, navigation}) => {
     useEffect(() => {
         if (endRegistrationDate > date) {
             setError('La date de fin d\'inscription ne peut être ultérieure à la date de début du tournoi.')
-        }
-        else {
+        } else {
             setError(null)
         }
     }, [endRegistrationDate, date])
@@ -99,37 +100,84 @@ export const ContestCreationScreen = ({route, navigation}) => {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.content}>
-                <View>
-                    {/*error && <Text style={styles.redText}>{error}</Text>*/}
-                    <View style={styles.inputsContainerRow}>
-                        <View style={styles.inputsRow}>
-                            <CustomInput field={city} placeholder={"Ville *"}
-                                         setField={setCity}
+            <SafeAreaView style={styles.container}>
+                <View style={styles.content}>
+                    <View>
+                        <View style={styles.inputsContainerRow}>
+                            <View style={styles.inputsRow}>
+                                <CustomInput field={city} placeholder={"Ville *"}
+                                             setField={setCity}
+                                             secure={false}/>
+                            </View>
+                            <View style={styles.inputsRow}>
+                                <CustomInput field={address} placeholder={"Adresse *"}
+                                             setField={setAddress}
+                                             secure={false}/>
+                            </View>
+                        </View>
+                        <View style={styles.inputsContainer}>
+                            <CustomInput field={hallName} placeholder={"Nom de la salle *"}
+                                         setField={setHallName}
                                          secure={false}/>
                         </View>
-                        <View style={styles.inputsRow}>
-                            <CustomInput field={address} placeholder={"Adresse *"}
-                                         setField={setAddress}
-                                         secure={false}/>
+
+                        {error &&
+                            <Text style={styles.error}>{error}</Text>
+                        }
+
+                        <View style={[styles.row, {
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            width: '100%'
+                        }]}>
+                            <View style={{width: '49%'}}>
+                                <Text style={{textAlign: 'center'}}>Date de début *</Text>
+                                <Pressable onPress={showDatepicker} style={styles.date}>
+                                    {!date ?
+                                        <View style={styles.row}>
+                                            <Text style={styles.placeholder}>dd</Text>
+                                            <Text style={styles.placeholder}> / </Text>
+                                            <Text style={styles.placeholder}>mm</Text>
+                                            <Text style={styles.placeholder}> / </Text>
+                                            <Text style={styles.placeholder}>yyyy</Text>
+                                        </View> : <View style={styles.row}>
+                                            <Text style={styles.dateFilled}>{date.getDate()}</Text>
+                                            <Text style={styles.dateFilled}> / </Text>
+                                            <Text
+                                                style={styles.dateFilled}>{(date.getUTCMonth() + 1) < 10 ? '0' + (date.getUTCMonth() + 1) : date.getUTCMonth() + 1}</Text>
+                                            <Text style={styles.dateFilled}> / </Text>
+                                            <Text style={styles.dateFilled}>{date.getFullYear()}</Text>
+                                        </View>
+                                    }
+                                </Pressable>
+                            </View>
+
+                            <View style={{width: '49%'}}>
+                                <Text style={{textAlign: 'center'}}>Date de fin *</Text>
+                                <Pressable onPress={showDatepickerEnd} style={styles.date}>
+                                    {!endDate ?
+                                        <View style={styles.row}>
+                                            <Text style={styles.placeholder}>dd</Text>
+                                            <Text style={styles.placeholder}> / </Text>
+                                            <Text style={styles.placeholder}>mm</Text>
+                                            <Text style={styles.placeholder}> / </Text>
+                                            <Text style={styles.placeholder}>yyyy</Text>
+                                        </View> : <View style={styles.row}>
+                                            <Text style={styles.dateFilled}>{endDate.getDate()}</Text>
+                                            <Text style={styles.dateFilled}> / </Text>
+                                            <Text
+                                                style={styles.dateFilled}>{(endDate.getUTCMonth() + 1) < 10 ? '0' + (endDate.getUTCMonth() + 1) : endDate.getUTCMonth() + 1}</Text>
+                                            <Text style={styles.dateFilled}> / </Text>
+                                            <Text style={styles.dateFilled}>{endDate.getFullYear()}</Text>
+                                        </View>
+                                    }
+                                </Pressable>
+                            </View>
                         </View>
-                    </View>
-                    <View style={styles.inputsContainer}>
-                        <CustomInput field={hallName} placeholder={"Nom de la salle *"}
-                                     setField={setHallName}
-                                     secure={false}/>
-                    </View>
-
-                    {error &&
-                        <Text style={styles.error}>{error}</Text>
-                    }
-
-                    <View style={[styles.row, {alignItems: 'center', justifyContent: 'space-between', width: '100%'}]}>
-                        <View style={{width: '49%'}}>
-                            <Text style={{ textAlign: 'center' }}>Date de début *</Text>
-                            <Pressable onPress={showDatepicker} style={styles.date}>
-                                {!date ?
+                        <View style={{marginTop: 10}}>
+                            <Text style={{textAlign: 'center'}}>Date de fin d'inscription *</Text>
+                            <Pressable onPress={showDatepickerReg} style={styles.date}>
+                                {!endRegistrationDate ?
                                     <View style={styles.row}>
                                         <Text style={styles.placeholder}>dd</Text>
                                         <Text style={styles.placeholder}> / </Text>
@@ -137,106 +185,62 @@ export const ContestCreationScreen = ({route, navigation}) => {
                                         <Text style={styles.placeholder}> / </Text>
                                         <Text style={styles.placeholder}>yyyy</Text>
                                     </View> : <View style={styles.row}>
-                                        <Text style={styles.dateFilled}>{date.getDate()}</Text>
+                                        <Text style={styles.dateFilled}>{endRegistrationDate.getDate()}</Text>
                                         <Text style={styles.dateFilled}> / </Text>
                                         <Text
-                                            style={styles.dateFilled}>{(date.getUTCMonth() + 1) < 10 ? '0' + (date.getUTCMonth() + 1) : date.getUTCMonth() + 1}</Text>
+                                            style={styles.dateFilled}>{(endRegistrationDate.getUTCMonth() + 1) < 10 ? '0' + (endRegistrationDate.getUTCMonth() + 1) : endRegistrationDate.getUTCMonth() + 1}</Text>
                                         <Text style={styles.dateFilled}> / </Text>
-                                        <Text style={styles.dateFilled}>{date.getFullYear()}</Text>
+                                        <Text style={styles.dateFilled}>{endRegistrationDate.getFullYear()}</Text>
                                     </View>
                                 }
                             </Pressable>
                         </View>
 
-                        <View style={{width: '49%'}}>
-                            <Text style={{ textAlign: 'center' }}>Date de fin *</Text>
-                            <Pressable onPress={showDatepickerEnd} style={styles.date}>
-                                {!endDate ?
-                                    <View style={styles.row}>
-                                        <Text style={styles.placeholder}>dd</Text>
-                                        <Text style={styles.placeholder}> / </Text>
-                                        <Text style={styles.placeholder}>mm</Text>
-                                        <Text style={styles.placeholder}> / </Text>
-                                        <Text style={styles.placeholder}>yyyy</Text>
-                                    </View> : <View style={styles.row}>
-                                        <Text style={styles.dateFilled}>{endDate.getDate()}</Text>
-                                        <Text style={styles.dateFilled}> / </Text>
-                                        <Text
-                                            style={styles.dateFilled}>{(endDate.getUTCMonth() + 1) < 10 ? '0' + (endDate.getUTCMonth() + 1) : endDate.getUTCMonth() + 1}</Text>
-                                        <Text style={styles.dateFilled}> / </Text>
-                                        <Text style={styles.dateFilled}>{endDate.getFullYear()}</Text>
-                                    </View>
-                                }
+                        {checkRequirements() &&
+                            <Pressable style={styles.nextBtn} onPress={() => {
+                                navigation.navigate('ContestCategoryCreation')
+                            }}>
+                                <Text style={styles.nextBtnText}>Créer les séries</Text>
                             </Pressable>
-                        </View>
-                    </View>
-                    <View style={{ marginTop: 10 }}>
-                        <Text style={{ textAlign: 'center' }}>Date de fin d'inscription *</Text>
-                        <Pressable onPress={showDatepickerReg} style={styles.date}>
-                            {!endRegistrationDate ?
-                                <View style={styles.row}>
-                                    <Text style={styles.placeholder}>dd</Text>
-                                    <Text style={styles.placeholder}> / </Text>
-                                    <Text style={styles.placeholder}>mm</Text>
-                                    <Text style={styles.placeholder}> / </Text>
-                                    <Text style={styles.placeholder}>yyyy</Text>
-                                </View> : <View style={styles.row}>
-                                    <Text style={styles.dateFilled}>{endRegistrationDate.getDate()}</Text>
-                                    <Text style={styles.dateFilled}> / </Text>
-                                    <Text
-                                        style={styles.dateFilled}>{(endRegistrationDate.getUTCMonth() + 1) < 10 ? '0' + (endRegistrationDate.getUTCMonth() + 1) : endRegistrationDate.getUTCMonth() + 1}</Text>
-                                    <Text style={styles.dateFilled}> / </Text>
-                                    <Text style={styles.dateFilled}>{endRegistrationDate.getFullYear()}</Text>
-                                </View>
-                            }
-                        </Pressable>
-                    </View>
+                        }
 
-                    { checkRequirements() &&
-                        <Pressable style={styles.nextBtn} onPress={() => {
-                            navigation.navigate('Profile')
-                        }}>
-                            <Text style={styles.nextBtnText}>Créer les séries</Text>
-                        </Pressable>
-                    }
-
+                    </View>
                 </View>
-            </View>
-            {show && (
-                <DateTimePicker
-                    minimumDate={getMinDate()}
-                    testID="dateTimePicker"
-                    value={date ? date : new Date()}
-                    mode={mode}
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChange}
-                />
-            )}
-            {showEnd && (
-                <DateTimePicker
-                    minimumDate={getMinDate()}
-                    testID="dateTimePicker"
-                    value={endDate ? endDate : new Date()}
-                    mode={modeEnd}
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChangeEnd}
-                />
-            )}
+                {show && (
+                    <DateTimePicker
+                        minimumDate={getMinDate()}
+                        testID="dateTimePicker"
+                        value={date ? date : new Date()}
+                        mode={mode}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChange}
+                    />
+                )}
+                {showEnd && (
+                    <DateTimePicker
+                        minimumDate={getMinDate()}
+                        testID="dateTimePicker"
+                        value={endDate ? endDate : new Date()}
+                        mode={modeEnd}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChangeEnd}
+                    />
+                )}
 
-            {showReg && (
-                <DateTimePicker
-                    minimumDate={getMinDate()}
-                    testID="dateTimePicker"
-                    value={endRegistrationDate ? endRegistrationDate : new Date()}
-                    mode={modeReg}
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChangeReg}
-                />
-            )}
-        </SafeAreaView>
+                {showReg && (
+                    <DateTimePicker
+                        minimumDate={getMinDate()}
+                        testID="dateTimePicker"
+                        value={endRegistrationDate ? endRegistrationDate : new Date()}
+                        mode={modeReg}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChangeReg}
+                    />
+                )}
+            </SafeAreaView>
     )
 }
 
