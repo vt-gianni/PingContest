@@ -12,8 +12,8 @@ export const ContestCreationScreen = ({route, navigation}) => {
     const [hallName, setHallName] = useState('')
 
     const [date, setDate] = useState(null)
-    const [endDate, setEndDate] = useState()
-    const [endRegistrationDate, setEndRegistrationDate] = useState()
+    const [endDate, setEndDate] = useState(null)
+    const [endRegistrationDate, setEndRegistrationDate] = useState(null)
 
     const [mode, setMode] = useState('date')
     const [modeEnd, setModeEnd] = useState('date')
@@ -24,6 +24,24 @@ export const ContestCreationScreen = ({route, navigation}) => {
     const [showReg, setShowReg] = useState(false)
 
     const [error, setError] = useState(null)
+
+    useEffect(() => {
+        if (endDate < date) {
+            setError('La date de fin ne peut être inférieure à la date de début.')
+        }
+        else {
+            setError(null)
+        }
+    }, [date, endDate])
+
+    useEffect(() => {
+        if (endRegistrationDate > date) {
+            setError('La date de fin d\'inscription ne peut être ultérieure à la date de début du tournoi.')
+        }
+        else {
+            setError(null)
+        }
+    }, [endRegistrationDate, date])
 
     const showDatepicker = () => {
         showMode('date')
@@ -55,7 +73,7 @@ export const ContestCreationScreen = ({route, navigation}) => {
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date
         setShow(Platform.OS === 'ios')
-        setDate(currentDate);
+        setDate(currentDate)
     }
 
     const onChangeEnd = (event, selectedDate) => {
@@ -74,6 +92,10 @@ export const ContestCreationScreen = ({route, navigation}) => {
         const minDate = new Date()
         minDate.setDate(minDate.getDate() + 1)
         return minDate
+    }
+
+    const checkRequirements = () => {
+        return address !== '' && city !== '' && hallName !== '' && date !== null && endDate !== null && endRegistrationDate !== null && endDate > date && endRegistrationDate < date
     }
 
     return (
@@ -99,55 +121,57 @@ export const ContestCreationScreen = ({route, navigation}) => {
                                      secure={false}/>
                     </View>
 
-                    <View
-                        style={[styles.row, {alignItems: 'center', justifyContent: 'space-evenly', width: '100%'}]}>
-                        <Text>Date de début *</Text>
-                        <Pressable onPress={showDatepicker} style={styles.date}>
-                            {!date ?
-                                <View style={styles.row}>
-                                    <Text style={styles.placeholder}>dd</Text>
-                                    <Text style={styles.placeholder}> / </Text>
-                                    <Text style={styles.placeholder}>mm</Text>
-                                    <Text style={styles.placeholder}> / </Text>
-                                    <Text style={styles.placeholder}>yyyy</Text>
-                                </View> : <View style={styles.row}>
-                                    <Text style={styles.dateFilled}>{date.getDate()}</Text>
-                                    <Text style={styles.dateFilled}> / </Text>
-                                    <Text
-                                        style={styles.dateFilled}>{(date.getUTCMonth() + 1) < 10 ? '0' + (date.getUTCMonth() + 1) : date.getUTCMonth() + 1}</Text>
-                                    <Text style={styles.dateFilled}> / </Text>
-                                    <Text style={styles.dateFilled}>{date.getFullYear()}</Text>
-                                </View>
-                            }
-                        </Pressable>
-                    </View>
+                    {error &&
+                        <Text style={styles.error}>{error}</Text>
+                    }
 
-                    <View
-                        style={[styles.row, {alignItems: 'center', justifyContent: 'space-evenly', width: '100%'}]}>
-                        <Text>Date de fin *</Text>
-                        <Pressable onPress={showDatepickerEnd} style={styles.date}>
-                            {!endDate ?
-                                <View style={styles.row}>
-                                    <Text style={styles.placeholder}>dd</Text>
-                                    <Text style={styles.placeholder}> / </Text>
-                                    <Text style={styles.placeholder}>mm</Text>
-                                    <Text style={styles.placeholder}> / </Text>
-                                    <Text style={styles.placeholder}>yyyy</Text>
-                                </View> : <View style={styles.row}>
-                                    <Text style={styles.dateFilled}>{endDate.getDate()}</Text>
-                                    <Text style={styles.dateFilled}> / </Text>
-                                    <Text
-                                        style={styles.dateFilled}>{(endDate.getUTCMonth() + 1) < 10 ? '0' + (endDate.getUTCMonth() + 1) : endDate.getUTCMonth() + 1}</Text>
-                                    <Text style={styles.dateFilled}> / </Text>
-                                    <Text style={styles.dateFilled}>{endDate.getFullYear()}</Text>
-                                </View>
-                            }
-                        </Pressable>
-                    </View>
+                    <View style={[styles.row, {alignItems: 'center', justifyContent: 'space-between', width: '100%'}]}>
+                        <View style={{width: '49%'}}>
+                            <Text style={{ textAlign: 'center' }}>Date de début *</Text>
+                            <Pressable onPress={showDatepicker} style={styles.date}>
+                                {!date ?
+                                    <View style={styles.row}>
+                                        <Text style={styles.placeholder}>dd</Text>
+                                        <Text style={styles.placeholder}> / </Text>
+                                        <Text style={styles.placeholder}>mm</Text>
+                                        <Text style={styles.placeholder}> / </Text>
+                                        <Text style={styles.placeholder}>yyyy</Text>
+                                    </View> : <View style={styles.row}>
+                                        <Text style={styles.dateFilled}>{date.getDate()}</Text>
+                                        <Text style={styles.dateFilled}> / </Text>
+                                        <Text
+                                            style={styles.dateFilled}>{(date.getUTCMonth() + 1) < 10 ? '0' + (date.getUTCMonth() + 1) : date.getUTCMonth() + 1}</Text>
+                                        <Text style={styles.dateFilled}> / </Text>
+                                        <Text style={styles.dateFilled}>{date.getFullYear()}</Text>
+                                    </View>
+                                }
+                            </Pressable>
+                        </View>
 
-                    <View
-                        style={[styles.row, {alignItems: 'center', justifyContent: 'space-evenly', width: '100%'}]}>
-                        <Text>Date de fin *</Text>
+                        <View style={{width: '49%'}}>
+                            <Text style={{ textAlign: 'center' }}>Date de fin *</Text>
+                            <Pressable onPress={showDatepickerEnd} style={styles.date}>
+                                {!endDate ?
+                                    <View style={styles.row}>
+                                        <Text style={styles.placeholder}>dd</Text>
+                                        <Text style={styles.placeholder}> / </Text>
+                                        <Text style={styles.placeholder}>mm</Text>
+                                        <Text style={styles.placeholder}> / </Text>
+                                        <Text style={styles.placeholder}>yyyy</Text>
+                                    </View> : <View style={styles.row}>
+                                        <Text style={styles.dateFilled}>{endDate.getDate()}</Text>
+                                        <Text style={styles.dateFilled}> / </Text>
+                                        <Text
+                                            style={styles.dateFilled}>{(endDate.getUTCMonth() + 1) < 10 ? '0' + (endDate.getUTCMonth() + 1) : endDate.getUTCMonth() + 1}</Text>
+                                        <Text style={styles.dateFilled}> / </Text>
+                                        <Text style={styles.dateFilled}>{endDate.getFullYear()}</Text>
+                                    </View>
+                                }
+                            </Pressable>
+                        </View>
+                    </View>
+                    <View style={{ marginTop: 10 }}>
+                        <Text style={{ textAlign: 'center' }}>Date de fin d'inscription *</Text>
                         <Pressable onPress={showDatepickerReg} style={styles.date}>
                             {!endRegistrationDate ?
                                 <View style={styles.row}>
@@ -167,6 +191,15 @@ export const ContestCreationScreen = ({route, navigation}) => {
                             }
                         </Pressable>
                     </View>
+
+                    { checkRequirements() &&
+                        <Pressable style={styles.nextBtn} onPress={() => {
+                            navigation.navigate('Profile')
+                        }}>
+                            <Text style={styles.nextBtnText}>Créer les séries</Text>
+                        </Pressable>
+                    }
+
                 </View>
             </View>
             {show && (
@@ -261,5 +294,20 @@ const styles = StyleSheet.create({
     },
     dateFilled: {
         color: '#000000'
+    },
+    nextBtn: {
+        marginTop: 20,
+        backgroundColor: '#00A1E7',
+        padding: 15,
+        borderRadius: 5,
+    },
+    nextBtnText: {
+        fontSize: 18,
+        color: '#ffffff',
+        fontWeight: 'bold'
+    },
+    error: {
+        color: '#E1673D',
+        marginVertical: 10
     }
 })

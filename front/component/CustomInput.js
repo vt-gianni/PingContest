@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
 
-const CustomInput = ({placeholder, field, setField, secure}) => {
+const CustomInput = ({placeholder, field, setField, secure, onBlur}) => {
     return (
         <View style={styles.container}>
             <TextInput
@@ -10,6 +10,7 @@ const CustomInput = ({placeholder, field, setField, secure}) => {
                 onChangeText={value => setField(value)}
                 defaultValue={field}
                 secureTextEntry={secure}
+                onBlur={onBlur}
             />
         </View>
     )
