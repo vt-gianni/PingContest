@@ -21,6 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1ca7eb0f-d451-41a1-a8ed-049ba1e9e753" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/ContestCategoryService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ContestCategoryService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/screen/ContestCreationValidationScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/screen/ContestCreationValidationScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/service/APIService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/service/APIService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,7 +246,11 @@
       <workItem from="1653064790949" duration="37000" />
       <workItem from="1653306868857" duration="11074000" />
       <workItem from="1653318953683" duration="1348000" />
-      <workItem from="1653395557572" duration="318000" />
+      <workItem from="1653395557572" duration="1617000" />
+      <workItem from="1653572793087" duration="1458000" />
+      <workItem from="1653580129973" duration="1615000" />
+      <workItem from="1653590659448" duration="880000" />
+      <workItem from="1653660857682" duration="3845000" />
     </task>
     <servers />
   </component>
