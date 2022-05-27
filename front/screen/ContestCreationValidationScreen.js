@@ -30,6 +30,7 @@ export const ContestCreationValidationScreen = ({route, navigation}) => {
 
         const contest = await categoriesResponse.json()
 
+
         if (categoriesResponse.status === 201) {
             setSuccess('Le tournoi a bien été créé !')
             setCategories([])

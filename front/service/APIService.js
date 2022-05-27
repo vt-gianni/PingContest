@@ -49,6 +49,7 @@ export const createContest = (token, data) => {
 }
 
 export const createContestCategories = (token, contestId, data) => {
+    console.log('data', data)
     return fetch(apiAddress + '/contest_categories', {
         method: 'POST',
         headers: {
