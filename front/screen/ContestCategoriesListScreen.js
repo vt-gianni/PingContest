@@ -25,7 +25,7 @@ export const ContestCategoriesListScreen = ({route, navigation}) => {
             <Pressable onPress={() => {
                 //navigation.navigate('Contest', {contest: item})
             }}>
-                <ContestCategoryItem item={item} key={item.id} />
+                <ContestCategoryItem category={item} key={item.id} />
             </Pressable>
         )
     }

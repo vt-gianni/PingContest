@@ -28,7 +28,7 @@ export const MainStack = () => {
                     )
                 }}
             />
-            <Tab.Screen
+            {/*<Tab.Screen
                 name="HomeStack"
                 component={HomeStack}
                 options={{
@@ -36,7 +36,7 @@ export const MainStack = () => {
                         <FontAwesome5Icon name='home' size={24} color={color} solid={false}/>
                     )
                 }}
-            />
+            />*/}
             <Tab.Screen
 
                 name="Account"

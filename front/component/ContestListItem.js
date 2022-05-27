@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, View} from "react-native"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import React, {useEffect, useState} from "react"
 import {translate} from "../service/DateService";
+import {Avatar} from "react-native-elements";
 const formatDistanceToNow = require('date-fns/formatDistanceToNow')
 
 export const ContestListItem = ({item, type}) => {
@@ -27,10 +28,12 @@ export const ContestListItem = ({item, type}) => {
             <View style={styles.item}>
                 <View style={styles.row}>
                     <View style={styles.pictureBlock}>
-                        {item.city === 'Lille' ?
-                            <Image source={require('../assets/lmtt.png')} style={styles.picture}/> :
-                        <Image source={require('../assets/wattignies.jpg')} style={styles.picture}/>
-                        }
+                        <Avatar
+                            size={60}
+                            rounded
+                            containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.1)' }}
+                            title={item.city.charAt(0) }
+                        />
                     </View>
                     <View>
                         <Text style={styles.city}>{item.city}</Text>
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
         marginRight: 20,
         borderWidth: 1,
         borderRadius: 50,
-        borderColor: '#333'
+        borderColor: '#00A1E7'
     },
     picture: {
         width: 55,
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
         color: '#333'
     },
     startDate: {
-        color: '#29abe2',
+        color: '#00A1E7',
         fontSize: 13,
         fontStyle: 'italic'
     },

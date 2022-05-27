@@ -5,18 +5,47 @@ import {ContestListItem} from "./ContestListItem";
 import {translate} from "../service/DateService";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
+import {getDateFormat} from "../service/APIService";
 
 export const ContestCategoryItem = ({category}) => {
+    const [categoryName, setCategoryName] = useState('')
+    const [startDate, setStartDate] = useState(null)
+
+    useEffect(() => {
+        changeCategoryName()
+        setStartDate(category.startDate.split('T')[0].split('-'))
+    }, [])
+
+    const changeCategoryName = () => {
+        if (category.open) {
+            setCategoryName('Open')
+        }
+        if (category.disability) {
+            setCategoryName('Handicap')
+        }
+        if (category.onlyWomen) {
+            setCategoryName('Femmes')
+        }
+        if (category.maxAge) {
+            setCategoryName('Moins de ' + category.maxAge + ' ans')
+        }
+        if (category.minPoints) {
+            setCategoryName('Plus de ' + category.minPoints)
+        }
+    }
+
     return (
         <View>
             <View style={styles.item}>
                 <View style={styles.row}>
                     <View>
-                        <Text style={styles.city}>SERIE</Text>
+                        <Text style={styles.city}>{categoryName}</Text>
 
-                        <Text style={styles.startDate}>
-                            Bientot
-                        </Text>
+                        {startDate &&
+                            <Text style={styles.startDate}>
+                                Le {startDate[2]}/{startDate[1]}/{startDate[0]}
+                            </Text>
+                        }
                     </View>
                 </View>
                 <Text>
@@ -47,7 +76,7 @@ const styles = StyleSheet.create({
         color: '#333'
     },
     startDate: {
-        color: '#29abe2',
+        color: '#00A1E7',
         fontSize: 13,
         fontStyle: 'italic'
     },
