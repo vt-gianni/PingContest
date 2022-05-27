@@ -4,6 +4,8 @@ import contestCreationContext from "../context/ContestCreationContext";
 import {RadioButton} from "react-native-paper";
 import CustomInput from "../component/CustomInput";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message"
+
 
 export const ContestCategoryCreationScreen = ({navigation}) => {
     const {
@@ -40,6 +42,11 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
         checked !== 'none' && setCheckedAge('none')
         checked !== 'none' && setCheckedPoints('none')
     }, [checked])
+
+    useEffect(() => {
+        console.log(categories)
+        emptyData()
+    }, [categories])
 
     useEffect(() => {
         checkedAge === 'none' && setMaxAge(null)
@@ -152,6 +159,38 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
 
     const checkRequirements = () => {
         return catDate && catTime && checkParticipants() && checkPrice() && checkTypeAgePoints()
+    }
+
+    const saveCategory = () => {
+        let category = {}
+
+        category.catDate = catDate
+        category.catTime = catTime
+        category.minParticipants = minParticipants
+        category.maxParticipants = maxParticipants
+        category.price = price
+        category.winPrice = winPrice
+        category.checked = checked
+        category.checkedAge = checkedAge
+        category.checkedPoints = checkedPoints
+        category.maxAge = maxAge
+        category.minPoints = minPoints
+
+        setCategories([...categories, category])
+    }
+
+    const emptyData = () => {
+        setCatDate(null)
+        setCatTime(null)
+        setMinParticipants(null)
+        setMaxParticipants(null)
+        setPrice(null)
+        setWinPrice(null)
+        setChecked('none')
+        setCheckedAge('none')
+        setCheckedPoints('none')
+        setMaxAge(null)
+        setMinPoints(null)
     }
 
     return (
@@ -432,12 +471,30 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                     </View>
                 }
 
+                {categories.length > 0 && <Pressable style={styles.nextYellowBtn} onPress={() => {
+                    navigation.navigate('ContestCategoryCreation')
+                }}>
+                    <Text style={[styles.nextBtnText, { textAlign: 'center' }]}>Créer le tournoi</Text>
+                </Pressable>}
+
                 {checkRequirements() &&
-                    <Pressable style={styles.nextBtn} onPress={() => {
-                        navigation.navigate('ContestCategoryCreation')
-                    }}>
-                        <Text style={styles.nextBtnText}>Créer les séries</Text>
-                    </Pressable>
+                    <View style={styles.row}>
+                        <Pressable style={styles.nextBtn} onPress={() => {
+                            navigation.navigate('ContestCategoryCreation')
+                        }}>
+                            <Text style={styles.nextBtnText}>Créer le tournoi</Text>
+                        </Pressable>
+
+                        <Pressable style={styles.nextBtnWhite} onPress={() => {
+                            saveCategory()
+                            showMessage({
+                                message: "Série ajoutée temporairement.",
+                                type: "info",
+                            })
+                        }}>
+                            <Text style={styles.nextBtnTextWhite}>Ajout de série</Text>
+                        </Pressable>
+                    </View>
                 }
 
                 {show &&
@@ -517,9 +574,28 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 5,
     },
+    nextYellowBtn: {
+        marginTop: 20,
+        backgroundColor: '#FFB700',
+        padding: 15,
+        borderRadius: 5,
+    },
+    nextBtnWhite: {
+        marginTop: 20,
+        backgroundColor: '#ffffff',
+        borderColor: '#00A1E7',
+        borderWidth: 2,
+        padding: 15,
+        borderRadius: 5,
+    },
     nextBtnText: {
         fontSize: 18,
         color: '#ffffff',
         fontWeight: 'bold'
     },
+    nextBtnTextWhite: {
+        fontSize: 18,
+        color: '#00A1E7',
+        fontWeight: 'bold'
+    }
 })
