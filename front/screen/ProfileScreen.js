@@ -123,7 +123,6 @@ export const ProfileScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <FlashMessage position="top" />
             <View style={styles.topBar}>
                 <Pressable onPress={() => refRBSheet.current.open()}>
                     <MaterialCommunityIcon name="menu" color='#333' size={26}/>
@@ -206,6 +205,7 @@ export const ProfileScreen = () => {
             >
                 <UserParameters setToken={setToken} user={user} setUser={setUser} />
             </RBSheet>
+            <FlashMessage position="top" />
         </SafeAreaView>
     )
 }
