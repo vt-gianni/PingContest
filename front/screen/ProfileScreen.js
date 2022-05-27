@@ -12,7 +12,7 @@ import * as ImagePicker from 'expo-image-picker'
 import * as ImageManipulator from "expo-image-manipulator"
 import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message"
 
-export const ProfileScreen = () => {
+export const ProfileScreen = ({navigation}) => {
     const {token, setToken, user, setUser} = useContext(authContext)
     const refRBSheet = useRef()
     const [userService, setUserService] = useState(null)

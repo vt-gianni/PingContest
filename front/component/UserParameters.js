@@ -1,8 +1,11 @@
 import {AsyncStorage, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import React, {useEffect} from "react";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import {useNavigation} from "@react-navigation/native";
 
 export const UserParameters = ({setToken, user, setUser}) => {
+    const navigation = useNavigation()
+
     useEffect(() => {
         if (!user) {
             setToken(null)
@@ -11,7 +14,9 @@ export const UserParameters = ({setToken, user, setUser}) => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={ () => {}}>
+            <TouchableOpacity onPress={ () => {
+                navigation.navigate('ProfileUpdate')
+            }}>
                 <Text style={styles.text}>
                     <FontAwesome5Icon name='user-circle' size={18} color='#333' solid={false}/> Modifier mes informations
                 </Text>
