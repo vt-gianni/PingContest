@@ -52,7 +52,7 @@ export const ContestScreen = ({route, navigation}) => {
                                           solid={false}/> {contest?.address}
                     </Text>
                     <Text>
-                        Salle {contest?.hallName}
+                        {contest?.hallName}
                     </Text>
                 </View>
 

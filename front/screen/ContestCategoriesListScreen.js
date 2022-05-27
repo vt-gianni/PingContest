@@ -58,7 +58,7 @@ export const ContestCategoriesListScreen = ({route, navigation}) => {
                                           solid={false}/> {contest?.address}
                     </Text>
                     <Text>
-                        Salle {contest?.hallName}
+                        {contest?.hallName}
                     </Text>
                 </View>
 

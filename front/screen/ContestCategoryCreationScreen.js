@@ -5,6 +5,7 @@ import {RadioButton} from "react-native-paper";
 import CustomInput from "../component/CustomInput";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message"
+import {getDateFormat} from "../service/APIService";
 
 
 export const ContestCategoryCreationScreen = ({navigation}) => {
@@ -164,13 +165,15 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
     const saveCategory = () => {
         let category = {}
 
-        category.catDate = catDate
-        category.catTime = catTime
+        category.startDate = getDateFormat(catDate)
+        category.time = catTime
         category.minParticipants = minParticipants
         category.maxParticipants = maxParticipants
         category.price = price
         category.winPrice = winPrice
-        category.checked = checked
+        category.open = checked === 'open'
+        category.disability = checked === 'disability'
+        category.onlyWomen = checked === 'women'
         category.checkedAge = checkedAge
         category.checkedPoints = checkedPoints
         category.maxAge = maxAge
@@ -209,6 +212,12 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                 ), '-', ''
             ), ',', ''
         )
+    }
+
+    const createContest = async (save) => {
+        save && saveCategory()
+
+        navigation.navigate('ContestCreationValidation')
     }
 
     return (
@@ -496,7 +505,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                         <Text style={{ color: '#FFB700', textAlign: 'center' }}>Les données de la série en cours seront perdues.</Text>
 
                         <Pressable style={styles.nextYellowBtn} onPress={() => {
-                            navigation.navigate('ContestCategoryCreation')
+                            createContest(false)
                         }}>
                             <Text style={[styles.nextBtnText, { textAlign: 'center' }]}>Créer le tournoi</Text>
                         </Pressable>
@@ -506,7 +515,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                 {checkRequirements() &&
                     <View style={styles.row}>
                         <Pressable style={styles.nextBtn} onPress={() => {
-                            navigation.navigate('ContestCategoryCreation')
+                            createContest(true)
                         }}>
                             <Text style={styles.nextBtnText}>Créer le tournoi</Text>
                         </Pressable>
