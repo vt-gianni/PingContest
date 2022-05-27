@@ -9,12 +9,21 @@ import authContext from "../context/AuthContext";
 export const ContestCreationValidationScreen = ({route, navigation}) => {
     const {token} = useContext(authContext)
     const {
-        address, city, hallName, date, endDate, endRegistrationDate, categories
+        address, setAddress, city, setCity, hallName, setHallName, date, setDate, endDate, setEndDate, endRegistrationDate, setEndRegistrationDate, categories, setCategories
     } = useContext(contestCreationContext)
 
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
     const [loading, setLoading] = useState(true)
+
+    const clearContext = () => {
+        setAddress(null)
+        setCity(null)
+        setHallName(null)
+        setDate(null)
+        setEndDate(null)
+        setEndRegistrationDate(null)
+    }
 
     const createCategories = async (contestId) => {
         let categoriesResponse = await createContestCategories(token, contestId, categories)
@@ -23,6 +32,7 @@ export const ContestCreationValidationScreen = ({route, navigation}) => {
 
         if (categoriesResponse.status === 201) {
             setSuccess('Le tournoi a bien été créé !')
+            setCategories([])
         }
         else {
             setError(contest.error)
@@ -42,6 +52,7 @@ export const ContestCreationValidationScreen = ({route, navigation}) => {
         const contest = await contestResponse.json()
 
         if (contestResponse.status === 201) {
+            clearContext()
             createCategories(contest.id)
         }
         else {
@@ -58,10 +69,6 @@ export const ContestCreationValidationScreen = ({route, navigation}) => {
             setLoading(false)
         }
     }, [success, error])
-
-    useEffect(() => {
-        console.log('loading', loading)
-    }, [loading])
 
     return (
         <SafeAreaView style={styles.container}>

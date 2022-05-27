@@ -38,12 +38,12 @@ export const createContest = (token, data) => {
             'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify({
-            startDate: getDateFormat(data.startDate),
+            startDate: data.startDate ? getDateFormat(data.startDate) : null,
             address: data.address,
             city: data.city,
             hallName: data.hallName,
-            endDate: getDateFormat(data.endDate),
-            endRegistrationDate: getDateFormat(data.endRegistrationDate)
+            endDate: data.endDate ? getDateFormat(data.endDate) : null,
+            endRegistrationDate: data.endRegistrationDate ? getDateFormat(data.endRegistrationDate) : null
         })
     })
 }
