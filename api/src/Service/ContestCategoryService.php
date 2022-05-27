@@ -54,13 +54,13 @@ class ContestCategoryService
                         elseif (array_key_exists('onlyMen', $element) && $element['onlyMen']) {
                             $this->createOnlyMen($element, $contest);
                         } // Série Limite d'âge
-                        elseif (array_key_exists('maxAge', $element) && $this->validatesAsInt($element['maxAge'])) {
+                        elseif (array_key_exists('maxAge', $element) && $element['maxAge'] && $this->validatesAsInt($element['maxAge'])) {
                             $this->createMaxAge($element, $contest);
                         } // Série Limite de points
-                        elseif (array_key_exists('maxPoints', $element) && $this->validatesAsInt($element['maxPoints'])) {
+                        elseif (array_key_exists('maxPoints', $element) && $element['maxPoints'] && $this->validatesAsInt($element['maxPoints'])) {
                             $this->createMaxPoints($element, $contest);
                         } // Série Minimum de points
-                        elseif (array_key_exists('minPoints', $element) && $this->validatesAsInt($element['minPoints'])) {
+                        elseif (array_key_exists('minPoints', $element) && $element['minPoints'] && $this->validatesAsInt($element['minPoints'])) {
                             $this->createMinPoints($element, $contest);
                         } else {
                             $this->setError('Bad request.');
