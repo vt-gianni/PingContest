@@ -5,7 +5,7 @@ import {RadioButton} from "react-native-paper";
 import CustomInput from "../component/CustomInput";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-export const ContestCategoryCreationScreen = () => {
+export const ContestCategoryCreationScreen = ({navigation}) => {
     const {
         date, endDate, categories, setCategories
     } = useContext(contestCreationContext)
@@ -43,6 +43,7 @@ export const ContestCategoryCreationScreen = () => {
 
     useEffect(() => {
         checkedAge === 'none' && setMaxAge(null)
+        checkedAge !== 'none' && setCheckedPoints('none')
     }, [checkedAge])
 
     useEffect(() => {
@@ -51,6 +52,7 @@ export const ContestCategoryCreationScreen = () => {
 
     useEffect(() => {
         checkedPoints === 'none' && setMinPoints(null)
+        checkedPoints !== 'none' && setCheckedAge('none')
     }, [checkedPoints])
 
     useEffect(() => {
@@ -112,6 +114,44 @@ export const ContestCategoryCreationScreen = () => {
 
     const showDatepicker = () => {
         showMode('date')
+    }
+
+    const checkParticipants = () => {
+        if (minParticipants === null || maxParticipants === null) {
+            return false
+        }
+        const minP = parseInt(minParticipants)
+        const maxP = parseInt(maxParticipants)
+
+        return minP >= 8 && minP <= 192 && maxP >= 8 && maxP <= 192 && minP <= maxP
+    }
+
+    const checkPrice = () => {
+        if (price === null || winPrice === null) {
+            return false
+        }
+
+        const p = parseInt(price)
+        const wP = parseInt(winPrice)
+
+        return !(p < 1 || p > 20 || wP < 20 || wP > 1000)
+    }
+
+    const checkTypeAgePoints = () => {
+        if (checked !== 'none') {
+            return true
+        }
+        if (checkedPoints === 'none' && checkedAge !== 'none' && maxAge && parseInt(maxAge) <= 18) {
+            return true
+        }
+        if (checkedAge === 'none' && checkedPoints !== 'none' && minPoints && parseInt(minPoints) >= 599 && parseInt(minPoints) <= 3000) {
+            return true
+        }
+        return false
+    }
+
+    const checkRequirements = () => {
+        return catDate && catTime && checkParticipants() && checkPrice() && checkTypeAgePoints()
     }
 
     return (
@@ -392,6 +432,14 @@ export const ContestCategoryCreationScreen = () => {
                     </View>
                 }
 
+                {checkRequirements() &&
+                    <Pressable style={styles.nextBtn} onPress={() => {
+                        navigation.navigate('ContestCategoryCreation')
+                    }}>
+                        <Text style={styles.nextBtnText}>Créer les séries</Text>
+                    </Pressable>
+                }
+
                 {show &&
                     <DateTimePicker
                         minimumDate={date}
@@ -462,5 +510,16 @@ const styles = StyleSheet.create({
     error: {
         color: '#E1673D',
         marginVertical: 10
-    }
+    },
+    nextBtn: {
+        marginTop: 20,
+        backgroundColor: '#00A1E7',
+        padding: 15,
+        borderRadius: 5,
+    },
+    nextBtnText: {
+        fontSize: 18,
+        color: '#ffffff',
+        fontWeight: 'bold'
+    },
 })
