@@ -12,19 +12,20 @@ export const ContestCreationValidationScreen = ({route, navigation}) => {
         address, city, hallName, date, endDate, endRegistrationDate, categories
     } = useContext(contestCreationContext)
 
+    const [error, setError] = useState(null)
+    const [success, setSuccess] = useState(null)
     const [loading, setLoading] = useState(true)
 
     const createCategories = async (contestId) => {
         let categoriesResponse = await createContestCategories(token, contestId, categories)
 
-        console.log('STATUS RESPONSE CATEGORY', categoriesResponse.status)
-
         const contest = await categoriesResponse.json()
 
-        console.log('la raison', contest)
-
         if (categoriesResponse.status === 201) {
-            console.log('OK')
+            setSuccess('Le tournoi a bien été créé !')
+        }
+        else {
+            setError(contest.error)
         }
     }
 
@@ -43,22 +44,24 @@ export const ContestCreationValidationScreen = ({route, navigation}) => {
         if (contestResponse.status === 201) {
             createCategories(contest.id)
         }
-
-
-        console.log(contest)
-
-        /*if (contestResponse.statusCode === 201) {
-            const data = await contestResponse.json()
-            console.log(data)
-        }
         else {
-            console.log('error', contestResponse.statusCode)
-        }*/
+            setError(contest.error)
+        }
     }
 
     useEffect(() => {
         createContestAndCategories()
     }, [])
+
+    useEffect(() => {
+        if (success || error) {
+            setLoading(false)
+        }
+    }, [success, error])
+
+    useEffect(() => {
+        console.log('loading', loading)
+    }, [loading])
 
     return (
         <SafeAreaView style={styles.container}>
@@ -70,7 +73,19 @@ export const ContestCreationValidationScreen = ({route, navigation}) => {
                         <Text>Veuillez ne pas fermer l'application.</Text>
                     </View>
                     :
-                    <View><Text>Done!</Text></View>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <View>
+                            { success ?
+                                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                                    <LottieView source={require('../assets/success.json')} autoPlay={true} loop={false} style={{ width: '70%' }} />
+                                    <Text style={styles.success}>{success}</Text>
+                                </View> :
+                                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                                    <LottieView source={require('../assets/error.json')} autoPlay={true} loop={false} style={{ width: '70%' }} />
+                                    <Text style={styles.error}>{error}</Text>
+                                </View>}
+                        </View>
+                    </View>
             }
         </SafeAreaView>
     )
@@ -85,5 +100,18 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         marginTop: 10
+    },
+    error: {
+        color: '#E1673D',
+        fontSize: 18
+    },
+    success: {
+        color: '#00A1E7',
+        fontSize: 18
+    },
+    logo: {
+        width: 150,
+        height: 150,
+        marginVertical: 20
     }
 })
