@@ -18,13 +18,16 @@ export const ContestStack = () => {
     const [endDate, setEndDate] = useState(null)
     const [endRegistrationDate, setEndRegistrationDate] = useState(null)
 
+    const [categories, setCategories] = useState([])
+
     const contestContextValue = {
         address, setAddress,
         city, setCity,
         hallName, setHallName,
         date, setDate,
         endDate, setEndDate,
-        endRegistrationDate, setEndRegistrationDate
+        endRegistrationDate, setEndRegistrationDate,
+        categories, setCategories
     }
 
     return (

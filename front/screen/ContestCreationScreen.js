@@ -2,9 +2,7 @@ import {Platform, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, V
 import React, {useContext, useEffect, useState} from "react"
 import authContext from "../context/AuthContext";
 import CustomInput from "../component/CustomInput";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import ContestCreationContext from "../context/ContestCreationContext";
 import contestCreationContext from "../context/ContestCreationContext";
 
 export const ContestCreationScreen = ({route, navigation}) => {

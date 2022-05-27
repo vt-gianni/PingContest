@@ -3,11 +3,19 @@ import React, {useContext, useEffect, useState} from "react"
 import contestCreationContext from "../context/ContestCreationContext";
 import {RadioButton} from "react-native-paper";
 import CustomInput from "../component/CustomInput";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 export const ContestCategoryCreationScreen = () => {
     const {
-        address, city, hallName, date, endDate, endRegistrationDate,
+        date, endDate, categories, setCategories
     } = useContext(contestCreationContext)
+
+    const [catDate, setCatDate] = useState(null)
+    const [catTime, setCatTime] = useState(null)
+    const [mode, setMode] = useState('date')
+    const [timeMode, setTimeMode] = useState('time')
+    const [show, setShow] = useState(false)
+    const [timeShow, setTimeShow] = useState(false)
 
     const [minParticipants, setMinParticipants] = useState(null)
     const [maxParticipants, setMaxParticipants] = useState(null)
@@ -85,9 +93,75 @@ export const ContestCategoryCreationScreen = () => {
         }
     }
 
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date
+        setShow(Platform.OS === 'ios')
+        setCatDate(currentDate)
+    }
+
+    const onTimeChange = (event, selectedTime) => {
+        const currentDate = selectedTime || date
+        setTimeShow(Platform.OS === 'ios')
+        setCatTime(currentDate)
+    }
+
+    const showMode = (currentMode) => {
+        setShow(true)
+        setMode(currentMode)
+    }
+
+    const showDatepicker = () => {
+        showMode('date')
+    }
+
     return (
         <ScrollView style={styles.container}>
             <View style={{paddingBottom: 30}}>
+                <View>
+                    <Text style={styles.title}>Date et heure</Text>
+
+                    <View style={styles.row}>
+                        <View style={styles.rowElement}>
+                            <Pressable onPress={showDatepicker} style={styles.date}>
+                                {!catDate ?
+                                    <View style={styles.row}>
+                                        <Text style={styles.placeholder}>dd</Text>
+                                        <Text style={styles.placeholder}> / </Text>
+                                        <Text style={styles.placeholder}>mm</Text>
+                                        <Text style={styles.placeholder}> / </Text>
+                                        <Text style={styles.placeholder}>yyyy</Text>
+                                    </View> : <View style={styles.row}>
+                                        <Text style={styles.dateFilled}>{catDate.getDate()}</Text>
+                                        <Text style={styles.dateFilled}> / </Text>
+                                        <Text
+                                            style={styles.dateFilled}>{(catDate.getUTCMonth() + 1) < 10 ? '0' + (catDate.getUTCMonth() + 1) : catDate.getUTCMonth() + 1}</Text>
+                                        <Text style={styles.dateFilled}> / </Text>
+                                        <Text style={styles.dateFilled}>{catDate.getFullYear()}</Text>
+                                    </View>
+                                }
+                            </Pressable>
+                        </View>
+
+                        <View style={styles.rowElement}>
+                            <Pressable onPress={() => {
+                                setTimeShow(true)
+                                setTimeMode('time')
+                            }} style={styles.date}>
+                                {!catTime ?
+                                    <View style={styles.row}>
+                                        <Text style={styles.placeholder}>hh</Text>
+                                        <Text style={styles.placeholder}> : </Text>
+                                        <Text style={styles.placeholder}>mm</Text>
+                                    </View> : <View style={styles.rowStrict}>
+                                        <Text style={styles.dateFilled}>{catTime.getHours()}</Text>
+                                        <Text style={styles.dateFilled}>h</Text>
+                                        <Text style={styles.dateFilled}>{catTime.getMinutes()}</Text>
+                                    </View>
+                                }
+                            </Pressable>
+                        </View>
+                    </View>
+                </View>
                 <View>
                     <Text style={styles.title}>Nombre de participants</Text>
 
@@ -317,6 +391,31 @@ export const ContestCategoryCreationScreen = () => {
                         />
                     </View>
                 }
+
+                {show &&
+                    <DateTimePicker
+                        minimumDate={date}
+                        maximumDate={endDate}
+                        testID="dateTimePicker"
+                        value={catDate ? catDate : new Date()}
+                        mode={'date'}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChange}
+                    />
+                }
+
+                {timeShow &&
+                    <DateTimePicker
+                        testID="timePicker"
+                        value={catTime ? catTime : new Date()}
+                        mode={'time'}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onTimeChange}
+                    />
+                }
+
             </View>
         </ScrollView>
     )
@@ -337,8 +436,24 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
+    rowStrict: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     rowElement: {
         width: '49%'
+    },
+    date: {
+        backgroundColor: '#ffffff',
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderWidth: 1,
+        borderColor: '#00A1E7',
+        borderRadius: 3
+    },
+    dateFilled: {
+        color: '#000000'
     },
     radioBlock: {
         flexDirection: 'row',
