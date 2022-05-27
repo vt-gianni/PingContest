@@ -306,7 +306,8 @@ const styles = StyleSheet.create({
     nextBtnText: {
         fontSize: 18,
         color: '#ffffff',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
     },
     error: {
         color: '#E1673D',

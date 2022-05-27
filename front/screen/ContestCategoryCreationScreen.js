@@ -141,7 +141,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
         const p = parseInt(price)
         const wP = parseInt(winPrice)
 
-        return !(p < 1 || p > 20 || wP < 20 || wP > 1000)
+        return p >= 1 && p <= 20 && wP >= 20 && wP <= 1000
     }
 
     const checkTypeAgePoints = () => {
@@ -193,9 +193,28 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
         setMinPoints(null)
     }
 
+    const escapeRegExp = (string) => {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    }
+
+    const replaceAll = (str, find, replace) => {
+        return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+    }
+
+    const replaceAllWithCharacters = (string) => {
+        return replaceAll(
+            replaceAll(
+                replaceAll(
+                    replaceAll(string, '.', ''), ' ', ''
+                ), '-', ''
+            ), ',', ''
+        )
+    }
+
     return (
         <ScrollView style={styles.container}>
-            <View style={{paddingBottom: 30}}>
+            <FlashMessage position="top" />
+            <SafeAreaView style={{paddingHorizontal: 20, paddingVertical: 20}}>
                 <View>
                     <Text style={styles.title}>Date et heure</Text>
 
@@ -257,7 +276,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                                 type={'number'}
                                 onBlur={async () => {
                                     if (minParticipants) {
-                                        await setMinParticipants(minParticipants.replace('.', '').replace(' ', '').replace('-', '').replace(',', ''))
+                                        await setMinParticipants(replaceAllWithCharacters(minParticipants))
                                         checkParticipantsError()
                                     }
                                 }}
@@ -274,7 +293,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                                 type={'number'}
                                 onBlur={async () => {
                                     if (maxParticipants) {
-                                        await setMaxParticipants(maxParticipants.replace('.', '').replace(' ', '').replace('-', '').replace(',', ''))
+                                        await setMaxParticipants(replaceAllWithCharacters(maxParticipants))
                                         checkParticipantsError()
                                     }
                                 }}
@@ -299,7 +318,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                                 type={'number'}
                                 onBlur={async () => {
                                     if (price) {
-                                        await setPrice(price.replace('.', '').replace(' ', '').replace('-', '').replace(',', ''))
+                                        await setPrice(replaceAllWithCharacters(price))
                                         checkPriceError()
                                     }
                                 }}
@@ -316,7 +335,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                                 type={'number'}
                                 onBlur={async () => {
                                     if (winPrice) {
-                                        await setWinPrice(winPrice.replace('.', '').replace(' ', '').replace('-', '').replace(',', ''))
+                                        await setWinPrice(replaceAllWithCharacters(winPrice))
                                         checkPriceError()
                                     }
                                 }}
@@ -410,7 +429,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                             type={'number'}
                             onBlur={async () => {
                                 if (maxAge) {
-                                    await setMaxAge(maxAge.replace('.', '').replace(' ', '').replace('-', '').replace(',', ''))
+                                    await setMaxAge(replaceAllWithCharacters(maxAge))
                                     parseInt(maxAge) > 18 ? setMaxAgeError('L\'âge maximal ne peut dépasser 18.') : setMaxAgeError(null)
                                 }
                             }}
@@ -457,7 +476,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                             type={'number'}
                             onBlur={async () => {
                                 if (minPoints) {
-                                    await setMinPoints(minPoints.replace('.', '').replace(' ', '').replace('-', '').replace(',', ''))
+                                    await setMinPoints(replaceAllWithCharacters(minPoints))
                                     if (parseInt(minPoints) < 599) {
                                         setMinPointsError('La restriction de points minimale est de 599.')
                                     } else if (parseInt(minPoints) > 3000) {
@@ -471,11 +490,18 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                     </View>
                 }
 
-                {categories.length > 0 && <Pressable style={styles.nextYellowBtn} onPress={() => {
-                    navigation.navigate('ContestCategoryCreation')
-                }}>
-                    <Text style={[styles.nextBtnText, { textAlign: 'center' }]}>Créer le tournoi</Text>
-                </Pressable>}
+                {!checkRequirements() && categories.length > 0 &&
+                    <View style={{ marginTop: 20 }}>
+                        <Text style={{ fontWeight: 'bold', color: '#FFB700', textAlign: 'center' }}>ATTENTION</Text>
+                        <Text style={{ color: '#FFB700', textAlign: 'center' }}>Les données de la série en cours seront perdues.</Text>
+
+                        <Pressable style={styles.nextYellowBtn} onPress={() => {
+                            navigation.navigate('ContestCategoryCreation')
+                        }}>
+                            <Text style={[styles.nextBtnText, { textAlign: 'center' }]}>Créer le tournoi</Text>
+                        </Pressable>
+                    </View>
+                        }
 
                 {checkRequirements() &&
                     <View style={styles.row}>
@@ -521,7 +547,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
                     />
                 }
 
-            </View>
+            </SafeAreaView>
         </ScrollView>
     )
 }
@@ -529,7 +555,6 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
         backgroundColor: 'white'
     },
     title: {
@@ -575,7 +600,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     nextYellowBtn: {
-        marginTop: 20,
+        marginTop: 5,
         backgroundColor: '#FFB700',
         padding: 15,
         borderRadius: 5,
