@@ -50,10 +50,16 @@ class ParticipationService
                 // S'il y a encore de la place
                 if (($category->getParticipations() && count($category->getParticipations()) < $category->getMaxParticipants()) || !$category->getParticipations()) {
                     // Vérification limite d'âge
-                    if ($category->getMaxAge() && $category->getMaxAge() >= $this->calculateAge($user->getBirthdate())) {
-                        $this->createParticipation($category, $user);
+                    if (($category->getMaxAge() && $category->getMaxAge() >= $this->calculateAge($user->getBirthdate())) || !$category->getMaxAge()) {
+                        // Vérification limite points
+                        if (($category->getMinPoints() && $category->getMinPoints() <= $user->getOfficialPoints()) || !$category->getMinPoints()) {
+                            $this->createParticipation($category, $user);
 
-                        return $category;
+                            return $category;
+                        }
+                        else {
+                            $this->setError('Vos points ne vous permettent pas de participer à cette série.');
+                        }
                     }
                     else {
                         $this->setError('Votre catégorie d\'âge ne correspond pas à cette série.');
