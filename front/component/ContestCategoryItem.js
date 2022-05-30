@@ -22,8 +22,6 @@ export const ContestCategoryItem = ({category, token}) => {
     const getCurrentParticipation = async () => {
         const response = await getUserCategoryParticipation(token, category.id)
 
-        console.log('status', response.status)
-
         const data = await response.json()
         if (response.status === 200) {
             setSolid(data.participation)
