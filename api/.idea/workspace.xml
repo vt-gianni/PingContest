@@ -20,9 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ca7eb0f-d451-41a1-a8ed-049ba1e9e753" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Service/ContestCategoryService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ContestCategoryService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/screen/ContestCreationValidationScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/screen/ContestCreationValidationScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/service/APIService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/service/APIService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Participation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Participation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/component/ContestCategoryItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/component/ContestCategoryItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/screen/ProfileUpdateScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/screen/ProfileUpdateScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +181,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Service" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Controller" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -190,8 +192,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/Service" />
       <recent name="$PROJECT_DIR$/src/Controller" />
+      <recent name="$PROJECT_DIR$/src/Service" />
     </key>
   </component>
   <component name="RunManager">
@@ -249,7 +251,10 @@
       <workItem from="1653572793087" duration="1458000" />
       <workItem from="1653580129973" duration="1615000" />
       <workItem from="1653590659448" duration="880000" />
-      <workItem from="1653660857682" duration="6070000" />
+      <workItem from="1653660857682" duration="7916000" />
+      <workItem from="1653892420028" duration="657000" />
+      <workItem from="1653924091454" duration="709000" />
+      <workItem from="1653933444951" duration="1393000" />
     </task>
     <servers />
   </component>
@@ -273,10 +278,14 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1653064822706" />
-    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog" timestamp="1653313293519">
+    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog" timestamp="1653934167411">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1653313293519" />
+    <state x="582" y="273" width="769" height="568" key="NewPhpClassDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1653934167411" />
+    <state x="755" y="479" width="399" height="156" key="NewPhpFileDialog" timestamp="1653934160732">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="755" y="479" width="399" height="156" key="NewPhpFileDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1653934160732" />
     <state x="764" y="224" width="391" height="665" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1653308231408">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

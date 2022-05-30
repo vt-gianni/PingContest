@@ -2,11 +2,27 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ParticipationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipationRepository::class)
+ * @ApiResource(
+ *     itemOperations={},
+ *     collectionOperations={
+ *          "get"={
+ *              "access_control"="object.user == user"
+ *          }, "post"={
+ *              "method"="post",
+ *              "path"="/participations",
+ *              "controller"="App\Controller\CreateParticipationController",
+ *              "openapi_context"={
+ *                  "summary"="Crée une participation."
+ *              }
+ *          }
+ *     }
+ * )
  */
 class Participation
 {
