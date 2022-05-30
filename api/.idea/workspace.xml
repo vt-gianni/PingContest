@@ -22,6 +22,7 @@
     <list default="true" id="1ca7eb0f-d451-41a1-a8ed-049ba1e9e753" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/ParticipationService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ParticipationService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/component/ContestCategoryItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/component/ContestCategoryItem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +252,7 @@
       <workItem from="1653660857682" duration="7916000" />
       <workItem from="1653892420028" duration="657000" />
       <workItem from="1653924091454" duration="709000" />
-      <workItem from="1653933444951" duration="5035000" />
+      <workItem from="1653933444951" duration="5407000" />
     </task>
     <servers />
   </component>

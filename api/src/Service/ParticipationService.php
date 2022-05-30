@@ -76,12 +76,11 @@ class ParticipationService
     /**
      * @param DateTimeInterface $birthDate
      * @return int
+     * @throws Exception
      */
     private function calculateAge(DateTimeInterface $birthDate): int
     {
-        $today = date("Y-m-d");
-        $diff = date_diff(date_create($birthDate), date_create($today));
-        return intval($diff->format('%y'));
+        return $birthDate->diff(new DateTime('now', new \DateTimeZone('Europe/Paris')))->y;
     }
 
     /**
