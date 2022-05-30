@@ -5,7 +5,7 @@ import {ContestListItem} from "./ContestListItem";
 import {translate} from "../service/DateService";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
-import {getDateFormat, participate} from "../service/APIService";
+import {getDateFormat, getUserCategoryParticipation, participate} from "../service/APIService";
 import FlashMessage, {showMessage} from "react-native-flash-message";
 
 export const ContestCategoryItem = ({category, token}) => {
@@ -16,7 +16,19 @@ export const ContestCategoryItem = ({category, token}) => {
     useEffect(() => {
         changeCategoryName()
         setStartDate(category.startDate.split('T')[0].split('-'))
+        getCurrentParticipation()
     }, [])
+
+    const getCurrentParticipation = async () => {
+        const response = await getUserCategoryParticipation(token, category.id)
+
+        console.log('status', response.status)
+
+        const data = await response.json()
+        if (response.status === 200) {
+            setSolid(data.participation)
+        }
+    }
 
     const changeCategoryName = () => {
         if (category.open) {

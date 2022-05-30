@@ -88,3 +88,11 @@ export const participate = (token, contestCategoryId) => {
         })
     })
 }
+
+export const getUserCategoryParticipation = (token, contestCategoryId) => {
+    return fetch(apiAddress + '/participations/category/' + contestCategoryId, {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
+}
