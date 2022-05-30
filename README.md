@@ -90,3 +90,11 @@ Thanks to Symfony Cloud, I will be able to ensure a continuous deployment of my 
 ## Sketch
 
 <p align="center"><img src ="login_screen.png" alt="Login Screen" width="250"/> <img src ="list_screen.png" alt="List Screen" width="250"/></p>
+
+## Color palette used
+
+<div style="width: 100px; height: 100px; background-color: #00A1E7"></div>
+
+- ![#00a1e7](https://via.placeholder.com/35/00a1e7/000000?text=+) `#00A1E7`
+
+- ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#f03c15`
