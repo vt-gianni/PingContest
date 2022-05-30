@@ -6,7 +6,7 @@ import {
     FlatList,
     StyleSheet,
     Pressable,
-    ActivityIndicator, TouchableOpacity
+    ActivityIndicator, TouchableOpacity, Modal
 } from "react-native"
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon"
 import RBSheet from "react-native-raw-bottom-sheet"
@@ -15,6 +15,7 @@ import {ContestListItem} from "../component/ContestListItem"
 import AuthContext from "../context/AuthContext"
 import {getContests} from "../service/APIService"
 import authContext from "../context/AuthContext";
+import {AnonymousModal} from "../component/AnonymousModal";
 
 export const ContestsListScreen = ({navigation}) => {
     const {token, setToken, user, setUser} = useContext(authContext)
@@ -24,6 +25,7 @@ export const ContestsListScreen = ({navigation}) => {
     const [page, setPage] = useState(1)
     const [firstLoading, setFirstLoading] = useState(true)
     const [loading, setLoading] = useState(false)
+    const [modalVisible, setModalVisible] = useState(false)
 
     useEffect(() => {
         saveContests().then(() => {
@@ -72,14 +74,15 @@ export const ContestsListScreen = ({navigation}) => {
         if (request.status === 200) {
             const response = await request.json()
             page === 1 ? setContests(response['hydra:member']) :
-            setContests([...contests, ...response['hydra:member']])
+                setContests([...contests, ...response['hydra:member']])
         }
     }
 
     const renderItem = ({item}) => {
         return (
             <Pressable onPress={() => {
-                navigation.navigate('Contest', {contest: item})
+                user ?
+                navigation.navigate('Contest', {contest: item}) : setModalVisible(true)
             }}>
                 <ContestListItem item={item} key={item.id} type={type} />
             </Pressable>
@@ -92,11 +95,12 @@ export const ContestsListScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <AnonymousModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
             {firstLoading ?
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <ActivityIndicator size={80} color={'#00A1E7'}/>
                 </View> :
-                <View style={{ flex: 1 }}>
+                <View style={{flex: 1}}>
                     <View style={styles.content}>
                         <View style={{
                             flexDirection: 'row',
@@ -105,25 +109,31 @@ export const ContestsListScreen = ({navigation}) => {
                             marginBottom: 15
                         }}>
                             <View style={{flexDirection: 'row'}}>
-                                <Pressable style={type === 'inprogress' ? styles.activeFilter : styles.filter} onPress={() => {
-                                    setType('inprogress')
-                                }}>
-                                    <Text style={type === 'inprogress' ? styles.activeFilterText : styles.filterText}>En cours</Text>
+                                <Pressable style={type === 'inprogress' ? styles.activeFilter : styles.filter}
+                                           onPress={() => {
+                                               user ? setType('inprogress') : setModalVisible(true)
+                                           }}>
+                                    <Text style={type === 'inprogress' ? styles.activeFilterText : styles.filterText}>En
+                                        cours</Text>
                                 </Pressable>
 
-                                <Pressable style={type === 'coming' ? styles.activeFilter : styles.filter} onPress={() => {
-                                    setType('coming')
-                                }}>
-                                    <Text style={type === 'coming' ? styles.activeFilterText : styles.filterText}>A venir</Text>
+                                <Pressable style={type === 'coming' ? styles.activeFilter : styles.filter}
+                                           onPress={() => {
+                                               user ? setType('coming') : setModalVisible(true)
+                                           }}>
+                                    <Text style={type === 'coming' ? styles.activeFilterText : styles.filterText}>A
+                                        venir</Text>
                                 </Pressable>
 
-                                <Pressable style={type === 'done' ? styles.activeFilter : styles.filter} onPress={() => {
-                                    setType('done')
-                                }}>
-                                    <Text style={type === 'done' ? styles.activeFilterText : styles.filterText}>Terminés</Text>
+                                <Pressable style={type === 'done' ? styles.activeFilter : styles.filter}
+                                           onPress={() => {
+                                               user ? setType('done') : setModalVisible(true)
+                                           }}>
+                                    <Text
+                                        style={type === 'done' ? styles.activeFilterText : styles.filterText}>Terminés</Text>
                                 </Pressable>
                             </View>
-                            <Pressable onPress={() => refRBSheet.current.open()}>
+                            <Pressable onPress={() => user ? refRBSheet.current.open() : setModalVisible(true)}>
                                 <MaterialCommunityIcon name="tune" color="#00A1E7" size={26} direction={"ltr"}/>
                             </Pressable>
                         </View>
@@ -230,6 +240,6 @@ const styles = StyleSheet.create({
         bottom: 0,
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
 })
 
