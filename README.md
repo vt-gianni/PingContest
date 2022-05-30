@@ -91,11 +91,14 @@ Thanks to Symfony Cloud, I will be able to ensure a continuous deployment of my 
 
 <p align="center"><img src ="login_screen.png" alt="Login Screen" width="250"/> <img src ="list_screen.png" alt="List Screen" width="250"/></p>
 
-## Color palette used
+## Design
 
-<div style="width: 100px; height: 100px; background-color: #00A1E7"></div>
-
+Color palette used
 
 - <img src ="https://img.shields.io/static/v1?label=&message=00A1E7&color=00A1E7"/>
 - <img src ="https://img.shields.io/static/v1?label=&message=FF3100&color=FF3100"/>
 - <img src ="https://img.shields.io/static/v1?label=&message=FFB700&color=FFB700"/>
+
+Lottie files animations
+
+https://lottiefiles.com/
