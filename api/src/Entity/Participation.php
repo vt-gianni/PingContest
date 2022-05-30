@@ -20,7 +20,14 @@ use Doctrine\ORM\Mapping as ORM;
  *              "openapi_context"={
  *                  "summary"="Crée une participation."
  *              }
- *          }
+ *          }, "get_my_participations_on_category"={
+                    "method"="get",
+ *                  "path"="/participations/category/{contestCategoryId}",
+ *                  "controller"="App\Controller\CheckMyParticipationOnCategoryController",
+ *                  "openapi_context"={
+                        "summary"="Retourne la participation de l'utilisateur connecté à une série donnée."
+ *                  }
+ *              }
  *     }
  * )
  */
