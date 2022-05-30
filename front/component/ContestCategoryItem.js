@@ -5,11 +5,13 @@ import {ContestListItem} from "./ContestListItem";
 import {translate} from "../service/DateService";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
-import {getDateFormat} from "../service/APIService";
+import {getDateFormat, participate} from "../service/APIService";
+import FlashMessage, {showMessage} from "react-native-flash-message";
 
-export const ContestCategoryItem = ({category}) => {
+export const ContestCategoryItem = ({category, token}) => {
     const [categoryName, setCategoryName] = useState('')
     const [startDate, setStartDate] = useState(null)
+    const [solid, setSolid] = useState(false)
 
     useEffect(() => {
         changeCategoryName()
@@ -34,13 +36,37 @@ export const ContestCategoryItem = ({category}) => {
         }
     }
 
+    const createParticipation = async () => {
+        if (!solid) {
+            const response = await participate(token, category.id)
+            if (response.status === 201) {
+                showMessage({
+                    type: 'success',
+                    message: 'Vous avez bien été inscrit pour cette série.'
+                })
+                setSolid(true)
+            } else {
+                const data = await response.json()
+                showMessage({
+                    type: 'danger',
+                    message: data.error
+                })
+            }
+        }
+        else {
+            showMessage({
+                type: 'danger',
+                message: 'Vous participez déjà à cette série'
+            })
+        }
+    }
+
     return (
         <View>
             <View style={styles.item}>
                 <View style={styles.row}>
                     <View>
                         <Text style={styles.city}>{categoryName}</Text>
-
                         {startDate &&
                             <Text style={styles.startDate}>
                                 Le {startDate[2]}/{startDate[1]}/{startDate[0]}
@@ -48,9 +74,11 @@ export const ContestCategoryItem = ({category}) => {
                         }
                     </View>
                 </View>
-                <Text>
-                    <MaterialCommunityIcon name="chevron-right" color="#00A1E7" size={30} direction={"ltr"}/>
-                </Text>
+                <Pressable onPress={() => {
+                    createParticipation()
+                }}>
+                    <FontAwesome5Icon name='star' size={18} color='#00A1E7' solid={solid}/>
+                </Pressable>
             </View>
         </View>
     )

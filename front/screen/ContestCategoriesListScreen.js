@@ -1,12 +1,16 @@
 import {FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import {ContestListItem} from "../component/ContestListItem";
 import {ContestCategoryItem} from "../component/ContestCategoryItem";
+import authContext from "../context/AuthContext";
+import FlashMessage from "react-native-flash-message";
 
 export const ContestCategoriesListScreen = ({route, navigation}) => {
 
     const {contest} = route.params
+
+    const {token, user} = useContext(authContext)
 
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
@@ -25,7 +29,7 @@ export const ContestCategoriesListScreen = ({route, navigation}) => {
             <Pressable onPress={() => {
                 //navigation.navigate('Contest', {contest: item})
             }}>
-                <ContestCategoryItem category={item} key={item.id} />
+                <ContestCategoryItem category={item} key={item.id} token={token} />
             </Pressable>
         )
     }
@@ -62,6 +66,8 @@ export const ContestCategoriesListScreen = ({route, navigation}) => {
                     </Text>
                 </View>
 
+                <Text style={styles.info}>Cliquer sur une étoile pour s'inscrire à la série associée.</Text>
+
                 <FlatList
                     style={{marginHorizontal: 20, marginVertical: 20}}
                     showsVerticalScrollIndicator={false}
@@ -70,6 +76,7 @@ export const ContestCategoriesListScreen = ({route, navigation}) => {
                     keyExtractor={(item) => item.id}
                 />
             </View>
+            <FlashMessage position="top"/>
         </SafeAreaView>
     )
 }
@@ -103,5 +110,10 @@ const styles = StyleSheet.create({
     },
     where: {
         marginVertical: 15
+    },
+    info: {
+        fontSize: 12,
+        fontStyle: 'italic',
+        marginTop: 20
     }
 })

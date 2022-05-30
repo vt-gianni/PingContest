@@ -75,3 +75,16 @@ export const updateUserParameters = (token, id, licenseNumber, officialPoints) =
         })
     })
 }
+
+export const participate = (token, contestCategoryId) => {
+    return fetch(apiAddress + '/participations', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            contestCategoryId: contestCategoryId.toString(),
+        })
+    })
+}

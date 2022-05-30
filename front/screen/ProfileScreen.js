@@ -11,8 +11,9 @@ import {apiAvatar, getUserParticipations, updateUserPicture} from "../service/AP
 import * as ImagePicker from 'expo-image-picker'
 import * as ImageManipulator from "expo-image-manipulator"
 import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message"
+import {useNavigation} from "@react-navigation/native";
 
-export const ProfileScreen = ({navigation}) => {
+export const ProfileScreen = () => {
     const {token, setToken, user, setUser} = useContext(authContext)
     const refRBSheet = useRef()
     const [userService, setUserService] = useState(null)
@@ -22,6 +23,8 @@ export const ProfileScreen = ({navigation}) => {
     const [image, setImage] = useState(null)
     const [avatarLoading, setAvatarLoading] = useState(false)
     const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions()
+
+    const navigation = useNavigation()
 
     useEffect(() => {
         setUserService(new UserService())
@@ -114,7 +117,11 @@ export const ProfileScreen = ({navigation}) => {
 
     const renderItem = ({item}) => {
         return (
-            <ContestListItem item={item}/>
+            <Pressable onPress={() => {
+                    navigation.navigate('Contest', {contest: item})
+            }}>
+                <ContestListItem item={item}/>
+            </Pressable>
         )
     }
 

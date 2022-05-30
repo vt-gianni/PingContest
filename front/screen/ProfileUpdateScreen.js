@@ -95,6 +95,10 @@ export const ProfileUpdateScreen = () => {
         }
     }
 
+    const checkFormat = () => {
+        return number && points && number.length >= 4 && points.toString().length > 2 && number.match(/^[0-9]+$/) && points.match(/^[0-9]+$/)
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <FlashMessage position="top"/>
@@ -147,12 +151,7 @@ export const ProfileUpdateScreen = () => {
                     {error && <View style={styles.errorBlock}><Text style={styles.error}>{error}</Text></View>}
 
                     <Pressable style={styles.btn} onPress={() => {
-                        if (number && points && number.length >= 4 && points.toString().length > 2) {
-                            updateUser()
-                        }
-                        else {
-                            setError('Mauvais format du numéro de licence et / ou des points officiels.')
-                        }
+                        checkFormat() ? updateUser() : setError('Mauvais format du numéro de licence et / ou des points officiels.')
                     }}>
                         <Text style={styles.btnText}>Enregistrer les modifications</Text>
                     </Pressable>
@@ -181,7 +180,8 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     row: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     btn: {
         borderRadius: 5,
