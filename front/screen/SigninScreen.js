@@ -7,6 +7,7 @@ import {SecurityService} from "../service/SecurityService"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import authContext from "../context/AuthContext"
 import jwtDecode from "jwt-decode";
+import LottieView from "lottie-react-native";
 
 export const SigninScreen = ({navigation}) => {
     const [firstname, setFirstname] = useState('')
@@ -19,6 +20,7 @@ export const SigninScreen = ({navigation}) => {
     const [error, setError] = useState(null)
     const [security, setSecurity] = useState(null)
     const [tk, setTk] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     const {token, setToken, user, setUser} = useContext(authContext)
 
@@ -72,111 +74,123 @@ export const SigninScreen = ({navigation}) => {
     return (
         <LinearGradient colors={['#ffffff', '#D4E7F3']} start={{x: 0, y: 0}} end={{x: 1, y: 1}}
                         style={{flex: 1, width: '100%'}}>
-            <View style={styles.darken}>
-                <View style={styles.container}>
-                    <View style={styles.logo}>
-                        <Image source={require('../assets/logo.png')} style={styles.logoPicture}/>
-                    </View>
+            {loading ?
+                <View style={styles.lottieBlock}><LottieView source={require('../assets/splash.json')} autoPlay={true}
+                                                             loop={true} style={{width: '70%'}}/></View> :
+                <View style={styles.darken}>
+                    <View style={styles.container}>
+                        <View style={styles.logo}>
+                            <Image source={require('../assets/logo.png')} style={styles.logoPicture}/>
+                        </View>
 
-                    <View style={styles.form}>
-                        {error && <Text style={styles.redText}>{error}</Text>}
-                        <View style={styles.inputsContainerRow}>
-                            <View style={styles.inputsRow}>
-                                <CustomInput field={firstname} placeholder={"Prénom *"}
-                                             setField={setFirstname}
-                                             secure={false}/>
+                        <View style={styles.form}>
+                            {error && <Text style={styles.redText}>{error}</Text>}
+                            <View style={styles.inputsContainerRow}>
+                                <View style={styles.inputsRow}>
+                                    <CustomInput field={firstname} placeholder={"Prénom *"}
+                                                 setField={setFirstname}
+                                                 secure={false}/>
+                                </View>
+                                <View style={styles.inputsRow}>
+                                    <CustomInput field={lastname} placeholder={"Nom *"}
+                                                 setField={setLastname}
+                                                 secure={false}/>
+                                </View>
                             </View>
-                            <View style={styles.inputsRow}>
-                                <CustomInput field={lastname} placeholder={"Nom *"}
-                                             setField={setLastname}
+                            <View style={styles.inputsContainer}>
+                                <CustomInput field={mailAddress} placeholder={"Adresse mail *"}
+                                             setField={setMailAddress}
                                              secure={false}/>
+                                <CustomInput field={password} placeholder={"Mot de passe *"} setField={setPassword}
+                                             secure={true}/>
                             </View>
-                        </View>
-                        <View style={styles.inputsContainer}>
-                            <CustomInput field={mailAddress} placeholder={"Adresse mail *"}
-                                         setField={setMailAddress}
-                                         secure={false}/>
-                            <CustomInput field={password} placeholder={"Mot de passe *"} setField={setPassword}
-                                         secure={true}/>
-                        </View>
 
-                        <View
-                            style={[styles.row, {alignItems: 'center', justifyContent: 'space-evenly', width: '100%'}]}>
-                            <Text>Date de naissance *</Text>
-                            <Pressable onPress={showDatepicker} style={styles.date}>
-                                {!date ?
-                                    <View style={styles.row}>
-                                        <Text style={styles.placeholder}>dd</Text>
-                                        <Text style={styles.placeholder}> / </Text>
-                                        <Text style={styles.placeholder}>mm</Text>
-                                        <Text style={styles.placeholder}> / </Text>
-                                        <Text style={styles.placeholder}>yyyy</Text>
-                                    </View> : <View style={styles.row}>
-                                        <Text style={styles.dateFilled}>{date.getDate()}</Text>
-                                        <Text style={styles.dateFilled}> / </Text>
-                                        <Text
-                                            style={styles.dateFilled}>{(date.getUTCMonth() + 1) < 10 ? '0' + (date.getUTCMonth() + 1) : date.getUTCMonth() + 1}</Text>
-                                        <Text style={styles.dateFilled}> / </Text>
-                                        <Text style={styles.dateFilled}>{date.getFullYear()}</Text>
-                                    </View>
-                                }
-                            </Pressable>
-                        </View>
+                            <View
+                                style={[styles.row, {
+                                    alignItems: 'center',
+                                    justifyContent: 'space-evenly',
+                                    width: '100%'
+                                }]}>
+                                <Text>Date de naissance *</Text>
+                                <Pressable onPress={showDatepicker} style={styles.date}>
+                                    {!date ?
+                                        <View style={styles.row}>
+                                            <Text style={styles.placeholder}>dd</Text>
+                                            <Text style={styles.placeholder}> / </Text>
+                                            <Text style={styles.placeholder}>mm</Text>
+                                            <Text style={styles.placeholder}> / </Text>
+                                            <Text style={styles.placeholder}>yyyy</Text>
+                                        </View> : <View style={styles.row}>
+                                            <Text style={styles.dateFilled}>{date.getDate()}</Text>
+                                            <Text style={styles.dateFilled}> / </Text>
+                                            <Text
+                                                style={styles.dateFilled}>{(date.getUTCMonth() + 1) < 10 ? '0' + (date.getUTCMonth() + 1) : date.getUTCMonth() + 1}</Text>
+                                            <Text style={styles.dateFilled}> / </Text>
+                                            <Text style={styles.dateFilled}>{date.getFullYear()}</Text>
+                                        </View>
+                                    }
+                                </Pressable>
+                            </View>
 
-                        <TouchableOpacity onPress={async () => {
-                            if (security !== null) {
-                                if (
-                                    security.canRegister({
-                                        firstname: firstname,
-                                        lastname: lastname,
-                                        mailAddress: mailAddress,
-                                        birthdate: date.toISOString().split('T')[0],
-                                        password: password
-                                    })) {
-                                    const req = await security.register()
-                                    if (req.status === 201) {
-                                        const logReq = await security.login()
-                                        if (logReq.status === 200) {
-                                            const res = await logReq.json()
-                                            await AsyncStorage.setItem('token', res.token)
-                                            setTk(res.token)
+                            <TouchableOpacity onPress={async () => {
+                                setLoading(true)
+                                if (security !== null) {
+                                    if (
+                                        security.canRegister({
+                                            firstname: firstname,
+                                            lastname: lastname,
+                                            mailAddress: mailAddress,
+                                            birthdate: date.toISOString().split('T')[0],
+                                            password: password
+                                        })) {
+                                        const req = await security.register()
+                                        if (req.status === 201) {
+                                            const logReq = await security.login()
+                                            if (logReq.status === 200) {
+                                                const res = await logReq.json()
+                                                await AsyncStorage.setItem('token', res.token)
+                                                setTk(res.token)
+                                            }
+                                        } else {
+                                            setLoading(false)
+                                            const data = await req.json()
+                                            setError(data.error)
                                         }
+                                    } else {
+                                        setLoading(false)
+                                        setError(security.error)
                                     }
-                                    else{
-                                        const data = await req.json()
-                                        setError(data.error)
-                                    }
-                                } else {
-                                    setError(security.error)
                                 }
-                            }
-                        }} style={styles.btnRed}>
-                            <Text style={styles.btnText}>Inscription</Text>
-                        </TouchableOpacity>
+                                else {
+                                    setLoading(false)
+                                }
+                            }} style={styles.btnRed}>
+                                <Text style={styles.btnText}>Inscription</Text>
+                            </TouchableOpacity>
 
-                        <View style={[styles.row, styles.w100]}>
-                            <Text style={styles.noAccount}>Pas encore de compte ?</Text>
-                            <Pressable style={styles.registerBtn} onPress={() => {
-                                navigation.navigate('Profile')
-                            }}>
-                                <Text style={[styles.registerBtnText, styles.noAccount]}>Se connecter</Text>
-                            </Pressable>
+                            <View style={[styles.row, styles.w100]}>
+                                <Text style={styles.noAccount}>Pas encore de compte ?</Text>
+                                <Pressable style={styles.registerBtn} onPress={() => {
+                                    navigation.navigate('Profile')
+                                }}>
+                                    <Text style={[styles.registerBtnText, styles.noAccount]}>Se connecter</Text>
+                                </Pressable>
+                            </View>
                         </View>
                     </View>
+                    {show && (
+                        <DateTimePicker
+                            maximumDate={getMaxDate()}
+                            testID="dateTimePicker"
+                            value={date ? date : new Date()}
+                            mode={mode}
+                            is24Hour={true}
+                            display="default"
+                            onChange={onChange}
+                        />
+                    )}
                 </View>
-                {show && (
-                    <DateTimePicker
-                        maximumDate={getMaxDate()}
-                        testID="dateTimePicker"
-                        value={date ? date : new Date()}
-                        mode={mode}
-                        is24Hour={true}
-                        display="default"
-                        onChange={onChange}
-                    />
-                )}
-            </View>
-
+            }
         </LinearGradient>
     )
 }
@@ -187,6 +201,11 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         width: '100%',
         padding: 20
+    },
+    lottieBlock: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     logo: {
         flex: 2,
