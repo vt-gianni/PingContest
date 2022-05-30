@@ -51,10 +51,7 @@ export const ProfileScreen = ({navigation}) => {
             updateUserPicture(token, image['base64']).then((request) => {
                 if (request.status) {
                     request.json().then(data => {
-                        showMessage({
-                            message: "Avatar modifié avec succès.",
-                            type: "success",
-                        })
+                        œ
                         setUser(data)
                         setAvatarLoading(false)
                     })

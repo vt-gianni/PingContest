@@ -12,10 +12,10 @@ export const AnonymousModal = ({modalVisible, setModalVisible}) => {
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-                setModalVisible(!modalVisible);
+                setModalVisible(!modalVisible)
             }}
         >
-            <View style={styles.centeredView}>
+            <View style={styles.centeredView} onPressOut={() => setModalVisible(false)}>
                 <View style={styles.modalView}>
                     <Pressable
                         style={styles.crossBlock}
@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
     crossBlock: {
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        padding: 5
     },
     cross: {
         fontSize: 30

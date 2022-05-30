@@ -49,7 +49,6 @@ export const createContest = (token, data) => {
 }
 
 export const createContestCategories = (token, contestId, data) => {
-    console.log('data', data)
     return fetch(apiAddress + '/contest_categories', {
         method: 'POST',
         headers: {
@@ -59,6 +58,20 @@ export const createContestCategories = (token, contestId, data) => {
         body: JSON.stringify({
             contestId: contestId,
             elements: data
+        })
+    })
+}
+
+export const updateUserParameters = (token, id, licenseNumber, officialPoints) => {
+    return fetch(apiAddress + '/users/' + id, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            licenseNumber: licenseNumber,
+            officialPoints: parseFloat(officialPoints)
         })
     })
 }
