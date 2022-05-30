@@ -27,7 +27,7 @@ class CheckMyParticipationOnCategoryController extends AbstractController
     /**
      * @param Request $request
      * @param int $contestCategoryId
-     * @return Participation|JsonResponse|null
+     * @return bool|JsonResponse
      */
     public function __invoke(Request $request, int $contestCategoryId)
     {
@@ -35,8 +35,9 @@ class CheckMyParticipationOnCategoryController extends AbstractController
         $user = $this->getUser();
 
         if ($contestCategory = $this->categoryRepository->find($contestCategoryId)) {
-            return $this->repository->findOneBy(['contestCategory' => $contestCategory, 'user' => $user]);
+            return
+                $this->json(['participation' => $this->repository->findOneBy(['contestCategory' => $contestCategory, 'user' => $user]) ? true : false]);
         }
-        return $this->json(['error' => 'Cette série n\'existe pas ou plus.']);
+        return $this->json(['error' => 'Cette série n\'existe pas ou plus.'], 400);
     }
 }
