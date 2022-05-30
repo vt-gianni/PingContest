@@ -35,8 +35,11 @@ class CheckMyParticipationOnCategoryController extends AbstractController
         $user = $this->getUser();
 
         if ($contestCategory = $this->categoryRepository->find($contestCategoryId)) {
+            $participation = $this->repository->findOneBy(['contestCategory' => $contestCategory, 'user' => $user]);
             return
-                $this->json(['participation' => $this->repository->findOneBy(['contestCategory' => $contestCategory, 'user' => $user]) ? true : false]);
+                $this->json([
+                    'participation' => $participation !== null
+                ]);
         }
         return $this->json(['error' => 'Cette série n\'existe pas ou plus.'], 400);
     }
