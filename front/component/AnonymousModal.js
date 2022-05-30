@@ -29,7 +29,7 @@ export const AnonymousModal = ({modalVisible, setModalVisible}) => {
 
                     <Pressable style={styles.connectionBtn} onPress={() => {
                         setModalVisible(false)
-                        navigation.navigate('Account', {screen: 'Signin'})
+                        navigation.navigate('Account', {screen: 'Profile'})
                     }}>
                         <Text style={styles.connectionBtnText}>Se connecter</Text>
                     </Pressable>
