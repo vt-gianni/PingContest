@@ -95,6 +95,7 @@ Thanks to Symfony Cloud, I will be able to ensure a continuous deployment of my 
 
 <div style="width: 100px; height: 100px; background-color: #00A1E7"></div>
 
-- ![#00a1e7](https://via.placeholder.com/35/00a1e7/000000?text=+) `#00A1E7`
 
-- ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#f03c15`
+- <img src ="https://img.shields.io/static/v1?label=&message=B&color=00A1E7"/>
+- <img src ="https://img.shields.io/static/v1?label=&message=R&color=FF3100"/>
+- <img src ="https://img.shields.io/static/v1?label=&message=Y&color=FFB700"/>
