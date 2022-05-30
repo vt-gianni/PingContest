@@ -87,18 +87,20 @@ Thanks to Symfony Cloud, I will be able to ensure a continuous deployment of my 
 
 <p align="center"><img src ="db_schema.png" alt="Database schema"/></p>
 
-## Sketch
-
-<p align="center"><img src ="login_screen.png" alt="Login Screen" width="250"/> <img src ="list_screen.png" alt="List Screen" width="250"/></p>
-
 ## Design
 
-Color palette used
+### Screens
+
+<p align="center">
+<img src ="contests_list.jpg" alt="Logo" width="250"/> <img src ="connection.jpg" alt="Logo" width="250"/> <img src ="user_profile.jpg" alt="Logo" width="250"/>
+</p>
+
+### Color palette used
 
 - <img src ="https://img.shields.io/static/v1?label=&message=00A1E7&color=00A1E7"/>
 - <img src ="https://img.shields.io/static/v1?label=&message=FF3100&color=FF3100"/>
 - <img src ="https://img.shields.io/static/v1?label=&message=FFB700&color=FFB700"/>
 
-Lottie files animations
+### Lottie files animations
 
 https://lottiefiles.com/
