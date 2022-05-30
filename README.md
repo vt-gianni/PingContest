@@ -96,6 +96,6 @@ Thanks to Symfony Cloud, I will be able to ensure a continuous deployment of my 
 <div style="width: 100px; height: 100px; background-color: #00A1E7"></div>
 
 
-- <img src ="https://img.shields.io/static/v1?label=&message=B&color=00A1E7"/>
-- <img src ="https://img.shields.io/static/v1?label=&message=R&color=FF3100"/>
-- <img src ="https://img.shields.io/static/v1?label=&message=Y&color=FFB700"/>
+- <img src ="https://img.shields.io/static/v1?label=&message=00A1E7&color=00A1E7"/>
+- <img src ="https://img.shields.io/static/v1?label=&message=FF3100&color=FF3100"/>
+- <img src ="https://img.shields.io/static/v1?label=&message=FFB700&color=FFB700"/>
