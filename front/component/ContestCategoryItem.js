@@ -1,4 +1,4 @@
-import {FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import {ActivityIndicator, FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import {ContestListItem} from "./ContestListItem";
@@ -12,6 +12,7 @@ export const ContestCategoryItem = ({category, token}) => {
     const [categoryName, setCategoryName] = useState('')
     const [startDate, setStartDate] = useState(null)
     const [solid, setSolid] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         changeCategoryName()
@@ -25,6 +26,7 @@ export const ContestCategoryItem = ({category, token}) => {
         const data = await response.json()
         if (response.status === 200) {
             setSolid(data.participation)
+            setLoading(false)
         }
     }
 
@@ -62,8 +64,7 @@ export const ContestCategoryItem = ({category, token}) => {
                     message: data.error
                 })
             }
-        }
-        else {
+        } else {
             showMessage({
                 type: 'danger',
                 message: 'Vous participez déjà à cette série'
@@ -84,11 +85,16 @@ export const ContestCategoryItem = ({category, token}) => {
                         }
                     </View>
                 </View>
-                <Pressable onPress={() => {
-                    createParticipation()
-                }}>
-                    <FontAwesome5Icon name='star' size={18} color='#00A1E7' solid={solid}/>
-                </Pressable>
+                {loading ? <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end'}}>
+                        <ActivityIndicator size={30} color={'#00A1E7'}/>
+                    </View> :
+                    <Pressable onPress={() => {
+                        createParticipation()
+                    }}>
+                        { solid ? <FontAwesome5Icon name='calendar-check' size={18} color='#00A1E7' solid={solid}/> :
+                        <FontAwesome5Icon name='calendar' size={18} color='#00A1E7' solid={solid}/> }
+                    </Pressable>
+                }
             </View>
         </View>
     )

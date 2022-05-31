@@ -1,4 +1,4 @@
-import {FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import {ActivityIndicator, FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import React, {useContext, useEffect, useState} from "react";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import {ContestListItem} from "../component/ContestListItem";
