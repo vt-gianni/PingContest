@@ -7,9 +7,10 @@ use App\Repository\ClubRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(normalizationContext={"groups"={"read_club"}})
  * @ORM\Entity(repositoryClass=ClubRepository::class)
  */
 class Club
@@ -18,61 +19,73 @@ class Club
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read_club", "read_contest"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read_club", "read_contest"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read_club", "read_contest"})
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read_club", "read_contest"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read_club", "read_contest"})
      */
     private $creationDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read_club", "read_contest"})
      */
     private $spid;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read_club", "read_contest"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read_club", "read_contest"})
      */
     private $contactFirstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read_club", "read_contest"})
      */
     private $contactLastname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read_club", "read_contest"})
      */
     private $contactPhone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read_club", "read_contest"})
      */
     private $contactMailAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read_club", "read_contest"})
      */
     private $website;
 
