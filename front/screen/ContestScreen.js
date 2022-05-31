@@ -57,7 +57,9 @@ export const ContestScreen = ({route, navigation}) => {
                 </View>
 
                 <View style={styles.choices}>
-                    <Pressable style={styles.lightButton}>
+                    <Pressable style={styles.lightButton} onPress={() => {
+                        navigation.navigate('Club', {club: contest.club})
+                    }}>
                         <Text style={styles.lightButtonText}>Voir le Club</Text>
                     </Pressable>
 

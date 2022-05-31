@@ -8,6 +8,7 @@ import {useState} from "react";
 import ContestCreationContext from "../context/ContestCreationContext";
 import {ContestCreationValidationScreen} from "../screen/ContestCreationValidationScreen";
 import {SigninScreen} from "../screen/SigninScreen";
+import {ClubScreen} from "../screen/ClubScreen";
 
 const Stack = createNativeStackNavigator()
 
@@ -75,6 +76,10 @@ export const ContestStack = () => {
                     name="Signin"
                     component={SigninScreen}
                     options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Club"
+                    component={ClubScreen}
                 />
             </Stack.Navigator>
         </ContestCreationContext.Provider>
