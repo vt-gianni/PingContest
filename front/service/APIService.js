@@ -1,16 +1,16 @@
-export const apiAvatar = 'https://ping-contest.herokuapp.com/img/avatar'
-export const apiAddress = 'https://ping-contest.herokuapp.com/api'
+import {API_ADDRESS} from 'react-native-dotenv'
+
 
 export const getDateFormat = (date) => {
     return date.toISOString().split('T')[0]
 }
 
 export const getContests = (token, page, type) => {
-    return fetch(apiAddress + '/contests/' + type + '?page=' + page)
+    return fetch(API_ADDRESS + '/contests/' + type + '?page=' + page)
 }
 
 export const getUserParticipations = (token, page) => {
-    return fetch(apiAddress + '/contests/participations?page=' + page, {
+    return fetch(API_ADDRESS + '/contests/participations?page=' + page, {
         headers: {
             'Authorization': 'Bearer ' + token
         }
@@ -18,7 +18,7 @@ export const getUserParticipations = (token, page) => {
 }
 
 export const updateUserPicture = (token, picture) => {
-    return fetch(apiAddress + '/users/update-picture', {
+    return fetch(API_ADDRESS + '/users/update-picture', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export const updateUserPicture = (token, picture) => {
 }
 
 export const createContest = (token, data) => {
-    return fetch(apiAddress + '/contests', {
+    return fetch(API_ADDRESS + '/contests', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export const createContest = (token, data) => {
 }
 
 export const createContestCategories = (token, contestId, data) => {
-    return fetch(apiAddress + '/contest_categories', {
+    return fetch(API_ADDRESS + '/contest_categories', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ export const createContestCategories = (token, contestId, data) => {
 }
 
 export const updateUserParameters = (token, id, licenseNumber, officialPoints) => {
-    return fetch(apiAddress + '/users/' + id, {
+    return fetch(API_ADDRESS + '/users/' + id, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export const updateUserParameters = (token, id, licenseNumber, officialPoints) =
 }
 
 export const participate = (token, contestCategoryId) => {
-    return fetch(apiAddress + '/participations', {
+    return fetch(API_ADDRESS + '/participations', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ export const participate = (token, contestCategoryId) => {
 }
 
 export const getUserCategoryParticipation = (token, contestCategoryId) => {
-    return fetch(apiAddress + '/participations/category/' + contestCategoryId, {
+    return fetch(API_ADDRESS + '/participations/category/' + contestCategoryId, {
         headers: {
             'Authorization': 'Bearer ' + token
         }

@@ -1,5 +1,5 @@
 import {ActivityIndicator, FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import {ContestListItem} from "../component/ContestListItem";
 import {ContestCategoryItem} from "../component/ContestCategoryItem";
@@ -14,6 +14,8 @@ export const ContestCategoriesListScreen = ({route, navigation}) => {
 
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
+
+    const categoryListRef = useRef('categoryList')
 
     useEffect(() => {
         navigation.setOptions({title: contest?.city + ' - Séries'})
@@ -76,7 +78,7 @@ export const ContestCategoriesListScreen = ({route, navigation}) => {
                     keyExtractor={(item) => item.id}
                 />
             </View>
-            <FlashMessage position="top"/>
+            <FlashMessage position="top" ref={categoryListRef} />
         </SafeAreaView>
     )
 }

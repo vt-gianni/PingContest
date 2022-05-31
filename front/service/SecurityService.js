@@ -1,6 +1,8 @@
+import {API_ADDRESS} from 'react-native-dotenv'
+
 export const SecurityService = class {
     constructor() {
-        this._apiAddress = 'https://ping-contest.herokuapp.com/api'
+        this._apiAddress = API_ADDRESS
         this._error = null
 
         this._firstname = ''

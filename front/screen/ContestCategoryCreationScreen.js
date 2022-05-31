@@ -1,5 +1,5 @@
 import {Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native"
-import React, {useContext, useEffect, useState} from "react"
+import React, {useContext, useEffect, useRef, useState} from "react"
 import contestCreationContext from "../context/ContestCreationContext";
 import {RadioButton} from "react-native-paper";
 import CustomInput from "../component/CustomInput";
@@ -38,6 +38,8 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
 
     const [minPoints, setMinPoints] = useState(null)
     const [minPointsError, setMinPointsError] = useState(null)
+
+    const categoryCreationRef = useRef('categoryCreation')
 
     useEffect(() => {
         checked !== 'none' && setCheckedAge('none')
@@ -222,7 +224,7 @@ export const ContestCategoryCreationScreen = ({navigation}) => {
 
     return (
         <ScrollView style={styles.container}>
-            <FlashMessage position="top" />
+            <FlashMessage position="top" ref={categoryCreationRef} />
             <SafeAreaView style={{paddingHorizontal: 20, paddingVertical: 20}}>
                 <View>
                     <Text style={styles.title}>Date et heure</Text>

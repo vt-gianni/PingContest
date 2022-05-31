@@ -7,11 +7,12 @@ import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCom
 import {ContestListItem} from "../component/ContestListItem"
 import {UserService} from "../service/UserService"
 import {UserParameters} from "../component/UserParameters"
-import {apiAvatar, getUserParticipations, updateUserPicture} from "../service/APIService"
+import {getUserParticipations, updateUserPicture} from "../service/APIService"
 import * as ImagePicker from 'expo-image-picker'
 import * as ImageManipulator from "expo-image-manipulator"
 import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message"
-import {useNavigation} from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native"
+import {API_AVATAR} from 'react-native-dotenv'
 
 export const ProfileScreen = () => {
     const {token, setToken, user, setUser} = useContext(authContext)
@@ -25,6 +26,8 @@ export const ProfileScreen = () => {
     const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions()
 
     const navigation = useNavigation()
+
+    const profileRef = useRef('profile')
 
     useEffect(() => {
         setUserService(new UserService())
@@ -54,7 +57,6 @@ export const ProfileScreen = () => {
             updateUserPicture(token, image['base64']).then((request) => {
                 if (request.status) {
                     request.json().then(data => {
-                        œ
                         setUser(data)
                         setAvatarLoading(false)
                     })
@@ -142,7 +144,7 @@ export const ProfileScreen = () => {
                             <Avatar
                                 size={90}
                                 rounded
-                                source={{ uri: apiAvatar + '/' + user?.picture }}
+                                source={{ uri: API_AVATAR + '/' + user?.picture }}
                                 containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: '#fff', marginRight: 20 }}
                             /> :
                             <Avatar
@@ -209,7 +211,7 @@ export const ProfileScreen = () => {
             >
                 <UserParameters setToken={setToken} user={user} setUser={setUser} />
             </RBSheet>
-            <FlashMessage position="top" />
+            <FlashMessage position="top" ref={profileRef} />
         </SafeAreaView>
     )
 }

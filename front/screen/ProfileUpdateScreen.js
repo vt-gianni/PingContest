@@ -7,7 +7,7 @@ import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCom
 import {ContestListItem} from "../component/ContestListItem"
 import {UserService} from "../service/UserService"
 import {UserParameters} from "../component/UserParameters"
-import {apiAvatar, getUserParticipations, updateUserParameters, updateUserPicture} from "../service/APIService"
+import {getUserParticipations, updateUserParameters, updateUserPicture} from "../service/APIService"
 import * as ImagePicker from 'expo-image-picker'
 import * as ImageManipulator from "expo-image-manipulator"
 import FlashMessage, {showMessage, hideMessage} from "react-native-flash-message"
@@ -24,6 +24,8 @@ export const ProfileUpdateScreen = () => {
     const [loading, setLoading] = useState(false)
 
     const navigation = useNavigation()
+
+    const profileUpdateRef = useRef('profileUpdate')
 
     useEffect(() => {
         setNumber(
@@ -101,7 +103,7 @@ export const ProfileUpdateScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <FlashMessage position="top"/>
+            <FlashMessage position="top" ref={profileUpdateRef}/>
             {loading ? <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <ActivityIndicator size={80} color={'#00A1E7'}/>
                 </View> :

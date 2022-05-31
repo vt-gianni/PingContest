@@ -1,5 +1,5 @@
 import {FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import {ContestListItem} from "../component/ContestListItem";
 import {ContestCategoryItem} from "../component/ContestCategoryItem";
@@ -13,6 +13,8 @@ export const ClubScreen = ({route, navigation}) => {
     useEffect(() => {
         navigation.setOptions({title: club?.name})
     })
+
+    const clubRef = useRef('club')
 
     return (
         <SafeAreaView style={styles.container}>
@@ -61,7 +63,7 @@ export const ClubScreen = ({route, navigation}) => {
                     </Text>
                 }
             </View>
-            <FlashMessage position="top"/>
+            <FlashMessage position="top" ref={clubRef}/>
         </SafeAreaView>
     )
 }

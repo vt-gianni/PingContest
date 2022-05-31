@@ -3,7 +3,7 @@ import {BeforeStack} from "./stack/BeforeStack"
 import AuthContext from "./context/AuthContext"
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import jwtDecode from "jwt-decode";
-import {apiAddress} from "./service/APIService";
+import {API_ADDRESS} from 'react-native-dotenv'
 
 export default function App() {
     const [token, setToken] = useState(null)
@@ -37,7 +37,7 @@ export default function App() {
 
         // Token expiré
         if (exp * 1000 < now.getTime()) {
-            const response = await fetch(apiAddress + '/token/refresh', {
+            const response = await fetch(API_ADDRESS + '/token/refresh', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
