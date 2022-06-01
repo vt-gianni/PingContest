@@ -168,9 +168,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Gianni GIUDICE - [@twitter_handle](https://twitter.com/GGianniDev) - gg@vitalytech.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/vt-gianni/PingContest/](https://github.com/vt-gianni/PingContest/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
