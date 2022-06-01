@@ -22,11 +22,11 @@
     Application for creating and managing contests for table tennis.
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/vt-gianni/PingContest">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/vt-gianni/PingContest/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/vt-gianni/PingContest/issues">Request Feature</a>
   </p>
 </div>
 
