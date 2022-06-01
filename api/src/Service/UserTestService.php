@@ -15,7 +15,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class UserTestService
 {
     const SUCCESS_CODE = 200;
-    const BASE_URL = 'https://127.0.0.1:8000';
+    const BASE_URL = 'https://ping-contest.herokuapp.com';
 
     private $client;
     private $requestStack;
