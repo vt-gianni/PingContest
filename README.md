@@ -168,7 +168,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Gianni GIUDICE - [@twitter_handle](https://twitter.com/GGianniDev) - gg@vitalytech.com
+Gianni GIUDICE - [@GGianniDev](https://twitter.com/GGianniDev) - gg@vitalytech.com
 
 Project Link: [https://github.com/vt-gianni/PingContest/](https://github.com/vt-gianni/PingContest/)
 
