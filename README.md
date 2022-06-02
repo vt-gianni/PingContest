@@ -72,6 +72,7 @@
 ### Built With
 
 * [Symfony](https://symfony.com/)
+* [API Platform](https://api-platform.com/)
 * [React Native](https://reactnative.dev/)
 * [Expo](https://expo.dev/)
 
