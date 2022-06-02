@@ -67,9 +67,27 @@
 ### Built With
 
 * [Symfony](https://symfony.com/)
+
+A « framework » is a toolkit in the form of code files. It allows developers to focus on the main features of their project by providing an architecture, security rules, useful components, etc..
+
+There are many frameworks, so why do I use Symfony?
+
+Symfony is a french PHP framework, with a huge community. It benefits from regular updates and new annual versions that are always more efficient. It is therefore a very lively framework and it is easy to find help when a problem arises.
+
+In addition, unlike many other frameworks, Symfony incorporates important security measures, making it possible to avoir most common flaws. It also integrates many modules of all kinds, such as API Platform.
+
 * [API Platform](https://api-platform.com/)
+
+API Platform is a module that can be easily installed via a Symfony API. It greatly simplifies development by providing for example, basic actions around entities. The developer does not need to develop the routes himself to fetch the articles, create one, delete one, etc.. It is nevertheless of course possible to create custom routes and modify the basic behavior of the classic routes. The creation of routes can be done only via annotations and makes development very fast.
+
 * [React Native](https://reactnative.dev/)
+
+React Native is a framework for creating cross-platform mobile applications very simply using only the JavaScript langage. This framework is based on the React framework, itself designed to simplify the development of web platforms by providing reusable component development. React Native is a very reliable framework, developed by Facebook, with a huge community and many community plugins. Its choice over other mobile frameworks is primarily based on its cross-platform character. In addition, its simplicity of development, coupled with the use of Expo Go made me prefer React Native to Flutter for example.
+
 * [Expo](https://expo.dev/)
+
+Expo Go is a tool and a mobile application allowing to test an application in React Native on all devices connected to the same network as the PC where the developer works. Thus, the developer can test in real time the modifications on the application on many devices at the same time, via the Internet.
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
