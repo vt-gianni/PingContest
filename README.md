@@ -5,6 +5,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+[![Twitter][twitter-shield]][twitter-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -65,7 +66,8 @@
 ### Built With
 
 
-<img src ="symfony.png" alt="Symfony" width="150"/>
+
+<img src ="symfony.png" alt="Symfony" width="100"/>
 
 * [Symfony](https://symfony.com/)
 
@@ -77,7 +79,7 @@ Symfony is a french PHP framework, with a huge community. It benefits from regul
 
 In addition, unlike many other frameworks, Symfony incorporates important security measures, making it possible to avoir most common flaws. It also integrates many modules of all kinds, such as API Platform.
 
-<img src ="api_platform.png" alt="API Platform" width="150"/>
+<img src ="api_platform.png" alt="API Platform" width="100"/>
 
 * [API Platform](https://api-platform.com/)
 
@@ -94,6 +96,25 @@ React Native is a framework for creating cross-platform mobile applications very
 * [Expo](https://expo.dev/)
 
 Expo Go is a tool and a mobile application allowing to test an application in React Native on all devices connected to the same network as the PC where the developer works. Thus, the developer can test in real time the modifications on the application on many devices at the same time, via the Internet.
+
+
+### App design
+
+I was able to work on the design thanks to some usefull tools.
+
+
+#### Colors
+
+In order to create a design with consistent and modern colors, I used the online tool <a href="https://paletton.com/">Paletton</a>. Paletton is a tool for creating color palettes. Here are the colors i picked:
+
+- <img src ="https://img.shields.io/static/v1?label=&message=00A1E7&color=00A1E7"/>
+- <img src ="https://img.shields.io/static/v1?label=&message=FF3100&color=FF3100"/>
+- <img src ="https://img.shields.io/static/v1?label=&message=FFB700&color=FFB700"/>
+
+
+#### Lottie files animations
+
+In order to make loading times more user friendly, I used <a href="https://lottiefiles.com/">Lottie files</a> which allowed me to integrate very light animations in the form of a json file.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -168,4 +189,6 @@ Project Link: [https://github.com/vt-gianni/PingContest/](https://github.com/vt-
 [license-url]: https://github.com/vt-gianni/PingContest/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://fr.linkedin.com/in/gianni-giudice-388b56157
+[twitter-shield]: https://img.shields.io/badge/-Twitter-black.svg?style=for-the-badge&logo=Twitter&colorB=555
+[twitter-url]: https://twitter.com/GGianniDev
 [product-screenshot]: images/screenshot.png
