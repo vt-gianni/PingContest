@@ -6,8 +6,6 @@
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -76,13 +74,19 @@ Symfony is a french PHP framework, with a huge community. It benefits from regul
 
 In addition, unlike many other frameworks, Symfony incorporates important security measures, making it possible to avoir most common flaws. It also integrates many modules of all kinds, such as API Platform.
 
+<img src ="api_platform.png" alt="API Platform" width="150"/>
+
 * [API Platform](https://api-platform.com/)
 
 API Platform is a module that can be easily installed via a Symfony API. It greatly simplifies development by providing for example, basic actions around entities. The developer does not need to develop the routes himself to fetch the articles, create one, delete one, etc.. It is nevertheless of course possible to create custom routes and modify the basic behavior of the classic routes. The creation of routes can be done only via annotations and makes development very fast.
 
+<img src ="react_native.png" alt="React Native" width="150"/>
+
 * [React Native](https://reactnative.dev/)
 
 React Native is a framework for creating cross-platform mobile applications very simply using only the JavaScript langage. This framework is based on the React framework, itself designed to simplify the development of web platforms by providing reusable component development. React Native is a very reliable framework, developed by Facebook, with a huge community and many community plugins. Its choice over other mobile frameworks is primarily based on its cross-platform character. In addition, its simplicity of development, coupled with the use of Expo Go made me prefer React Native to Flutter for example.
+
+<img src ="expo_go.png" alt="Expo Go" width="150"/>
 
 * [Expo](https://expo.dev/)
 
