@@ -64,6 +64,9 @@
 
 ### Built With
 
+
+<img src ="symfony.png" alt="Symfony" width="150"/>
+
 * [Symfony](https://symfony.com/)
 
 A « framework » is a toolkit in the form of code files. It allows developers to focus on the main features of their project by providing an architecture, security rules, useful components, etc..
