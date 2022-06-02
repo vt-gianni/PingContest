@@ -47,7 +47,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#features">Features</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -57,17 +57,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<p align="center">
-<img src ="contests_list.jpg" alt="Logo" width="250"/> <img src ="connection.jpg" alt="Logo" width="250"/> <img src ="user_profile.jpg" alt="Logo" width="250"/>
-</p>
+Being quite athletic, I participated in many tournaments in different sports. Over the years, I have seen many problems with the registration process and the management of sports tournaments. The first is the accessibility of the information because many tournaments are only announced on Facebook pages to which you must be a subscriber. (often the club page) Then, the registration is only done by currency, it is currently impossible to pay by bank transfer.
+
+So I had the idea of creating an app allowing both competitors and organizers to facilitate the management of tournaments. Not knowing all the sports and how their tournaments work, I decided to devote myself only to one sport, table tennis.
 
 
 
 ### Built With
 
 
-
-<img src ="symfony.png" alt="Symfony" width="100"/>
+<p align="center"><img src ="symfony.png" alt="Symfony" width="100"/></p>
 
 * [Symfony](https://symfony.com/)
 
@@ -79,19 +78,19 @@ Symfony is a french PHP framework, with a huge community. It benefits from regul
 
 In addition, unlike many other frameworks, Symfony incorporates important security measures, making it possible to avoir most common flaws. It also integrates many modules of all kinds, such as API Platform.
 
-<img src ="api_platform.png" alt="API Platform" width="100"/>
+<p align="center"><img src ="api_platform.png" alt="API Platform" width="100"/></p>
 
 * [API Platform](https://api-platform.com/)
 
 API Platform is a module that can be easily installed via a Symfony API. It greatly simplifies development by providing for example, basic actions around entities. The developer does not need to develop the routes himself to fetch the articles, create one, delete one, etc.. It is nevertheless of course possible to create custom routes and modify the basic behavior of the classic routes. The creation of routes can be done only via annotations and makes development very fast.
 
-<img src ="react_native.png" alt="React Native" width="150"/>
+<p align="center"><img src ="react_native.png" alt="React Native" width="150"/></p>
 
 * [React Native](https://reactnative.dev/)
 
 React Native is a framework for creating cross-platform mobile applications very simply using only the JavaScript langage. This framework is based on the React framework, itself designed to simplify the development of web platforms by providing reusable component development. React Native is a very reliable framework, developed by Facebook, with a huge community and many community plugins. Its choice over other mobile frameworks is primarily based on its cross-platform character. In addition, its simplicity of development, coupled with the use of Expo Go made me prefer React Native to Flutter for example.
 
-<img src ="expo_go.png" alt="Expo Go" width="150"/>
+<p align="center"><img src ="expo_go.png" alt="Expo Go" width="150"/></p>
 
 * [Expo](https://expo.dev/)
 
@@ -155,12 +154,26 @@ This is an example of how to list things you need to use the software and how to
 
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
+## Features
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<p align="center">
+<img src ="contests_list.jpg" alt="Logo" width="250"/> <img src ="connection.jpg" alt="Logo" width="250"/> <img src ="user_profile.jpg" alt="Logo" width="250"/>
+</p>
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+### Registration and connection
+
+The application allows access to the list of upcoming tournaments without having to log in. The user can thus get an idea of ​​the appearance of the application and the functionalities it offers before registering.
+
+Ping Contest currently allows to create an account manually and will allow, in a future version, to create an account via the Facebook service. The user can then log in and access more options.
+
+### List of past, current and upcoming tournaments
+
+On the home page, a list of tournaments is available to the user. It also has the possibility to sort these tournaments in order to obtain those past, in progress or to come. A pagination system is performed when scrolling the screen.
+
+### Creation of a tournament and its series
+
+The + button that can be seen on the screen above on the home page is only visible for a "pro" user, corresponding to an account managed by the leader of a club. The user is then brought to a form allowing him to create a tournament as well as its different series.
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
