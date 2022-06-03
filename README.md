@@ -210,6 +210,18 @@ We can see here that the password field is not assigned to any group. It is ther
 
 Regarding the firstname field, it is subscribed to the put_user group, indicating that it is one of the fields that can be modified via the PUT operation, but also to the read_user group, indicating that it can be retrieved via the GET operation.
 
+#### Config file
+
+A configuration file finally allows me to manage which user role has the right to access the endpoints.
+
+```yml
+access_control:
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api/registration, roles: PUBLIC_ACCESS }
+        - { path: ^/api/contests, roles: PUBLIC_ACCESS }
+        - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+```
 
 #### Roles
 
