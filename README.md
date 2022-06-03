@@ -10,7 +10,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://ping-contest.herokuapp.com">
     <img src="front/assets/logo.png" alt="Logo" width="200">
   </a>
 
@@ -38,8 +38,10 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#database-schema">Database schema</a></li>
         <li><a href="#securing-endpoints">Securing endpoints</a></li>
         <li><a href="#app-design">App design</a></li>
+        <li><a href="#deployment-with-continuous-integration">Deployment with Continuous Integration</a></li>
       </ul>
     </li>
     <li>
@@ -105,15 +107,131 @@ API Platform is a module that can be easily installed via a Symfony API. It grea
 
 React Native is a framework for creating cross-platform mobile applications very simply using only the JavaScript langage. This framework is based on the React framework, itself designed to simplify the development of web platforms by providing reusable component development. React Native is a very reliable framework, developed by Facebook, with a huge community and many community plugins. Its choice over other mobile frameworks is primarily based on its cross-platform character. In addition, its simplicity of development, coupled with the use of Expo Go made me prefer React Native to Flutter for example.
 
-<p align="center"><img src ="expo_go.png" alt="Expo Go" width="150"/></p>
+<p align="center"><img src="expo_go.png" alt="Expo Go" width="150"/></p>
 
 * [Expo](https://expo.dev/)
 
 Expo Go is a tool and a mobile application allowing to test an application in React Native on all devices connected to the same network as the PC where the developer works. Thus, the developer can test in real time the modifications on the application on many devices at the same time, via the Internet.
 
+### Database schema
+
+<p align="center"><img src="schema_bdd.png" alt="Database schema"/></p>
+
 ### Securing endpoints
 
 The API is secure thanks to the management of <a href="https://jwt.io/">JWT</a> Token and the secure configuration of endpoints.
+
+#### Using a JWT Token
+
+The endpoint allowing the connection will return a jwt token which will then allow the user to be authenticated when calling private endpoints.
+
+This is what the return of the login endpoint looks like:
+
+```json
+{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NTQyNDcxNTgsImV4cCI6MTY1NDMzMzU1OCwicm9sZXMiOlsiUk9MRV9QUk8iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJnaWFubmlnaXV4LmdpdWRpY2VAZ21haWwuY29tIiwiaWQiOjEsImZpcnN0bmFtZSI6IkdpYW5uaSIsImxhc3RuYW1lIjoiR2l1ZGljZSIsImJpcnRoZGF0ZSI6eyJkYXRlIjoiMTk5Ni0wNi0xOCAxMzoyNDoxNS4wMDAwMDAiLCJ0aW1lem9uZV90eXBlIjozLCJ0aW1lem9uZSI6IlVUQyJ9LCJsaWNlbnNlTnVtYmVyIjoiNTcyNTMxIiwib2ZmaWNpYWxQb2ludHMiOjk3NSwicGljdHVyZSI6IjYyOTExYTkyZTQ2OWIuanBnIn0.bdqJq17aqQYsi6IpWdA2UO6tykqKf7W9NpcC0p443btDedCNk5SUkCFS3NOTjApg3dGNxpLLhYsCMqpSZUfMn7aYW1iMfLQLtCXbKgymEGCRsrMemHuTrBcloUan8bWGRjlM4w2afFnA_GPqfV8o5RzLrQh_dX8d9f8bGNs6xhNs1YN6RBK-9JS-TwVcNTULtXsYaz5sgWVz9I6TqZY2B25iHyQ52WHZtdMljqSeFExg_yF7BSiDsVSSNJnFgl9UGR-D8osHFUCtZauJjS4nZkGVLus87JjH_zfD5nmPvleeueLf-HulTu0-Ubr-MaW_CEoSKctF-pVrV953OQF2kg",
+    "refresh_token": "11d9c04814620af22b7da2d9d6af0e73a973a6ae23a5025761226d215f218dd5fddca01a8a70ccc3d9aa134d0479a09a2edf754f9206912d71d955342f8b2265"
+}
+```
+
+The refresh token, on the other hand, makes it possible to automatically generate a new token on the front side once the old token has expired. This allows the user not to be disconnected once his token expires.
+
+Here is the example of a method in javascript allowing to call the creation of a contest endpoint, using a JWT token:
+
+```js
+export const createContest = (token, data) => {
+    return fetch(API_ADDRESS + '/contests', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            startDate: data.startDate,
+            address: data.address,
+            city: data.city,
+            hallName: data.hallName,
+            endDate: data.endDate,
+            endRegistrationDate: data.endRegistrationDate
+        })
+    })
+}
+```
+
+
+#### Configuration of endpoints
+
+The endpoints have been secured to allow only strictly necessary operations accessible via the application. Thus, it is impossible, for example, to modify certain fields or delete certain data via the API. For example, it is not possible to delete a user from an API endpoint. In addition, endpoints do not allow you to modify the information of a club that you do not own or the information of another user, for example. This is thanks to the authentication and roles system.
+
+Let's see an example configuration on Symfony using API Platform annotations:
+
+```php
+ /** @ApiResource(
+ *     normalizationContext={"groups"={"read_user"}},
+ *     itemOperations={
+ *          "get",
+            "put"={
+ *              "access_control"="object == user",
+ *              "denormalization_context"={"groups"={"put_user"}}
+ *          }
+ *     },
+ *     collectionOperations={
+            "get",
+ *          "update_picture"={
+ *              "method"="put",
+ *              "path"="/users/update-picture",
+ *              "controller"="App\Controller\UpdateUserPictureController",
+ *              "openapi_context"={
+ *                  "summary"="Modifie l'image de l'utilisateur."
+ *              }
+ *          }
+ *     }
+ */
+```
+
+As you can see, a "read_user" group is defined to determine what data is returned to data normalization.
+
+Next, the operations available for "item" type data are defined. We can see that only get and put operations are allowed here.
+
+It is possible to determine rules on each operation as here with the put operation. It is specified that only the user owning the account can modify his information and that he can only modify the fields belonging to the "put_user" group.
+
+In collection type operations, we can see an example of a custom operation with the redirection of a route to a method of a controller. This makes it possible to create more complex behaviors where the data is managed directly by hand.
+
+Here is an example of the fields of our User entity and the groups of operations related to it:
+
+```php
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user_registrated", "put_user", "read_user"})
+     */
+    private $firstname;
+```
+We can see here that the password field is not assigned to any group. It is therefore not recoverable via a GET operation and cannot be modified with a direct PUT.
+
+Regarding the firstname field, it is subscribed to the put_user group, indicating that it is one of the fields that can be modified via the PUT operation, but also to the read_user group, indicating that it can be retrieved via the GET operation.
+
+#### Config file
+
+A configuration file finally allows me to manage which user role has the right to access the endpoints.
+
+```yml
+access_control:
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api/registration, roles: PUBLIC_ACCESS }
+        - { path: ^/api/contests, roles: PUBLIC_ACCESS }
+        - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+```
+
+#### Roles
+
+There are currently two different roles for a user. The **["ROLE_USER"]** defines a normal user of the application. The **["ROLE_PRO"]** defines a user who can create a tournament, often represented by a club manager.
 
 
 ### App design
@@ -134,6 +252,16 @@ In order to create a design with consistent and modern colors, I used the online
 
 In order to make loading times more user friendly, I used <a href="https://lottiefiles.com/">Lottie files</a> which allowed me to integrate very light animations in the form of a json file.
 
+
+### Deployment with Continuous Integration
+
+I currently use <a href="https://dashboard.heroku.com/">Heroku</a> git to deploy Ping Contest API. Thanks to Heroku, the project is built and deployed automatically after a git heroku command.
+
+```bash
+git push heroku main
+```
+
+Thanks to this tool, the project API is currently accessible at this address: <a href="https://ping-contest.herokuapp.com/">https://ping-contest.herokuapp.com</a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
