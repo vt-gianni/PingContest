@@ -38,6 +38,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#app-design">App design</a></li>
       </ul>
     </li>
     <li>
@@ -47,7 +48,14 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#features">Features</a></li>
+    <li>
+      <a href="#features">Features</a>
+      <ul>
+        <li><a href="#registration-and-connection">Registration and connection</a></li>
+        <li><a href="#list-of-contests">List of contests</a></li>
+        <li><a href="#creation-of-a-contest-and-its-series">Creation of a contest and its series</a></li>
+      </ul>
+    </li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -166,11 +174,11 @@ The application allows access to the list of upcoming tournaments without having
 
 Ping Contest currently allows to create an account manually and will allow, in a future version, to create an account via the Facebook service. The user can then log in and access more options.
 
-### List of past, current and upcoming tournaments
+### List of contests
 
 On the home page, a list of tournaments is available to the user. It also has the possibility to sort these tournaments in order to obtain those past, in progress or to come. A pagination system is performed when scrolling the screen.
 
-### Creation of a tournament and its series
+### Creation of a contest and its series
 
 The + button that can be seen on the screen above on the home page is only visible for a "pro" user, corresponding to an account managed by the leader of a club. The user is then brought to a form allowing him to create a tournament as well as its different series.
 
