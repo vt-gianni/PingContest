@@ -31,6 +31,9 @@ class UserTest extends ApiTestCase
         $this->assertMatchesResourceItemJsonSchema(User::class);
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     public function testLogUser(): void
     {
         static::createClient()->request('POST', '/api/login_check', ['json' => [
@@ -42,10 +45,13 @@ class UserTest extends ApiTestCase
         $this->assertMatchesResourceItemJsonSchema(User::class);
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     public function testGetUser(): void
     {
         $kernel = self::bootKernel();
-        $token = $kernel->getContainer()->get(UserTestService::class)->getUserToken('gg@vitalytech.com', 'Test12!');
+        $token = $kernel->getContainer()->get(UserTestService::class)->getUserToken('giannigiux.giudice@gmail.com', 'Test12!');
 
         static::createClient()->request('GET', '/api/users/1', ['headers' => [
             'Authorization' => 'Bearer ' . $token
