@@ -153,7 +153,6 @@ export const createContest = (token, data) => {
 ```
 
 
-
 #### Configuration of endpoints
 
 The endpoints have been secured to allow only strictly necessary operations accessible via the application. Thus, it is impossible, for example, to modify certain fields or delete certain data via the API. For example, it is not possible to delete a user from an API endpoint. In addition, endpoints do not allow you to modify the information of a club that you do not own or the information of another user, for example. This is thanks to the authentication and roles system.
@@ -196,12 +195,6 @@ Here is an example of the fields of our User entity and the groups of operations
 
 ```php
     /**
-     * @ORM\Column(type="json")
-     * @Groups({"user_registrated"})
-     */
-    private $roles = [];
-
-    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -213,6 +206,10 @@ Here is an example of the fields of our User entity and the groups of operations
      */
     private $firstname;
 ```
+We can see here that the password field is not assigned to any group. It is therefore not recoverable via a GET operation and cannot be modified with a direct PUT.
+
+Regarding the firstname field, it is subscribed to the put_user group, indicating that it is one of the fields that can be modified via the PUT operation, but also to the read_user group, indicating that it can be retrieved via the GET operation.
+
 
 #### Roles
 
