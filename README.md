@@ -130,10 +130,89 @@ This is what the return of the login endpoint looks like:
 
 The refresh token, on the other hand, makes it possible to automatically generate a new token on the front side once the old token has expired. This allows the user not to be disconnected once his token expires.
 
+Here is the example of a method in javascript allowing to call the creation of a contest endpoint, using a JWT token:
+
+```js
+export const createContest = (token, data) => {
+    return fetch(API_ADDRESS + '/contests', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            startDate: data.startDate,
+            address: data.address,
+            city: data.city,
+            hallName: data.hallName,
+            endDate: data.endDate,
+            endRegistrationDate: data.endRegistrationDate
+        })
+    })
+}
+```
+
+
 
 #### Configuration of endpoints
 
 The endpoints have been secured to allow only strictly necessary operations accessible via the application. Thus, it is impossible, for example, to modify certain fields or delete certain data via the API. For example, it is not possible to delete a user from an API endpoint. In addition, endpoints do not allow you to modify the information of a club that you do not own or the information of another user, for example. This is thanks to the authentication and roles system.
+
+Let's see an example configuration on Symfony using API Platform annotations:
+
+```php
+ /** @ApiResource(
+ *     normalizationContext={"groups"={"read_user"}},
+ *     itemOperations={
+ *          "get",
+            "put"={
+ *              "access_control"="object == user",
+ *              "denormalization_context"={"groups"={"put_user"}}
+ *          }
+ *     },
+ *     collectionOperations={
+            "get",
+ *          "update_picture"={
+ *              "method"="put",
+ *              "path"="/users/update-picture",
+ *              "controller"="App\Controller\UpdateUserPictureController",
+ *              "openapi_context"={
+ *                  "summary"="Modifie l'image de l'utilisateur."
+ *              }
+ *          }
+ *     }
+ */
+```
+
+As you can see, a "read_user" group is defined to determine what data is returned to data normalization.
+
+Next, the operations available for "item" type data are defined. We can see that only get and put operations are allowed here.
+
+It is possible to determine rules on each operation as here with the put operation. It is specified that only the user owning the account can modify his information and that he can only modify the fields belonging to the "put_user" group.
+
+In collection type operations, we can see an example of a custom operation with the redirection of a route to a method of a controller. This makes it possible to create more complex behaviors where the data is managed directly by hand.
+
+Here is an example of the fields of our User entity and the groups of operations related to it:
+
+```php
+    /**
+     * @ORM\Column(type="json")
+     * @Groups({"user_registrated"})
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user_registrated", "put_user", "read_user"})
+     */
+    private $firstname;
+```
 
 #### Roles
 
