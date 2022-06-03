@@ -259,6 +259,8 @@ In order to make loading times more user friendly, I used <a href="https://lotti
 
 I use <a href="https://circleci.com/">Circle CI</a> for continuous integration of my API. I integrate the installation of my API project as well as the launch of my unit tests.
 
+Here you can see a <a href="https://app.circleci.com/pipelines/github/vt-gianni/PingContest/21/workflows/051b75fe-4ee7-4196-b7be-4813164e28c8/jobs/21">Successful Circle CI build</a>.
+
 ### Deployment
 
 I currently use <a href="https://dashboard.heroku.com/">Heroku</a> git to deploy Ping Contest API. Thanks to Heroku, the project is built and deployed automatically after a git heroku command.
