@@ -31,4 +31,4 @@ jobs:
       # run tests with phpunit
       - run:
           name: "Run tests"
-          command: cd api; php bin/phpunit
+          command: cd api; composer install; php bin/phpunit
