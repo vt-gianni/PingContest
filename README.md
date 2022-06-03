@@ -256,9 +256,32 @@ In order to make loading times more user friendly, I used <a href="https://lotti
 
 ### Unit Tests
 
-I have some unit tests in place that allow me to test the behavior and return of my API endpoints. 
+I have some unit tests in place that allow me to test the behavior and return of my API endpoints. I use <a href="https://phpunit.de/">PHPUnit</a>.
 
 You can access it here: <a href="https://github.com/vt-gianni/PingContest/tree/main/api/tests">api/tests</a> 
+
+This is what a unit test looks like with PHPUnit:
+
+```php
+    /**
+     * @throws TransportExceptionInterface
+     */
+    public function testCreateUser(): void
+    {
+        $faker = Factory::create('fr_FR');
+
+        static::createClient()->request('POST', '/api/registration', ['json' => [
+            'firstname' => str_replace(' ', '', $faker->firstName),
+            'lastname' => str_replace(' ', '', $faker->lastName),
+            'mailAddress' => $faker->email,
+            'birthdate' => $faker->dateTimeBetween('-80 years', '-6 years')->format('Y-m-d'),
+            'password' => 'Test12!'
+        ]]);
+        $this->assertResponseStatusCodeSame(201);
+        $this->assertResponseHeaderSame('content-type', 'application/json');
+        $this->assertMatchesResourceItemJsonSchema(User::class);
+    }
+```
 
 ### Continuous Integration
 
