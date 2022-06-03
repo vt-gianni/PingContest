@@ -38,6 +38,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#securing-endpoints">Securing endpoints</a></li>
         <li><a href="#app-design">App design</a></li>
       </ul>
     </li>
@@ -109,6 +110,10 @@ React Native is a framework for creating cross-platform mobile applications very
 * [Expo](https://expo.dev/)
 
 Expo Go is a tool and a mobile application allowing to test an application in React Native on all devices connected to the same network as the PC where the developer works. Thus, the developer can test in real time the modifications on the application on many devices at the same time, via the Internet.
+
+### Securing endpoints
+
+The API is secure thanks to the management of <a href="https://jwt.io/">JWT</a> Token and the secure configuration of endpoints.
 
 
 ### App design
