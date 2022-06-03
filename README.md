@@ -255,6 +255,8 @@ In order to make loading times more user friendly, I used <a href="https://lotti
 
 ### Continuous Integration
 
+<p align="center"><img src ="circle-ci.png" alt="Circle CI"/></p>
+
 I use <a href="https://circleci.com/">Circle CI</a> for continuous integration of my API. I integrate the installation of my API project as well as the launch of my unit tests.
 
 ### Deployment
