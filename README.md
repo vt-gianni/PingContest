@@ -115,6 +115,29 @@ Expo Go is a tool and a mobile application allowing to test an application in Re
 
 The API is secure thanks to the management of <a href="https://jwt.io/">JWT</a> Token and the secure configuration of endpoints.
 
+#### Using a JWT Token
+
+The endpoint allowing the connection will return a jwt token which will then allow the user to be authenticated when calling private endpoints.
+
+This is what the return of the login endpoint looks like:
+
+```json
+{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NTQyNDcxNTgsImV4cCI6MTY1NDMzMzU1OCwicm9sZXMiOlsiUk9MRV9QUk8iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJnaWFubmlnaXV4LmdpdWRpY2VAZ21haWwuY29tIiwiaWQiOjEsImZpcnN0bmFtZSI6IkdpYW5uaSIsImxhc3RuYW1lIjoiR2l1ZGljZSIsImJpcnRoZGF0ZSI6eyJkYXRlIjoiMTk5Ni0wNi0xOCAxMzoyNDoxNS4wMDAwMDAiLCJ0aW1lem9uZV90eXBlIjozLCJ0aW1lem9uZSI6IlVUQyJ9LCJsaWNlbnNlTnVtYmVyIjoiNTcyNTMxIiwib2ZmaWNpYWxQb2ludHMiOjk3NSwicGljdHVyZSI6IjYyOTExYTkyZTQ2OWIuanBnIn0.bdqJq17aqQYsi6IpWdA2UO6tykqKf7W9NpcC0p443btDedCNk5SUkCFS3NOTjApg3dGNxpLLhYsCMqpSZUfMn7aYW1iMfLQLtCXbKgymEGCRsrMemHuTrBcloUan8bWGRjlM4w2afFnA_GPqfV8o5RzLrQh_dX8d9f8bGNs6xhNs1YN6RBK-9JS-TwVcNTULtXsYaz5sgWVz9I6TqZY2B25iHyQ52WHZtdMljqSeFExg_yF7BSiDsVSSNJnFgl9UGR-D8osHFUCtZauJjS4nZkGVLus87JjH_zfD5nmPvleeueLf-HulTu0-Ubr-MaW_CEoSKctF-pVrV953OQF2kg",
+    "refresh_token": "11d9c04814620af22b7da2d9d6af0e73a973a6ae23a5025761226d215f218dd5fddca01a8a70ccc3d9aa134d0479a09a2edf754f9206912d71d955342f8b2265"
+}
+```
+
+The refresh token, on the other hand, makes it possible to automatically generate a new token on the front side once the old token has expired. This allows the user not to be disconnected once his token expires.
+
+
+#### Configuration of endpoints
+
+The endpoints have been secured to allow only strictly necessary operations accessible via the application. Thus, it is impossible, for example, to modify certain fields or delete certain data via the API. For example, it is not possible to delete a user from an API endpoint. In addition, endpoints do not allow you to modify the information of a club that you do not own or the information of another user, for example. This is thanks to the authentication and roles system.
+
+#### Roles
+
+
 
 ### App design
 
