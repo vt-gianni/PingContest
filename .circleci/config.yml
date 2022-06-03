@@ -31,4 +31,11 @@ jobs:
       # run tests with phpunit
       - run:
           name: "Run tests"
-          command: cd api; pwd; composer install; php bin/phpunit
+          command: cd api; "APP_ENV=dev
+            APP_SECRET=22af946e6e153b3354f0ea3d851e77d5
+            DATABASE_URL="mysql://root:P=vPyjd,1@127.0.0.1:3306/pingcontest?serverVersion=5.7&charset=utf8mb4"
+            JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
+            JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+            JWT_PASSPHRASE=4a88fec551b8cc1ba973c8e326d4e456
+            CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'
+            KERNEL_CLASS='App\Kernel'" >> .env.local; composer install; php bin/phpunit
