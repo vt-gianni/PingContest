@@ -19,7 +19,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      -run: sudo apt-get install php-sqlite3
+      - run: sudo apt-get install php-sqlite3
 
       - run: sudo apt install zlib1g-dev libsqlite3-dev
 
