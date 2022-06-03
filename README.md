@@ -54,9 +54,11 @@
         <li><a href="#registration-and-connection">Registration and connection</a></li>
         <li><a href="#list-of-contests">List of contests</a></li>
         <li><a href="#creation-of-a-contest-and-its-series">Creation of a contest and its series</a></li>
-        <li><a href="#contest-information">Contest Information</a></li>
-        <li><a href="#club-information">Club Information</a></li>
+        <li><a href="#contest-information">Contest information</a></li>
+        <li><a href="#club-information">Club information</a></li>
         <li><a href="#subscribe-to-a-series">Subscribe to a series</a></li>
+        <li><a href="#profile-information">Profile information</a></li>
+        <li><a href="#avatar-uploading">Avatar uploading</a></li>
       </ul>
     </li>
     <li><a href="#contact">Contact</a></li>
@@ -196,6 +198,14 @@ On the screen of a contest, by clicking on the button "See the club", it is poss
 ### Subscribe to a series
 
 By clicking on "See the series" on the screen of a tournament, the user is redirected to a page displaying the different series of the contest. He can then see if he is already registered or not for each series and register for a series by clicking on an icon directly.
+
+### Profile information
+
+The profile icon on the navigation bar provides access to the user profile. On it, the user can see his main information as well as the upcoming tournaments in which he is registered.
+
+### Avatar Uploading
+
+By clicking on his avatar, the user can upload an image from his personal files.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
