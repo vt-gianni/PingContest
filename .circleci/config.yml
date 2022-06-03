@@ -19,10 +19,6 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run:
-          name: "Going to right directory"
-          command: cd api
-
       - run: sudo apt install zlib1g-dev libsqlite3-dev
 
       - run: sudo docker-php-ext-install zip
@@ -30,10 +26,6 @@ jobs:
       - run: sudo docker-php-ext-install pdo_sqlite
 
       - run: sudo docker-php-ext-enable pdo_sqlite
-
-      - run:
-          name: "Install Dependencies"
-          command: composer install -n --prefer-dist
 
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
@@ -43,4 +35,4 @@ jobs:
       # run tests with phpunit
       - run:
           name: "Run tests"
-          command: php bin/phpunit
+          command: cd api; composer install; php bin/phpunit
