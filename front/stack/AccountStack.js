@@ -2,6 +2,7 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack"
 import {ProfileTab} from "../tab/ProfileTab";
 import {SigninScreen} from "../screen/SigninScreen";
 import {ProfileUpdateScreen} from "../screen/ProfileUpdateScreen";
+import React from 'react'
 
 const Stack = createNativeStackNavigator()
 

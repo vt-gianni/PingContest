@@ -4,6 +4,7 @@ import {IndexScreen} from "../screen/IndexScreen"
 import {StatusBar} from "expo-status-bar"
 import {MainStack} from "./MainStack"
 import FlashMessage from "react-native-flash-message";
+import React from 'react'
 
 const Stack = createNativeStackNavigator()
 

@@ -9,6 +9,7 @@ import ContestCreationContext from "../context/ContestCreationContext";
 import {ContestCreationValidationScreen} from "../screen/ContestCreationValidationScreen";
 import {SigninScreen} from "../screen/SigninScreen";
 import {ClubScreen} from "../screen/ClubScreen";
+import React from 'react'
 
 const Stack = createNativeStackNavigator()
 
