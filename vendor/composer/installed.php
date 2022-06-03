@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6117e880201443da29a6c32076b4112d7aeeba74',
+        'reference' => 'c20bd6728b987857ed93f272c0cd29bfa362e455',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6117e880201443da29a6c32076b4112d7aeeba74',
+            'reference' => 'c20bd6728b987857ed93f272c0cd29bfa362e455',
             'dev_requirement' => false,
         ),
         'lcobucci/clock' => array(
