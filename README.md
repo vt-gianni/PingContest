@@ -41,6 +41,7 @@
         <li><a href="#database-schema">Database schema</a></li>
         <li><a href="#securing-endpoints">Securing endpoints</a></li>
         <li><a href="#app-design">App design</a></li>
+        <li><a href="#deployment-with-continuous-integration">Deployment with Continuous Integration</a></li>
       </ul>
     </li>
     <li>
@@ -251,6 +252,16 @@ In order to create a design with consistent and modern colors, I used the online
 
 In order to make loading times more user friendly, I used <a href="https://lottiefiles.com/">Lottie files</a> which allowed me to integrate very light animations in the form of a json file.
 
+
+### Deployment with Continuous Integration
+
+I currently use <a href="https://dashboard.heroku.com/">Heroku</a> git to deploy Ping Contest API. Thanks to Heroku, the project is built and deployed automatically after a git heroku command.
+
+```bash
+git push heroku main
+```
+
+Thanks to this tool, the project API is currently accessible at this address: <a href="https://ping-contest.herokuapp.com/">https://ping-contest.herokuapp.com</a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
