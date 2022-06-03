@@ -54,6 +54,9 @@
         <li><a href="#registration-and-connection">Registration and connection</a></li>
         <li><a href="#list-of-contests">List of contests</a></li>
         <li><a href="#creation-of-a-contest-and-its-series">Creation of a contest and its series</a></li>
+        <li><a href="#contest-information">Contest Information</a></li>
+        <li><a href="#club-information">Club Information</a></li>
+        <li><a href="#subscribe-to-a-series">Subscribe to a series</a></li>
       </ul>
     </li>
     <li><a href="#contact">Contact</a></li>
@@ -182,6 +185,17 @@ On the home page, a list of tournaments is available to the user. It also has th
 
 The + button that can be seen on the screen above on the home page is only visible for a "pro" user, corresponding to an account managed by the leader of a club. The user is then brought to a form allowing him to create a tournament as well as its different series.
 
+### Contest information
+
+By clicking on one of the contests in the list, the application redirects to a screen displaying the information of a contest.
+
+### Club information
+
+On the screen of a contest, by clicking on the button "See the club", it is possible to display the information on the club organizing the contest.
+
+### Subscribe to a series
+
+By clicking on "See the series" on the screen of a tournament, the user is redirected to a page displaying the different series of the contest. He can then see if he is already registered or not for each series and register for a series by clicking on an icon directly.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
