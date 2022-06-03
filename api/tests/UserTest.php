@@ -34,7 +34,7 @@ class UserTest extends ApiTestCase
     public function testLogUser(): void
     {
         static::createClient()->request('POST', '/api/login_check', ['json' => [
-            'username' => 'gg@vitalytech.com',
+            'username' => 'giannigiux.giudice@gmail.com',
             'password' => 'Test12!'
         ]]);
         $this->assertResponseStatusCodeSame(200);
