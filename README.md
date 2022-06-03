@@ -59,6 +59,7 @@
         <li><a href="#subscribe-to-a-series">Subscribe to a series</a></li>
         <li><a href="#profile-information">Profile information</a></li>
         <li><a href="#avatar-uploading">Avatar uploading</a></li>
+        <li><a href="#change-of-information-and-logout">Change of information and logout</a></li>
       </ul>
     </li>
     <li><a href="#contact">Contact</a></li>
@@ -206,6 +207,10 @@ The profile icon on the navigation bar provides access to the user profile. On i
 ### Avatar Uploading
 
 By clicking on his avatar, the user can upload an image from his personal files.
+
+### Change of information and logout
+
+By clicking on the icon at the top right of the user profile screen, a menu is displayed and offers two links. A first to disconnect and a second leading to a screen for editing personal information. On it, the user can modify the value of his license number as well as the value of his official points.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
