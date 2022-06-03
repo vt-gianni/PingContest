@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ca7eb0f-d451-41a1-a8ed-049ba1e9e753" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml.dist" afterDir="false" />
-    </list>
+    <list default="true" id="1ca7eb0f-d451-41a1-a8ed-049ba1e9e753" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -258,7 +256,7 @@
       <workItem from="1653933444951" duration="6378000" />
       <workItem from="1653984233928" duration="2670000" />
       <workItem from="1654086940418" duration="9639000" />
-      <workItem from="1654246793170" duration="7521000" />
+      <workItem from="1654246793170" duration="7942000" />
     </task>
     <servers />
   </component>
