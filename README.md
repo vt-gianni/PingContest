@@ -10,7 +10,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://ping-contest.herokuapp.com">
     <img src="front/assets/logo.png" alt="Logo" width="200">
   </a>
 
