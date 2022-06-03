@@ -137,6 +137,7 @@ The endpoints have been secured to allow only strictly necessary operations acce
 
 #### Roles
 
+There are currently two different roles for a user. The **["ROLE_USER"]** defines a normal user of the application. The **["ROLE_PRO"]** defines a user who can create a tournament, often represented by a club manager.
 
 
 ### App design
