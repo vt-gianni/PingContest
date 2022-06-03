@@ -41,6 +41,7 @@
         <li><a href="#database-schema">Database schema</a></li>
         <li><a href="#securing-endpoints">Securing endpoints</a></li>
         <li><a href="#app-design">App design</a></li>
+        <li><a href="#unit-tests">Unit Tests</a></li>
         <li><a href="#continuous-integration">Continuous Integration</a></li>
         <li><a href="#deployment">Deployment</a></li>
       </ul>
@@ -252,6 +253,12 @@ In order to create a design with consistent and modern colors, I used the online
 #### Lottie files animations
 
 In order to make loading times more user friendly, I used <a href="https://lottiefiles.com/">Lottie files</a> which allowed me to integrate very light animations in the form of a json file.
+
+### Unit Tests
+
+I have some unit tests in place that allow me to test the behavior and return of my API endpoints. 
+
+You can access it here: <a href="https://github.com/vt-gianni/PingContest/tree/main/api/tests">api/tests</a> 
 
 ### Continuous Integration
 
