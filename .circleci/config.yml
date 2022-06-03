@@ -20,6 +20,16 @@ jobs:
             - v1-dependencies-
 
       - run:
+          name: "Going to right directory"
+          command: cd api
+
+      - run: sudo docker-php-ext-install zip
+
+      - run: sudo docker-php-ext-install pdo_sqlite
+
+      - run: sudo docker-php-ext-enable pdo_sqlite
+
+      - run:
           name: "Install Dependencies"
           command: composer install -n --prefer-dist
 
@@ -31,4 +41,4 @@ jobs:
       # run tests with phpunit
       - run:
           name: "Run tests"
-          command: cd api; phpenmod  -s cli pdo_mysql; composer install; php bin/phpunit
+          command: php bin/phpunit
