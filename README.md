@@ -41,7 +41,8 @@
         <li><a href="#database-schema">Database schema</a></li>
         <li><a href="#securing-endpoints">Securing endpoints</a></li>
         <li><a href="#app-design">App design</a></li>
-        <li><a href="#deployment-with-continuous-integration">Deployment with Continuous Integration</a></li>
+        <li><a href="#continuous-integration">Continuous Integration</a></li>
+        <li><a href="#deployment">Deployment</a></li>
       </ul>
     </li>
     <li>
@@ -252,8 +253,11 @@ In order to create a design with consistent and modern colors, I used the online
 
 In order to make loading times more user friendly, I used <a href="https://lottiefiles.com/">Lottie files</a> which allowed me to integrate very light animations in the form of a json file.
 
+### Continuous Integration
 
-### Deployment with Continuous Integration
+I use Circle CI for continuous integration of my API. I integrate the installation of my API project as well as the launch of my unit tests.
+
+### Deployment
 
 I currently use <a href="https://dashboard.heroku.com/">Heroku</a> git to deploy Ping Contest API. Thanks to Heroku, the project is built and deployed automatically after a git heroku command.
 
