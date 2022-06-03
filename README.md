@@ -38,6 +38,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#database-schema">Database schema</a></li>
         <li><a href="#securing-endpoints">Securing endpoints</a></li>
         <li><a href="#app-design">App design</a></li>
       </ul>
@@ -105,11 +106,15 @@ API Platform is a module that can be easily installed via a Symfony API. It grea
 
 React Native is a framework for creating cross-platform mobile applications very simply using only the JavaScript langage. This framework is based on the React framework, itself designed to simplify the development of web platforms by providing reusable component development. React Native is a very reliable framework, developed by Facebook, with a huge community and many community plugins. Its choice over other mobile frameworks is primarily based on its cross-platform character. In addition, its simplicity of development, coupled with the use of Expo Go made me prefer React Native to Flutter for example.
 
-<p align="center"><img src ="expo_go.png" alt="Expo Go" width="150"/></p>
+<p align="center"><img src="expo_go.png" alt="Expo Go" width="150"/></p>
 
 * [Expo](https://expo.dev/)
 
 Expo Go is a tool and a mobile application allowing to test an application in React Native on all devices connected to the same network as the PC where the developer works. Thus, the developer can test in real time the modifications on the application on many devices at the same time, via the Internet.
+
+### Database schema
+
+<p align="center"><img src="schema_bdd.png" alt="Database schema"/></p>
 
 ### Securing endpoints
 
