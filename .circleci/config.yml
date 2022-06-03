@@ -38,4 +38,4 @@ jobs:
             JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
             JWT_PASSPHRASE=4a88fec551b8cc1ba973c8e326d4e456
             CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'
-            KERNEL_CLASS='App\Kernel'" >> .env.local; composer install; php bin/phpunit
+            KERNEL_CLASS='App\Kernel'" >> .env.local; composer install; CORS_ALLOW_ORIGIN="*" php bin/phpunit

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ceae4466-5c81-44d8-ab68-c7b1489cc0f1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/api/phpunit.xml.dist" beforeDir="false" afterPath="$PROJECT_DIR$/api/phpunit.xml.dist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.circleci/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.circleci/config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +81,7 @@
       <option name="presentableId" value="Default" />
       <updated>1654265447595</updated>
       <workItem from="1654265448752" duration="40000" />
-      <workItem from="1654265610941" duration="552000" />
+      <workItem from="1654265610941" duration="652000" />
     </task>
     <servers />
   </component>
