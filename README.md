@@ -314,9 +314,7 @@ Go to Settings/Network under the 'Attach to:' drop down menu and change from NAT
 
 ```bash
 sudo dnf install nodejs
-```
 
-```bash
 git clone https://github.com/vt-gianni/PingContest.git
 
 cd PingContest/front
