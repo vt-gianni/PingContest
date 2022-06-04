@@ -324,6 +324,12 @@ cd PingContest/front
 npm i
 
 sudo npm install --global expo-cli
+
+sudo dnf install curl
+
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash   
+
+source ~/.bashrc
 ````
 
 ### Launch
