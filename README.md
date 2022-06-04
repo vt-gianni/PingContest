@@ -329,6 +329,8 @@ sudo dnf install nodejs
 git clone https://github.com/vt-gianni/PingContest.git
 
 cd PingContest/front
+
+npm i
 ````
 
 ### Launch
