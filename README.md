@@ -331,6 +331,12 @@ git clone https://github.com/vt-gianni/PingContest.git
 cd PingContest/front
 ````
 
+### Launch
+
+```bash
+npm start
+```
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
