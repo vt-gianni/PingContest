@@ -305,12 +305,15 @@ Thanks to this tool, the project API is currently accessible at this address: <a
 
 
 
-<!-- GETTING STARTED -->
 ## Getting Started
 
-Go to Settings/Network under the 'Attach to:' drop down menu and change from NAT to Bridged Adapter.
+For this installation, you will need a Fedora workstation 36 machine as well as the Expo Go application on your smartphone. You will also need to be connected to the same wifi network on your machine as well as on your smartphone.
+
+If you are using a Virtual Machine, you will have to change the network access mode from NAT to Bridged Adapter.
 
 ### Installation
+
+Open the terminal and run the following commands.
 
 ```bash
 sudo dnf install nodejs
@@ -336,8 +339,9 @@ source ~/.bashrc
 npm start
 ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+A QR code should appear in the terminal. All you have to do is scan this QR Code via the Expo Go application to launch the project on your smartphone.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 ## Features
