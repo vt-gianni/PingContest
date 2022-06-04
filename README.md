@@ -322,6 +322,10 @@ This is an example of how to list things you need to use the software and how to
 ### Installation
 
 ```bash
+sudo dnf install nodejs
+```
+
+```bash
 git clone https://github.com/vt-gianni/PingContest.git
 
 cd PingContest/front
