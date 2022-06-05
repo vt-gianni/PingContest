@@ -84,7 +84,7 @@ Being quite athletic, I participated in many tournaments in different sports. Ov
 So I had the idea of creating an app allowing both competitors and organizers to facilitate the management of tournaments. Not knowing all the sports and how their tournaments work, I decided to devote myself only to one sport, table tennis.
 
 
-**The api sources are located in this git repository in the api folder. The sources of the mobile application are located in this git repository in the front folder.**
+**INFO:** The api sources are located in this git repository in the api folder. The sources of the mobile application are located in this git repository in the front folder.
 
 
 ### Built With
