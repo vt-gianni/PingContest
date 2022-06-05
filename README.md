@@ -1,3 +1,5 @@
+*NB: Link to previous readme:* <a href="https://github.com/vt-gianni/PingContest/blob/main/MASTERPROJECT.md">https://github.com/vt-gianni/PingContest/blob/main/MASTERPROJECT.md</a>
+
 <div id="top"></div>
 
 [![Contributors][contributors-shield]][contributors-url]
