@@ -86,6 +86,10 @@ So I had the idea of creating an app allowing both competitors and organizers to
 
 **INFO:** The api sources are located in this git repository in the api folder. The sources of the mobile application are located in this git repository in the front folder.
 
+Link to the API sources: <a href="https://github.com/vt-gianni/PingContest/tree/main/api">https://github.com/vt-gianni/PingContest/tree/main/api</a>
+
+Link to the mobile app sources: <a href="https://github.com/vt-gianni/PingContest/tree/main/front">https://github.com/vt-gianni/PingContest/tree/main/front</a>
+
 
 ### Built With
 
