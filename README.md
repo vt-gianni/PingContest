@@ -67,6 +67,7 @@
         <li><a href="#change-of-information-and-logout">Change of information and logout</a></li>
       </ul>
     </li>
+    <li><a href="#demonstration">Demonstration</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -392,6 +393,13 @@ By clicking on his avatar, the user can upload an image from his personal files.
 By clicking on the icon at the top right of the user profile screen, a menu is displayed and offers two links. A first to disconnect and a second leading to a screen for editing personal information. On it, the user can modify the value of his license number as well as the value of his official points.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+
+## Demonstration
+
+A short video presenting the main features of the application is available on Youtube at the following address:
+
+<a target="_blank" href="https://www.youtube.com/watch?v=e2qkt72qvrU">https://www.youtube.com/watch?v=e2qkt72qvrU</a>
 
 
 <!-- CONTACT -->
