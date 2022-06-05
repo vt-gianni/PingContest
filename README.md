@@ -318,14 +318,6 @@ Open the terminal and run the following commands.
 ```bash
 sudo dnf install nodejs
 
-git clone https://github.com/vt-gianni/PingContest.git
-
-cd PingContest/front
-
-npm i
-
-sudo npm install --global expo-cli
-
 sudo dnf install curl
 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash   
@@ -333,6 +325,15 @@ curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 source ~/.bashrc
 
 nvm install 16.13.0
+
+git clone https://github.com/vt-gianni/PingContest.git
+
+cd PingContest/front
+
+sudo npm install --global expo-cli
+
+npm i
+
 ````
 
 ### Launch
