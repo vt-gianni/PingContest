@@ -1,3 +1,5 @@
+*NB: Link to previous readme:* <a href="https://github.com/vt-gianni/PingContest/blob/main/MASTERPROJECT.md">https://github.com/vt-gianni/PingContest/blob/main/MASTERPROJECT.md</a>
+
 <div id="top"></div>
 
 [![Contributors][contributors-shield]][contributors-url]
@@ -41,14 +43,16 @@
         <li><a href="#database-schema">Database schema</a></li>
         <li><a href="#securing-endpoints">Securing endpoints</a></li>
         <li><a href="#app-design">App design</a></li>
-        <li><a href="#deployment-with-continuous-integration">Deployment with Continuous Integration</a></li>
+        <li><a href="#unit-tests">Unit Tests</a></li>
+        <li><a href="#continuous-integration">Continuous Integration</a></li>
+        <li><a href="#deployment">Deployment</a></li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#launch">Launch</a></li>
       </ul>
     </li>
     <li>
@@ -65,6 +69,7 @@
         <li><a href="#change-of-information-and-logout">Change of information and logout</a></li>
       </ul>
     </li>
+    <li><a href="#demonstration">Demonstration</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -78,6 +83,12 @@ Being quite athletic, I participated in many tournaments in different sports. Ov
 
 So I had the idea of creating an app allowing both competitors and organizers to facilitate the management of tournaments. Not knowing all the sports and how their tournaments work, I decided to devote myself only to one sport, table tennis.
 
+
+**INFO:** The api sources are located in this git repository in the api folder. The sources of the mobile application are located in this git repository in the front folder.
+
+Link to the API sources: <a href="https://github.com/vt-gianni/PingContest/tree/main/api">https://github.com/vt-gianni/PingContest/tree/main/api</a>
+
+Link to the mobile app sources: <a href="https://github.com/vt-gianni/PingContest/tree/main/front">https://github.com/vt-gianni/PingContest/tree/main/front</a>
 
 
 ### Built With
@@ -252,8 +263,44 @@ In order to create a design with consistent and modern colors, I used the online
 
 In order to make loading times more user friendly, I used <a href="https://lottiefiles.com/">Lottie files</a> which allowed me to integrate very light animations in the form of a json file.
 
+### Unit Tests
 
-### Deployment with Continuous Integration
+I have some unit tests in place that allow me to test the behavior and return of my API endpoints. I use <a href="https://phpunit.de/">PHPUnit</a>.
+
+You can access it here: <a href="https://github.com/vt-gianni/PingContest/tree/main/api/tests">api/tests</a> 
+
+This is what a unit test looks like with PHPUnit:
+
+```php
+    /**
+     * @throws TransportExceptionInterface
+     */
+    public function testCreateUser(): void
+    {
+        $faker = Factory::create('fr_FR');
+
+        static::createClient()->request('POST', '/api/registration', ['json' => [
+            'firstname' => str_replace(' ', '', $faker->firstName),
+            'lastname' => str_replace(' ', '', $faker->lastName),
+            'mailAddress' => $faker->email,
+            'birthdate' => $faker->dateTimeBetween('-80 years', '-6 years')->format('Y-m-d'),
+            'password' => 'Test12!'
+        ]]);
+        $this->assertResponseStatusCodeSame(201);
+        $this->assertResponseHeaderSame('content-type', 'application/json');
+        $this->assertMatchesResourceItemJsonSchema(User::class);
+    }
+```
+
+### Continuous Integration
+
+<p align="center"><img src ="circle-ci.png" alt="Circle CI"/></p>
+
+I use <a href="https://circleci.com/">Circle CI</a> for continuous integration of my API. I integrate the installation of my API project as well as the launch of my unit tests.
+
+Here you can see a <a href="https://app.circleci.com/pipelines/github/vt-gianni/PingContest/21/workflows/051b75fe-4ee7-4196-b7be-4813164e28c8/jobs/21">Successful Circle CI build</a>.
+
+### Deployment
 
 I currently use <a href="https://dashboard.heroku.com/">Heroku</a> git to deploy Ping Contest API. Thanks to Heroku, the project is built and deployed automatically after a git heroku command.
 
@@ -267,38 +314,46 @@ Thanks to this tool, the project API is currently accessible at this address: <a
 
 
 
-<!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+For this installation, you will need a Fedora workstation 36 machine as well as the Expo Go application on your smartphone. You will also need to be connected to the same wifi network on your machine as well as on your smartphone.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+If you are using a Virtual Machine, you will have to change the network access mode from NAT to Bridged Adapter.
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+Open the terminal and run the following commands.
+
+```bash
+sudo dnf install nodejs
+
+sudo dnf install curl
+
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash   
+
+source ~/.bashrc
+
+nvm install 16.13.0
+
+git clone https://github.com/vt-gianni/PingContest.git
+
+cd PingContest/front
+
+sudo npm install --global expo-cli
+
+npm i
+
+````
+
+### Launch
+
+```bash
+npm start
+```
+
+A QR code should appear in the terminal. All you have to do is scan this QR Code via the Expo Go application to launch the project on your smartphone.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 ## Features
@@ -346,6 +401,13 @@ By clicking on his avatar, the user can upload an image from his personal files.
 By clicking on the icon at the top right of the user profile screen, a menu is displayed and offers two links. A first to disconnect and a second leading to a screen for editing personal information. On it, the user can modify the value of his license number as well as the value of his official points.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+
+## Demonstration
+
+A short video presenting the main features of the application is available on Youtube at the following address:
+
+<a target="_blank" href="https://www.youtube.com/watch?v=e2qkt72qvrU">https://www.youtube.com/watch?v=e2qkt72qvrU</a>
 
 
 <!-- CONTACT -->
