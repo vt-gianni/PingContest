@@ -6,6 +6,7 @@ import jwtDecode from "jwt-decode";
 import {API_ADDRESS} from 'react-native-dotenv'
 
 export default function App() {
+    console.disableYellowBox = true
     const [token, setToken] = useState(null)
     const [user, setUser] = useState(null)
 
